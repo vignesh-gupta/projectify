@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
-import Navbar from "@/components/common/navbar";
 import ConvexClientProvider from "@/components/providers/convex-client-provider";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/theme/theme-provider";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -21,20 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ConvexClientProvider>
-      <html lang="en">
-        <body className={cn("flex flex-col min-h-[100dvh]", inter.className)}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navbar />
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    </ConvexClientProvider>
+    <html lang="en">
+      <body className={cn("flex flex-col min-h-[100dvh]", inter.className)}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          disableTransitionOnChange
+        >
+          <ConvexClientProvider>{children}</ConvexClientProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
