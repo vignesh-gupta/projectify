@@ -54,7 +54,7 @@ const DashboardSidebar = () => {
         }}
       />
 
-      <div className="w-full space-y-1">
+      <div className="w-full space-y-2">
         <Button
           variant={!settings && !team ? "default" : "ghost"}
           asChild
@@ -65,7 +65,6 @@ const DashboardSidebar = () => {
             <Notebook className="w-4 h-4 mr-2" /> Projects
           </Link>
         </Button>
-      </div>
         <Button
           variant={team && !settings ? "default" : "ghost"}
           asChild
@@ -96,6 +95,7 @@ const DashboardSidebar = () => {
             <Settings2 className="w-4 h-4 mr-2" /> Settings
           </Link>
         </Button>
+      </div>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
   useOrganization,
 } from "@clerk/nextjs";
 import InviteButton from "./invite-button";
+import { ThemeSwitch } from "@/components/theme/theme-switch";
 
 const Navbar = () => {
   const { organization } = useOrganization();
@@ -34,8 +35,17 @@ const Navbar = () => {
           }}
         />
       </div>
+      <ThemeSwitch />
       {organization && <InviteButton />}
-      <UserButton />
+      <UserButton 
+        appearance={{
+          elements: {
+            accordionTriggerButton: {
+              border: "1px solid #E5E7EB",
+            }
+          }
+        }}
+      />
     </div>
   );
 };
