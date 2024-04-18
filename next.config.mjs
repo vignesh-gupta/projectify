@@ -2,13 +2,17 @@
 const nextConfig = {
   images: {
     dangerouslyAllowSVG: true,
-    remotePatterns : [
+    remotePatterns: [
       {
-        hostname: 'placehold.co',
-        protocol: 'https', 
-      }
-    ]
-  }
+        hostname: "img.clerk.com",
+        protocol: "https",
+      },
+      {
+        hostname: "placehold.co",
+        protocol: "https",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
