@@ -1,7 +1,17 @@
-import React from "react";
+"use client";
+
+import { useOrganization } from "@clerk/nextjs";
+import NoOrg from "./_component/empty-states/no-org";
+import ProjectList from "@/components/projects/project-list";
 
 const DashboardPage = () => {
-  return <div>DashboardPage</div>;
+  const { organization } = useOrganization();
+
+  return (
+    <div className="flex-1 h-[calc(100%-80px)] p-6">
+      {!organization ? <NoOrg /> : <ProjectList />}
+    </div>
+  );
 };
 
 export default DashboardPage;

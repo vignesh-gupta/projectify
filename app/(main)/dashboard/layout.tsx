@@ -5,7 +5,7 @@ import Navbar from "./_component/dashboard-nav";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="h-full">
+    <main className="h-[100dvh]">
       <OrganizationsSideBar />
       <div className="pl-[60px] h-full">
         <div className="flex h-full gap-x-3">

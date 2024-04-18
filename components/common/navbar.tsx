@@ -11,7 +11,6 @@ const Navbar = () => {
   return (
     <header className="container z-50 flex items-center h-[70px] lg:px-6">
       <Link className="flex items-center justify-center" href="#">
-        {/* <MountainIcon className="w-6 h-6" /> */}
         <span>Projectify</span>
       </Link>
       <nav className="flex items-center gap-4 ml-auto sm:gap-6">
@@ -44,7 +43,7 @@ const Navbar = () => {
           <UserButton afterSignOutUrl="/" />
         ) : (
           <SignInButton mode="modal">
-            <Button className="text-white">Sign In</Button>
+            <Button>Sign In</Button>
           </SignInButton>
         )}
         <ThemeSwitch />
