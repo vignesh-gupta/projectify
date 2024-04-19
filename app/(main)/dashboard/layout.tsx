@@ -1,7 +1,7 @@
 import React from "react";
 import OrganizationsSideBar from "./_component/sidebar/orgs-sidebar";
 import DashboardSidebar from "./_component/sidebar";
-import TopBar from "./_component/dashboard-top-bar";
+import DashboardTopBar from "./_component/dashboard-top-bar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="flex h-full">
           <DashboardSidebar />
           <div className="flex-1 h-full">
-            <TopBar />
+            <DashboardTopBar />
             {children}
           </div>
         </div>

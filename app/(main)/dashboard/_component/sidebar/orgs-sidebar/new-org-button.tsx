@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 
 import Hint from "@/components/hint";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { DASHBOARD_ROUTE } from "@/lib/constants";
 
 const NewButton = () => {
   return (
@@ -22,7 +23,7 @@ const NewButton = () => {
         </div>
       </DialogTrigger>
       <DialogContent className="p-0 bg-transparent border-none max-w-[480px]">
-        <CreateOrganization />
+        <CreateOrganization skipInvitationScreen afterCreateOrganizationUrl={DASHBOARD_ROUTE} />
       </DialogContent>
     </Dialog>
   );

@@ -1,12 +1,30 @@
+"use client";
+
 import NoProject from "@/components/empty-states/no-projects";
-import React from "react";
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
+import ProjectCard from "./project-card";
 
-const projects = [];
+type ProjectListProps = {
+  orgId: string;
+};
 
-const ProjectList = () => {
-  if (!projects.length) return <NoProject />;
+const ProjectList = ({ orgId }: ProjectListProps) => {
+  const projects = useQuery(api.projects.list, { orgId });
 
-  return <div>ProjectList</div>;
+  if (projects?.error) {
+    console.error("[PROJECT_FETCH_ERROR]", projects.error);
+  }
+
+  if (!projects?.data) return <NoProject />;
+
+  return (
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
+      {projects.data.map((project) => (
+        <ProjectCard key={project._id} {...project} />
+      ))}
+    </div>
+  );
 };
 
 export default ProjectList;

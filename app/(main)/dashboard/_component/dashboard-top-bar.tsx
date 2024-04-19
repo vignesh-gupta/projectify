@@ -8,7 +8,7 @@ import {
 import InviteButton from "./invite-button";
 import { ThemeSwitch } from "@/components/theme/theme-switch";
 
-const TopBar = () => {
+const DashBoardTopBar = () => {
   const { organization } = useOrganization();
   return (
     <div className="flex items-center justify-end px-5 py-2 gap-x-5 border-b">
@@ -50,4 +50,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default DashBoardTopBar;
