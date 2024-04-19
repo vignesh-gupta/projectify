@@ -1,3 +1,4 @@
+import AuthLoadProvider from "@/components/providers/auth-load-provider";
 import React from "react";
 
 const AppLayout = ({
@@ -5,7 +6,7 @@ const AppLayout = ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  return <>{children}</>;
+  return <AuthLoadProvider>{children}</AuthLoadProvider>;
 };
 
 export default AppLayout;

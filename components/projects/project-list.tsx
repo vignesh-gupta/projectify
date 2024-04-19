@@ -16,15 +16,15 @@ const ProjectList = ({ orgId }: ProjectListProps) => {
     console.error("[PROJECT_FETCH_ERROR]", projects.error);
   }
 
-  if (!projects?.data) return <NoProject />;
-
-  return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
-      {projects.data.map((project) => (
-        <ProjectCard key={project._id} {...project} />
-      ))}
-    </div>
-  );
+  if (projects?.data)
+    return (
+      <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
+        {projects.data.map((project) => (
+          <ProjectCard key={project._id} {...project} />
+        ))}
+      </div>
+    );
+  return <NoProject />;
 };
 
 export default ProjectList;
