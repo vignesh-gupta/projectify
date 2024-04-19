@@ -1,4 +1,4 @@
-import NoProject from "@/app/(main)/dashboard/_component/empty-states/no-projects";
+import NoProject from "@/components/empty-states/no-projects";
 import React from "react";
 
 const projects = [];

@@ -1,7 +1,7 @@
 "use client";
 
 import { useOrganization } from "@clerk/nextjs";
-import NoOrg from "./_component/empty-states/no-org";
+import NoOrg from "@/components/empty-states/no-org";
 import ProjectList from "@/components/projects/project-list";
 
 const DashboardPage = () => {
