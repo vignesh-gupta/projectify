@@ -10,9 +10,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="pl-[60px] h-full">
         <div className="flex h-full">
           <DashboardSidebar />
-          <div className="flex-1 h-full">
+          <div className="flex-1 h-full flex flex-col">
             <DashboardTopBar />
-            {children}
+            <div className="overflow-y-auto">{children}</div>
           </div>
         </div>
       </div>

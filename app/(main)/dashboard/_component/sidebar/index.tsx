@@ -30,7 +30,7 @@ const DashboardSidebar = () => {
       <Link href={DASHBOARD_ROUTE}>
         <div className="flex items-center gap-x-2">
           {/* <Image src="logo.svg" alt="Logo" height={45} width={45} /> */}
-          <span>Projectify</span>
+          <h1>Projectify</h1>
         </div>
       </Link>
       <OrganizationSwitcher
@@ -63,21 +63,6 @@ const DashboardSidebar = () => {
         >
           <Link href={DASHBOARD_ROUTE}>
             <Notebook className="w-4 h-4 mr-2" /> Projects
-          </Link>
-        </Button>
-        <Button
-          variant={team && !settings ? "default" : "ghost"}
-          asChild
-          size="lg"
-          className="justify-start w-full px-2 font-normal"
-        >
-          <Link
-            href={{
-              pathname: DASHBOARD_ROUTE,
-              query: { team: true },
-            }}
-          >
-            <Users className="w-4 h-4 mr-2" /> Team
           </Link>
         </Button>
         <Button

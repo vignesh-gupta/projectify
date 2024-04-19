@@ -21,7 +21,7 @@ export const create = mutation({
       creatorId: identity.subject,
       creatorName: identity.name!,
       description: args.description,
-      status: "active",
+      status: args.status,
       team: [identity.subject],
     });
 

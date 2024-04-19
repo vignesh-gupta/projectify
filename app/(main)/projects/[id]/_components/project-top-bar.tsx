@@ -10,6 +10,8 @@ import { ChevronRight } from "lucide-react";
 import ProjectSwitcher from "@/components/projects/project-switcher";
 import { ThemeSwitch } from "@/components/theme/theme-switch";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
+import Image from "next/image";
+import Link from "next/link";
 
 const ProjectTopBar = () => {
   const { organization } = useOrganization();
@@ -17,6 +19,10 @@ const ProjectTopBar = () => {
   return (
     <div className="flex items-center justify-end px-5 py-2 gap-x-5 border-b">
       <div className="flex-1 flex gap-1 items-center">
+        <Link href={DASHBOARD_ROUTE}>
+          <Image src="/logo.svg" height={30} width={30} alt="Projectify" />
+        </Link>
+        <ChevronRight className="h-5 w-5 text-muted-foreground" />
         <OrganizationSwitcher
           hidePersonal
           afterCreateOrganizationUrl={DASHBOARD_ROUTE}

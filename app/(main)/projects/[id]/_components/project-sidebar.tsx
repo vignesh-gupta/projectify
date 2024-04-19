@@ -4,7 +4,7 @@ import { OrganizationSwitcher } from "@clerk/nextjs";
 import { Layout, ListTodo, Notebook, Settings2, Users } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useParams, usePathname, useSearchParams } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
@@ -16,9 +16,11 @@ const poppinsFont = Poppins({
 });
 
 const ProjectSidebar = () => {
-  const searchParams = useSearchParams();
-  const settings = searchParams.get("settings");
-  const team = searchParams.get("team");
+  const param = useParams();
+
+  const pathname = usePathname();
+  const isWorkItem = pathname.includes("work-items");
+  const isSetting = pathname.includes("settings");
 
   return (
     <div
@@ -29,39 +31,29 @@ const ProjectSidebar = () => {
     >
       <div className="w-full space-y-2">
         <Button
-          variant={!settings && !team ? "default" : "ghost"}
+          variant={!isSetting && !isWorkItem ? "default" : "ghost"}
           asChild
           className="justify-start w-full px-2 font-normal"
         >
-          <Link href={DASHBOARD_ROUTE}>
+          <Link href={`/projects/${param.id}`}>
             <Layout className="w-4 h-4 mr-2" /> Dashboard
           </Link>
         </Button>
         <Button
-          variant={team && !settings ? "default" : "ghost"}
+          variant={isWorkItem ? "default" : "ghost"}
           asChild
           className="justify-start w-full px-2 font-normal"
         >
-          <Link
-            href={{
-              pathname: DASHBOARD_ROUTE,
-              query: { team: true },
-            }}
-          >
+          <Link href={`/projects/${param.id}/work-items`}>
             <ListTodo className="w-4 h-4 mr-2" /> Work Item
           </Link>
         </Button>
         <Button
-          variant={!team && settings ? "default" : "ghost"}
+          variant={isSetting ? "default" : "ghost"}
           asChild
           className="justify-start w-full px-2 font-normal"
         >
-          <Link
-            href={{
-              pathname: DASHBOARD_ROUTE,
-              query: { settings: true },
-            }}
-          >
+          <Link href={`/projects/${param.id}/settings`}>
             <Settings2 className="w-4 h-4 mr-2" /> Settings
           </Link>
         </Button>

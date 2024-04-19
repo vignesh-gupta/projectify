@@ -1,6 +1,6 @@
 import React from "react";
-import ProjectSidebar from "./_components/project-sidebar";
-import ProjectTopBar from "./_components/project-top-bar";
+import ProjectSidebar from "./[id]/_components/project-sidebar";
+import ProjectTopBar from "./[id]/_components/project-top-bar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (

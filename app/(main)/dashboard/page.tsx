@@ -1,11 +1,25 @@
 "use client";
 
-import { useOrganization } from "@clerk/nextjs";
+import { OrganizationProfile, useOrganization } from "@clerk/nextjs";
 import NoOrg from "@/components/empty-states/no-org";
 import ProjectList from "@/components/projects/project-list";
 
-const DashboardPage = () => {
+type DashboardPageProps = {
+  searchParams: {
+    settings?: string;
+  };
+};
+
+const DashboardPage = ({ searchParams: { settings } }: DashboardPageProps) => {
   const { organization } = useOrganization();
+
+  if (settings) {
+    return (
+      <div className="flex justify-center items-center pt-5">
+        <OrganizationProfile />
+      </div>
+    );
+  }
 
   return (
     <div className="flex-1 h-[calc(100%-80px)] p-6">

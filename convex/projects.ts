@@ -15,7 +15,7 @@ export const list = query({
 
     const projects = await ctx.db
       .query("projects")
-      // .withIndex("by_org", (q) => q.eq("orgId", args.orgId))
+      .withIndex("by_org", (q) => q.eq("orgId", args.orgId || ""))
       .collect();
 
     return { success: true, data: projects };
