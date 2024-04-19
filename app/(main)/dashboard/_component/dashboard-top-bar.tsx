@@ -8,10 +8,10 @@ import {
 import InviteButton from "./invite-button";
 import { ThemeSwitch } from "@/components/theme/theme-switch";
 
-const Navbar = () => {
+const TopBar = () => {
   const { organization } = useOrganization();
   return (
-    <div className="flex items-center justify-end p-5 gap-x-5">
+    <div className="flex items-center justify-end px-5 py-2 gap-x-5 border-b">
       <div className="flex-1 block lg:hidden">
         <OrganizationSwitcher
           hidePersonal
@@ -37,17 +37,17 @@ const Navbar = () => {
       </div>
       <ThemeSwitch />
       {organization && <InviteButton />}
-      <UserButton 
+      <UserButton
         appearance={{
           elements: {
             accordionTriggerButton: {
               border: "1px solid #E5E7EB",
-            }
-          }
+            },
+          },
         }}
       />
     </div>
   );
 };
 
-export default Navbar;
+export default TopBar;
