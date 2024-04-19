@@ -1,0 +1,17 @@
+import React from "react";
+import ProjectSidebar from "./_components/project-sidebar";
+import ProjectTopBar from "./_components/project-top-bar";
+
+const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <main className="h-[100dvh]">
+      <ProjectTopBar />
+      <div className="flex h-full">
+        <ProjectSidebar />
+        <div className="flex-1 h-full">{children}</div>
+      </div>
+    </main>
+  );
+};
+
+export default DashboardLayout;
