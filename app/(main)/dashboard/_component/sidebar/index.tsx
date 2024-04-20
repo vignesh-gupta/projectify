@@ -1,7 +1,7 @@
 "use client";
 
 import { OrganizationSwitcher } from "@clerk/nextjs";
-import { Notebook, Settings2, Users } from "lucide-react";
+import { Notebook, Settings, Users } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
@@ -77,7 +77,7 @@ const DashboardSidebar = () => {
               query: { settings: true },
             }}
           >
-            <Settings2 className="w-4 h-4 mr-2" /> Settings
+            <Settings className="w-4 h-4 mr-2" /> Settings
           </Link>
         </Button>
       </div>

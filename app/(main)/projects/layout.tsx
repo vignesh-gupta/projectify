@@ -6,7 +6,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="h-[100dvh]">
       <ProjectTopBar />
-      <div className="flex h-full">
+      <div className="flex h-[calc(100dvh-56px)]">
         <ProjectSidebar />
         <div className="flex-1 h-full">{children}</div>
       </div>

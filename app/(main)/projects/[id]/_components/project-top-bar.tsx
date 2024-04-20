@@ -17,7 +17,7 @@ const ProjectTopBar = () => {
   const { organization } = useOrganization();
 
   return (
-    <div className="flex items-center justify-end px-5 py-2 gap-x-5 border-b">
+    <div className="flex items-center justify-end px-5 py-2 gap-x-5 border-b h-14">
       <div className="flex-1 flex gap-1 items-center">
         <Link href={DASHBOARD_ROUTE}>
           <Image src="/logo.svg" height={30} width={30} alt="Projectify" />

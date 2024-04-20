@@ -17,4 +17,18 @@ export default defineSchema({
       searchField: "title",
       filterFields: ["orgId"],
     }),
+
+  workItems: defineTable({
+    assignee: v.string(),
+    label: v.string(),
+    priority: v.string(),
+    projectId: v.id("projects"),
+    status: v.string(),
+    title: v.string(),
+  })
+    .index("by_project", ["projectId"])
+    .searchIndex("search_title", {
+      searchField: "title",
+      filterFields: ["projectId"],
+    }),
 });

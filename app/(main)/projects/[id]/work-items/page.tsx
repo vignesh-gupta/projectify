@@ -1,28 +1,33 @@
-import { promises as fs } from "fs";
-import path from "path";
-import { z } from "zod";
+"use client";
 
+import { Button } from "@/components/ui/button";
 import { columns } from "@/components/work-items/column";
 import { DataTable } from "@/components/work-items/data-table";
-import { taskSchema } from "@/components/work-items/data/schema";
-import { UserNav } from "@/components/work-items/user-nav";
+import { api } from "@/convex/_generated/api";
+import { useQuery } from "convex/react";
 
-async function getTasks() {
-  const data = await fs.readFile(
-    path.join(process.cwd(), "components/work-items/data/tasks.json")
-  );
+type WorkItemsPageProps = {
+  params: {
+    id: string;
+  };
+};
 
-  const tasks = JSON.parse(data.toString());
+const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
+  const tasks = useQuery(api.work_items.list, { projectId: id })?.data;
 
-  return z.array(taskSchema).parse(tasks);
-}
-
-const WorkItemsPage = async () => {
-  const tasks = await getTasks();
+  if (!tasks) return <div>Loading...</div>;
 
   return (
-    <div className="hidden h-full flex-1 flex-col space-y-8 p-8 md:flex">
-      <DataTable data={tasks} columns={columns} />
+    <div className="p-8 space-y-5  flex flex-col">
+      <div className="flex justify-between">
+        <h3 className="font-bold text-xl md:text-2xl lg:text-3xl">
+          Work Items
+        </h3>
+        <Button size="sm">Add Item</Button>
+      </div>
+      <div className="hidden flex-1 flex-col space-y-8 md:flex">
+        <DataTable data={tasks} columns={columns} />
+      </div>
     </div>
   );
 };

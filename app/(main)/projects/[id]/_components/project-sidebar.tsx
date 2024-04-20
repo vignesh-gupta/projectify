@@ -1,7 +1,7 @@
 "use client";
 
 import { OrganizationSwitcher } from "@clerk/nextjs";
-import { Layout, ListTodo, Notebook, Settings2, Users } from "lucide-react";
+import { Layout, ListTodo, Notebook, Settings, Users } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
@@ -54,7 +54,7 @@ const ProjectSidebar = () => {
           className="justify-start w-full px-2 font-normal"
         >
           <Link href={`/projects/${param.id}/settings`}>
-            <Settings2 className="w-4 h-4 mr-2" /> Settings
+            <Settings className="w-4 h-4 mr-2" /> Settings
           </Link>
         </Button>
       </div>

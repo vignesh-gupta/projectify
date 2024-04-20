@@ -44,8 +44,6 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const label = labels.find((label) => label.value === row.original.label);
 
-      console.log("label", label);
-
       return (
         <div className="flex space-x-2">
           {label && <Badge variant={label.variant}>{label.label}</Badge>}

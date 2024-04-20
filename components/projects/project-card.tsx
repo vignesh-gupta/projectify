@@ -66,7 +66,9 @@ const ProjectCard = ({
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>View Project</DropdownMenuItem>
-              <DropdownMenuItem>View Settings</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href={`/projects/${_id}/settings`} >Settings</Link>
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </CardHeader>

@@ -36,12 +36,12 @@ export const labels: TLables = [
   },
   {
     value: "feature",
-    label: "Feature",
+    label: "Feat",
     variant: "default",
   },
   {
     value: "documentation",
-    label: "Documentation",
+    label: "Docs",
     variant: "outline",
   },
 ];
