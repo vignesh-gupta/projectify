@@ -3,28 +3,50 @@ import {
   ArrowRightIcon,
   ArrowUpIcon,
   CheckCircle,
+  CircleHelp,
   CircleIcon,
   CircleX,
-  CircleHelp,
+  LucideIcon,
   Timer,
 } from "lucide-react";
 
-export const labels = [
+type TLables = {
+  value: string;
+  label: string;
+  variant: "destructive" | "default" | "outline" | "secondary";
+}[];
+
+type TStatuses = {
+  value: string;
+  label: string;
+  icon: LucideIcon;
+}[];
+
+type TPriorities = {
+  label: string;
+  value: string;
+  icon: LucideIcon;
+}[];
+
+export const labels: TLables = [
   {
     value: "bug",
     label: "Bug",
+    variant: "destructive",
   },
   {
     value: "feature",
     label: "Feature",
+    variant: "default",
   },
   {
     value: "documentation",
     label: "Documentation",
+    variant: "outline",
   },
 ];
 
-export const statuses = [
+export const statuses: TStatuses = [
   {
     value: "backlog",
     label: "Backlog",
@@ -52,7 +74,7 @@ export const statuses = [
   },
 ];
 
-export const priorities = [
+export const priorities: TPriorities = [
   {
     label: "Low",
     value: "low",

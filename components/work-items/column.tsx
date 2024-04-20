@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
-import { ColumnDef } from "@tanstack/react-table"
+import { ColumnDef } from "@tanstack/react-table";
 
-import { Badge } from "@/components/ui/badge"
-import { Checkbox } from "@/components/ui/checkbox"
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-import { labels, priorities, statuses } from "./data/data"
-import { Task } from "./data/schema"
-import { DataTableColumnHeader } from "./data-table-column-header"
-import { DataTableRowActions } from "./data-table-row-actions"
+import { labels, priorities, statuses } from "./data/data";
+import { Task } from "./data/schema";
+import { DataTableColumnHeader } from "./data-table-column-header";
+import { DataTableRowActions } from "./data-table-row-actions";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -36,31 +37,44 @@ export const columns: ColumnDef<Task>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "id",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Task" />
-    ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
-    enableSorting: false,
-    enableHiding: false,
-  },
-  {
     accessorKey: "title",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Title" />
     ),
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+      const label = labels.find((label) => label.value === row.original.label);
+
+      console.log("label", label);
 
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
+          {label && <Badge variant={label.variant}>{label.label}</Badge>}
           <span className="max-w-[500px] truncate font-medium">
             {row.getValue("title")}
           </span>
         </div>
-      )
+      );
     },
+  },
+  {
+    accessorKey: "assignee",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Assignee" />
+    ),
+    cell: ({ row }) => (
+      <div className="flex items-center gap-1">
+        <Avatar className="aspect-square p-1">
+          <AvatarImage
+            width={1000}
+            height={1000}
+            className="rounded-full"
+            src="https://github.com/shadcn.png"
+          />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>{" "}
+        {row.getValue("assignee")}
+      </div>
+    ),
   },
   {
     accessorKey: "status",
@@ -70,10 +84,10 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const status = statuses.find(
         (status) => status.value === row.getValue("status")
-      )
+      );
 
       if (!status) {
-        return null
+        return null;
       }
 
       return (
@@ -83,10 +97,10 @@ export const columns: ColumnDef<Task>[] = [
           )}
           <span>{status.label}</span>
         </div>
-      )
+      );
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(row.getValue(id));
     },
   },
   {
@@ -97,10 +111,10 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       const priority = priorities.find(
         (priority) => priority.value === row.getValue("priority")
-      )
+      );
 
       if (!priority) {
-        return null
+        return null;
       }
 
       return (
@@ -110,14 +124,14 @@ export const columns: ColumnDef<Task>[] = [
           )}
           <span>{priority.label}</span>
         </div>
-      )
+      );
     },
     filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id))
+      return value.includes(row.getValue(id));
     },
   },
   {
     id: "actions",
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
-]
+];
