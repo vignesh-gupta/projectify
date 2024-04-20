@@ -1,6 +1,7 @@
 {
   "conventionalCommits.scopes": [
     "dashboard",
-    "project"
+    "project",
+    "work-items"
   ]
 }
