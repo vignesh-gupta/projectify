@@ -16,6 +16,7 @@ import type {
 } from "convex/server";
 import type * as project from "../project.js";
 import type * as projects from "../projects.js";
+import type * as user from "../user.js";
 import type * as work_items from "../work_items.js";
 
 /**
@@ -29,6 +30,7 @@ import type * as work_items from "../work_items.js";
 declare const fullApi: ApiFromModules<{
   project: typeof project;
   projects: typeof projects;
+  user: typeof user;
   work_items: typeof work_items;
 }>;
 export declare const api: FilterApi<

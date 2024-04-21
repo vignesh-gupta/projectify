@@ -14,9 +14,6 @@ export const list = query({
 
     if (!args.projectId) return { error: "Please select an Project" };
 
-    console.log("args.projectId", args.projectId);
-    
-
     const workItems = await ctx.db
       .query("workItems")
       .withIndex("by_project", (q) =>

@@ -2,6 +2,10 @@
   "conventionalCommits.scopes": [
     "dashboard",
     "project",
-    "work-items"
+    "work-items",
+    "user"
+  ],
+  "cSpell.words": [
+    "nothanks"
   ]
 }

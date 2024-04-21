@@ -31,4 +31,11 @@ export default defineSchema({
       searchField: "title",
       filterFields: ["projectId"],
     }),
+
+  users: defineTable({
+    email: v.string(),
+    firstName: v.string(),
+    imageUrl: v.string(),
+    clerkId: v.string(),
+  }),
 });

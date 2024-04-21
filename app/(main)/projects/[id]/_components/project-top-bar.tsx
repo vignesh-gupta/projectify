@@ -50,6 +50,7 @@ const ProjectTopBar = () => {
       </div>
       <ThemeSwitch />
       <UserButton
+        afterSignOutUrl={DASHBOARD_ROUTE}
         appearance={{
           elements: {
             accordionTriggerButton: {

@@ -16,15 +16,9 @@ type TLables = {
   variant: "destructive" | "default" | "outline" | "secondary";
 }[];
 
-type TStatuses = {
+type TOptions = {
   value: string;
   label: string;
-  icon: LucideIcon;
-}[];
-
-type TPriorities = {
-  label: string;
-  value: string;
   icon: LucideIcon;
 }[];
 
@@ -46,7 +40,7 @@ export const labels: TLables = [
   },
 ];
 
-export const statuses: TStatuses = [
+export const statuses: TOptions = [
   {
     value: "backlog",
     label: "Backlog",
@@ -74,7 +68,7 @@ export const statuses: TStatuses = [
   },
 ];
 
-export const priorities: TPriorities = [
+export const priorities: TOptions = [
   {
     label: "Low",
     value: "low",
