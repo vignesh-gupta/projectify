@@ -9,9 +9,7 @@ export const create = mutation({
     imageUrl: v.string(),
   },
   handler: async (ctx, args) => {
-    const userId = await ctx.db.insert("users", {
-      ...args,
-    });
+    const userId = await ctx.db.insert("users", args);
 
     console.log("[USER_CREATE_OPS] : Created user", userId);
   },
@@ -50,9 +48,7 @@ export const remove = mutation({
   handler: async (ctx, args) => {
     const existingUser = await ctx.db
       .query("users")
-      .withIndex("by_clerk", (q) =>
-        q.eq("clerkId", args.clerkId)
-      )
+      .withIndex("by_clerk", (q) => q.eq("clerkId", args.clerkId))
       .first();
 
     if (!existingUser) {

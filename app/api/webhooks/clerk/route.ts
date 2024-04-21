@@ -2,6 +2,7 @@ import { Webhook } from "svix";
 import { headers } from "next/headers";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { createUser, deleteUser, updateUser } from "./utils/user";
+import { createOrg, updateOrg } from "./utils/organization";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -57,6 +58,7 @@ export async function POST(req: Request) {
 
   try {
     switch (eventType) {
+      // User events
       case "user.created":
         await createUser(evt.data);
         break;
@@ -67,6 +69,16 @@ export async function POST(req: Request) {
 
       case "user.deleted":
         await deleteUser(evt.data);
+        break;
+
+      // Organization events
+      case "organization.created":
+        await createOrg(evt.data);
+        break;
+
+      case "organization.updated":
+        // Handle organization updated
+        updateOrg(evt.data);
         break;
 
       default:

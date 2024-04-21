@@ -3,7 +3,8 @@
     "dashboard",
     "project",
     "work-items",
-    "user"
+    "user",
+    "organization"
   ],
   "cSpell.words": [
     "nothanks"

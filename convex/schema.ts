@@ -46,4 +46,18 @@ export default defineSchema({
       searchField: "orgIds",
       filterFields: ["clerkId"],
     }),
+
+  teams: defineTable({
+    name: v.string(),
+    members: v.array(v.string()),
+    clerkId: v.string(),
+    imageUrl: v.string(),
+    admins: v.array(v.string()),
+    createdBy: v.string(),
+  })
+    .index("by_org", ["clerkId"])
+    .searchIndex("search_by_name", {
+      searchField: "name",
+      filterFields: ["clerkId"],
+    }),
 });

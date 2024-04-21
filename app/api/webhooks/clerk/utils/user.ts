@@ -1,9 +1,5 @@
 import { api } from "@/convex/_generated/api";
-import {
-  DeletedObject,
-  DeletedObjectJSON,
-  UserJSON,
-} from "@clerk/nextjs/server";
+import { DeletedObjectJSON, UserJSON } from "@clerk/nextjs/server";
 import { fetchMutation } from "convex/nextjs";
 
 type User = {
