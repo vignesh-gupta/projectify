@@ -37,5 +37,13 @@ export default defineSchema({
     firstName: v.string(),
     imageUrl: v.string(),
     clerkId: v.string(),
-  }),
+    orgIds: v.optional(v.array(v.string())),
+  })
+    .index("by_clerk", ["clerkId"])
+    .index("by_email", ["email"])
+    .index("by_clerk_and_email", ["clerkId", "email"])
+    .searchIndex("search_by_org", {
+      searchField: "orgIds",
+      filterFields: ["clerkId"],
+    }),
 });
