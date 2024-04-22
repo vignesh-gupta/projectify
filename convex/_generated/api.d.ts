@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as org_membership from "../org_membership.js";
 import type * as project from "../project.js";
 import type * as projects from "../projects.js";
 import type * as team from "../team.js";
@@ -29,6 +30,7 @@ import type * as work_items from "../work_items.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  org_membership: typeof org_membership;
   project: typeof project;
   projects: typeof projects;
   team: typeof team;

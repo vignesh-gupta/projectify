@@ -55,7 +55,7 @@ export default defineSchema({
     admins: v.array(v.id("users")),
     createdBy: v.id("users"),
   })
-    .index("by_org", ["clerkId"])
+    .index("by_clerkId", ["clerkId"])
     .searchIndex("search_by_name", {
       searchField: "name",
       filterFields: ["clerkId"],

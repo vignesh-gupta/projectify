@@ -1,5 +1,5 @@
 import { api } from "@/convex/_generated/api";
-import { OrganizationJSON } from "@clerk/nextjs/server";
+import { DeletedObjectJSON, OrganizationJSON } from "@clerk/nextjs/server";
 import { fetchMutation } from "convex/nextjs";
 
 type Organization = {
@@ -23,6 +23,10 @@ export const updateOrg = async (orgJson: OrganizationJSON) => {
     name: org.name,
     clerkId: org.clerkId,
   });
+};
+
+export const deleteOrg = async (orgJson: DeletedObjectJSON) => {
+  await fetchMutation(api.team.remove, { clerkId: orgJson.id || "" });
 };
 
 function mapOrgJsonToOrg(orgJson: OrganizationJSON): Organization {

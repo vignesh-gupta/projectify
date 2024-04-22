@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation } from "./_generated/server";
-import { Id } from "./_generated/dataModel";
 
 export const create = mutation({
   args: {
@@ -12,7 +11,7 @@ export const create = mutation({
   handler: async (ctx, args) => {
     const existingOrg = await ctx.db
       .query("teams")
-      .withIndex("by_org", (q) => q.eq("clerkId", args.clerkId))
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
       .first();
 
     if (existingOrg) {
@@ -51,7 +50,7 @@ export const update = mutation({
   handler: async (ctx, args) => {
     const existingOrg = await ctx.db
       .query("teams")
-      .withIndex("by_org", (q) => q.eq("clerkId", args.clerkId))
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
       .first();
 
     if (!existingOrg) {
@@ -72,7 +71,7 @@ export const remove = mutation({
   handler: async (ctx, args) => {
     const org = await ctx.db
       .query("teams")
-      .withIndex("by_org", (q) => q.eq("clerkId", args.clerkId))
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.clerkId))
       .first();
 
     if (!org) {
