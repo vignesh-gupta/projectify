@@ -1,31 +1,41 @@
 import { v } from "convex/values";
 import { mutation } from "./_generated/server";
+import { Id } from "./_generated/dataModel";
 
 export const create = mutation({
   args: {
     name: v.string(),
-    members: v.array(v.string()),
     clerkId: v.string(),
     imageUrl: v.string(),
-    admins: v.array(v.string()),
     createdBy: v.string(),
   },
   handler: async (ctx, args) => {
-    const filteredMembers = args.members.filter(async (member) => {
-      const memberUser = await ctx.db
-        .query("users")
-        .withIndex("by_clerk", (q) => q.eq("clerkId", member))
-        .first();
+    const existingOrg = await ctx.db
+      .query("teams")
+      .withIndex("by_org", (q) => q.eq("clerkId", args.clerkId))
+      .first();
 
-      return memberUser ? true : false;
-    });
-
-    if (filteredMembers.length !== args.members.length) {
-      console.error("[ORG_CREATE_ERR] : Invalid members");
-      throw new Error("Invalid members");
+    if (existingOrg) {
+      console.error("[ORG_CREATE_ERR] : Organization already exists");
+      throw new Error("Organization already exists");
     }
 
-    const orgId = await ctx.db.insert("teams", args);
+    const createdBy = await ctx.db
+      .query("users")
+      .withIndex("by_clerk", (q) => q.eq("clerkId", args.createdBy))
+      .first();
+
+    if (!createdBy) {
+      console.error("[ORG_CREATE_ERR] : User not found");
+      throw new Error("User not found");
+    }
+
+    const orgId = await ctx.db.insert("teams", {
+      ...args,
+      members: [createdBy._id],
+      admins: [createdBy._id],
+      createdBy: createdBy._id,
+    });
 
     console.log("[ORG_CREATE_OPS] : Created ORG", orgId);
   },
@@ -52,5 +62,26 @@ export const update = mutation({
     console.log("[ORG_UPDATE_OPS] : Updating ORG", existingOrg._id);
 
     await ctx.db.patch(existingOrg._id, args);
+  },
+});
+
+export const remove = mutation({
+  args: {
+    clerkId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const org = await ctx.db
+      .query("teams")
+      .withIndex("by_org", (q) => q.eq("clerkId", args.clerkId))
+      .first();
+
+    if (!org) {
+      console.error("[ORG_REMOVE_ERR] : Organization not found");
+      throw new Error("Organization not found");
+    }
+
+    await ctx.db.delete(org._id);
+
+    console.log("[ORG_REMOVE_OPS] : Removed ORG", org._id);
   },
 });

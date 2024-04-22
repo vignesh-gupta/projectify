@@ -12,11 +12,7 @@ type Organization = {
 export const createOrg = async (orgJson: OrganizationJSON) => {
   const org = mapOrgJsonToOrg(orgJson);
 
-  await fetchMutation(api.team.create, {
-    ...org,
-    admins: [org.createdBy],
-    members: [org.createdBy],
-  });
+  await fetchMutation(api.team.create, org);
 };
 
 export const updateOrg = async (orgJson: OrganizationJSON) => {

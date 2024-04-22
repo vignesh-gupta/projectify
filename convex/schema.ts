@@ -49,15 +49,23 @@ export default defineSchema({
 
   teams: defineTable({
     name: v.string(),
-    members: v.array(v.string()),
+    members: v.array(v.id("users")),
     clerkId: v.string(),
     imageUrl: v.string(),
-    admins: v.array(v.string()),
-    createdBy: v.string(),
+    admins: v.array(v.id("users")),
+    createdBy: v.id("users"),
   })
     .index("by_org", ["clerkId"])
     .searchIndex("search_by_name", {
       searchField: "name",
+      filterFields: ["clerkId"],
+    })
+    .searchIndex("search_by_member", {
+      searchField: "members",
+      filterFields: ["clerkId"],
+    })
+    .searchIndex("search_by_admin", {
+      searchField: "admins",
       filterFields: ["clerkId"],
     }),
 });
