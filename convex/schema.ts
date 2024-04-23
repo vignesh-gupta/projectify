@@ -19,12 +19,13 @@ export default defineSchema({
     }),
 
   workItems: defineTable({
-    assignee: v.string(),
+    assignee: v.id("users"),
     label: v.string(),
     priority: v.string(),
     projectId: v.id("projects"),
     status: v.string(),
     title: v.string(),
+    description: v.optional(v.string()),
   })
     .index("by_project", ["projectId"])
     .searchIndex("search_title", {
@@ -37,35 +38,28 @@ export default defineSchema({
     firstName: v.string(),
     imageUrl: v.string(),
     clerkId: v.string(),
-    orgIds: v.optional(v.array(v.string())),
   })
     .index("by_clerk", ["clerkId"])
-    .index("by_email", ["email"])
-    .index("by_clerk_and_email", ["clerkId", "email"])
-    .searchIndex("search_by_org", {
-      searchField: "orgIds",
-      filterFields: ["clerkId"],
-    }),
+    .index("by_email", ["email"]),
 
   teams: defineTable({
     name: v.string(),
-    members: v.array(v.id("users")),
     clerkId: v.string(),
     imageUrl: v.string(),
-    admins: v.array(v.id("users")),
     createdBy: v.id("users"),
   })
     .index("by_clerkId", ["clerkId"])
     .searchIndex("search_by_name", {
       searchField: "name",
       filterFields: ["clerkId"],
-    })
-    .searchIndex("search_by_member", {
-      searchField: "members",
-      filterFields: ["clerkId"],
-    })
-    .searchIndex("search_by_admin", {
-      searchField: "admins",
-      filterFields: ["clerkId"],
     }),
+
+  team_memberships: defineTable({
+    teamId: v.id("teams"),
+    userId: v.id("users"),
+    isAdmin: v.boolean(),
+  })
+    .index("by_team", ["teamId"])
+    .index("by_user", ["userId"])
+    .index("by_team_user", ["teamId", "userId"]),
 });

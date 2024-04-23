@@ -25,9 +25,7 @@ export const update = mutation({
   handler: async (ctx, args) => {
     const existingUser = await ctx.db
       .query("users")
-      .withIndex("by_clerk_and_email", (q) =>
-        q.eq("clerkId", args.clerkId).eq("email", args.email)
-      )
+      .withIndex("by_clerk", (q) => q.eq("clerkId", args.clerkId))
       .first();
 
     if (!existingUser) {

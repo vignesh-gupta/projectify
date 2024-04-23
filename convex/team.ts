@@ -31,9 +31,13 @@ export const create = mutation({
 
     const orgId = await ctx.db.insert("teams", {
       ...args,
-      members: [createdBy._id],
-      admins: [createdBy._id],
       createdBy: createdBy._id,
+    });
+
+    await ctx.db.insert("team_memberships", {
+      teamId: orgId,
+      userId: createdBy._id,
+      isAdmin: true,
     });
 
     console.log("[ORG_CREATE_OPS] : Created ORG", orgId);
@@ -81,6 +85,13 @@ export const remove = mutation({
 
     await ctx.db.delete(org._id);
 
+    let docs = await ctx.db
+      .query("team_memberships")
+      .withIndex("by_team", (q) => q.eq("teamId", org._id))
+      .collect();
+
+    await Promise.all(docs.map((doc) => ctx.db.delete(doc._id)));
+    
     console.log("[ORG_REMOVE_OPS] : Removed ORG", org._id);
   },
 });

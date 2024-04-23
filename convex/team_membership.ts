@@ -15,7 +15,7 @@ export const addMember = mutation({
 
     if (!org) {
       console.error("[ORG_ADD_MEMBER_ERR] : Organization not found");
-      throw new Error("Organization not found");
+      return;
     }
 
     const member = await ctx.db
@@ -25,27 +25,13 @@ export const addMember = mutation({
 
     if (!member) {
       console.error("[ORG_ADD_MEMBER_ERR] : User not found");
-      throw new Error("User not found");
+      return;
     }
 
-    let filteredMembers = Array.from(new Set([...org.members, member._id]));
-
-    if (args.userRole === "admin") {
-      let filteredAdmins = Array.from(new Set([...org.admins, member._id]));
-      await ctx.db.patch(org._id, {
-        admins: filteredAdmins,
-        members: filteredMembers,
-      });
-    } else {
-      await ctx.db.patch(org._id, {
-        members: filteredMembers,
-      });
-    }
-
-    const currentOrgs = member.orgIds || [];
-
-    await ctx.db.patch(member._id, {
-      orgIds: Array.from(new Set([...currentOrgs, org._id])),
+    await ctx.db.insert("team_memberships", {
+      teamId: org._id,
+      userId: member._id,
+      isAdmin: args.userRole === "org:admin",
     });
 
     console.log("[ORG_ADD_MEMBER_OPS] : Added member to ORG", org._id);
@@ -66,7 +52,7 @@ export const updateMemberRole = mutation({
 
     if (!org) {
       console.error("[ORG_UPDATE_MEMBER_ERR] : Organization not found");
-      throw new Error("Organization not found");
+      return;
     }
 
     const member = await ctx.db
@@ -76,26 +62,24 @@ export const updateMemberRole = mutation({
 
     if (!member) {
       console.error("[ORG_UPDATE_MEMBER_ERR] : User not found");
-      throw new Error("User not found");
+      return;
     }
 
-    let filteredMembers = Array.from(new Set([...org.members, member._id]));
+    const membership = await ctx.db
+      .query("team_memberships")
+      .withIndex("by_team_user", (q) =>
+        q.eq("teamId", org._id).eq("userId", member._id)
+      )
+      .first();
 
-    console.log(filteredMembers);
-
-    if (args.userRole === "org:admin") {
-      let filteredAdmins = Array.from(new Set([...org.admins, member._id]));
-
-      await ctx.db.patch(org._id, {
-        admins: filteredAdmins,
-        members: filteredMembers,
-      });
-    } else {
-      await ctx.db.patch(org._id, {
-        members: filteredMembers,
-        admins: org.admins.filter((a) => a !== member._id),
-      });
+    if (!membership) {
+      console.error("[ORG_UPDATE_MEMBER_ERR] : Membership not found");
+      return;
     }
+
+    await ctx.db.patch(membership._id, {
+      isAdmin: args.userRole === "org:admin",
+    });
 
     console.log(
       "[ORG_UPDATE_MEMBER_OPS] : Updated member role in ORG",
@@ -117,7 +101,7 @@ export const removeMember = mutation({
 
     if (!org) {
       console.error("[ORG_REMOVE_MEMBER_ERR] : Organization not found");
-      throw new Error("Organization not found");
+      return;
     }
 
     const member = await ctx.db
@@ -127,23 +111,20 @@ export const removeMember = mutation({
 
     if (!member) {
       console.error("[ORG_REMOVE_MEMBER_ERR] : User not found");
-      throw new Error("User not found");
+      return;
     }
 
-    let filteredMembers = org.members.filter((m) => m !== member._id);
-    let filteredAdmins = org.admins.filter((a) => a !== member._id);
+    const membership = await ctx.db
+      .query("team_memberships")
+      .withIndex("by_team_user", (q) =>
+        q.eq("teamId", org._id).eq("userId", member._id)
+      )
+      .collect();
 
-    await ctx.db.patch(org._id, {
-      admins: filteredAdmins,
-      members: filteredMembers,
-    });
+    await Promise.all(membership.map((mem) => ctx.db.delete(mem._id)));
 
-    const currentOrgs = member.orgIds || [];
-
-    await ctx.db.patch(member._id, {
-      orgIds: currentOrgs.filter((o) => o !== org._id),
-    });
-
-    console.log("[ORG_REMOVE_MEMBER_OPS] : Removed member from ORG", org._id);
+    console.log(
+      `[ORG_REMOVE_MEMBER_OPS] : Removed member ${member._id} from ORG", ${org._id}`
+    );
   },
 });
