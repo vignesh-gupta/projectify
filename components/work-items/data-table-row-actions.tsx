@@ -1,69 +1,40 @@
-"use client"
-
-import { Ellipsis } from "lucide-react"
-import { Row } from "@tanstack/react-table"
-
-import { Button } from "@/components/ui/button"
+import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@/components/ui/dropdown-menu";
+import { Button } from "../ui/button";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
+import { Row } from "@tanstack/react-table";
+import { Task } from "./data";
 
-import { labels } from "./data/data"
-import { taskSchema } from "./data/schema"
+type DataTableRowActionsProps = {
+  row: Row<Task>;
+};
 
-interface DataTableRowActionsProps<TData> {
-  row: Row<TData>
-}
-
-export function DataTableRowActions<TData>({
-  row,
-}: DataTableRowActionsProps<TData>) {
-  const task = taskSchema.parse(row.original)
-
+const DataTableRowActions = ({ row }: DataTableRowActionsProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button
-          variant="ghost"
-          className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
-        >
-          <Ellipsis className="h-4 w-4" />
+        <Button variant="ghost" className="h-8 w-8 p-0">
           <span className="sr-only">Open menu</span>
+          <MoreHorizontal className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
-                </DropdownMenuRadioItem>
-              ))}
-            </DropdownMenuRadioGroup>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
+      <DropdownMenuContent align="end">
         <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          <Edit className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" /> Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" /> Delete
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
-}
+  );
+};
+
+export default DataTableRowActions;

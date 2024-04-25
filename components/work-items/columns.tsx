@@ -2,14 +2,12 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-import { labels, priorities, statuses } from "./data/data";
-import { Task } from "./data/schema";
 import { DataTableColumnHeader } from "./data-table-column-header";
-import { DataTableRowActions } from "./data-table-row-actions";
+import DataTableRowActions from "./data-table-row-actions";
+import { Task } from "./data-table";
+import { Badge } from "../ui/badge";
+import { labels, priorities, statuses } from "./options";
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -47,12 +45,13 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div className="flex space-x-2">
           {label && <Badge variant={label.variant}>{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
+          <span className="truncate font-medium max-w-[500px]">
             {row.getValue("title")}
           </span>
         </div>
       );
     },
+    enableHiding: false,
   },
   {
     accessorKey: "assignee",
@@ -89,6 +88,14 @@ export const columns: ColumnDef<Task>[] = [
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
     },
+    sortingFn: (rowA, rowB, id) => {
+      const statusSeq = ["backlog", "todo", "in progress", "done", "canceled"];
+
+      return (
+        statusSeq.indexOf(rowA.getValue(id)) -
+        statusSeq.indexOf(rowB.getValue(id))
+      );
+    },
   },
   {
     accessorKey: "priority",
@@ -115,6 +122,14 @@ export const columns: ColumnDef<Task>[] = [
     },
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
+    },
+    sortingFn: (rowA, rowB, id) => {
+      const prioritySeq = ["low", "medium", "high"];
+
+      return (
+        prioritySeq.indexOf(rowA.getValue(id)) -
+        prioritySeq.indexOf(rowB.getValue(id))
+      );
     },
   },
   {
