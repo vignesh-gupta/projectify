@@ -19,6 +19,7 @@ import type * as projects from "../projects.js";
 import type * as team from "../team.js";
 import type * as team_membership from "../team_membership.js";
 import type * as user from "../user.js";
+import type * as users from "../users.js";
 import type * as work_items from "../work_items.js";
 
 /**
@@ -35,6 +36,7 @@ declare const fullApi: ApiFromModules<{
   team: typeof team;
   team_membership: typeof team_membership;
   user: typeof user;
+  users: typeof users;
   work_items: typeof work_items;
 }>;
 export declare const api: FilterApi<

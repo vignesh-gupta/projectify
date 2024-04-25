@@ -19,7 +19,8 @@ export default defineSchema({
     }),
 
   workItems: defineTable({
-    assignee: v.id("users"),
+    assigneeId: v.id("users"),
+    assignee: v.string(),
     label: v.string(),
     priority: v.string(),
     projectId: v.id("projects"),

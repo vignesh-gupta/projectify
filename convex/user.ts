@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 export const create = mutation({
   args: {
@@ -57,5 +57,14 @@ export const remove = mutation({
     console.log("[USER_DELETE_OPS] : Deleting user", existingUser._id);
 
     await ctx.db.delete(existingUser._id);
+  },
+});
+
+export const get = query({
+  args: {
+    id: v.id("users"),
+  },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
   },
 });

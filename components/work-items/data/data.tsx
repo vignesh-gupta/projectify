@@ -16,10 +16,10 @@ type TLables = {
   variant: "destructive" | "default" | "outline" | "secondary";
 }[];
 
-type TOptions = {
+export type TOptions = {
   value: string;
   label: string;
-  icon: LucideIcon;
+  icon?: LucideIcon;
 }[];
 
 export const labels: TLables = [

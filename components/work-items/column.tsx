@@ -60,18 +60,7 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Assignee" />
     ),
     cell: ({ row }) => (
-      <div className="flex items-center gap-1">
-        <Avatar className="aspect-square p-1">
-          <AvatarImage
-            width={1000}
-            height={1000}
-            className="rounded-full"
-            src="https://github.com/shadcn.png"
-          />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>{" "}
-        {row.getValue("assignee")}
-      </div>
+      <div className="flex items-center gap-1">{row.getValue("assignee")}</div>
     ),
   },
   {

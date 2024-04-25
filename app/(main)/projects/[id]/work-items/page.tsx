@@ -4,7 +4,9 @@ import { Button } from "@/components/ui/button";
 import { columns } from "@/components/work-items/column";
 import { DataTable } from "@/components/work-items/data-table";
 import { api } from "@/convex/_generated/api";
+import { useOrganization } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
+import { useEffect } from "react";
 
 type WorkItemsPageProps = {
   params: {
