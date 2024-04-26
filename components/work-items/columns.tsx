@@ -43,11 +43,9 @@ export const columns: ColumnDef<Task>[] = [
       const label = labels.find((label) => label.value === row.original.label);
 
       return (
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 max-w-[300px]">
           {label && <Badge variant={label.variant}>{label.label}</Badge>}
-          <span className="truncate font-medium max-w-[500px]">
-            {row.getValue("title")}
-          </span>
+          <span className="truncate font-medium">{row.getValue("title")}</span>
         </div>
       );
     },
@@ -59,8 +57,11 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Assignee" />
     ),
     cell: ({ row }) => (
-      <div className="flex items-center gap-1">{row.getValue("assignee")}</div>
+      <div className="flex items-center gap-1">
+        {row.getValue("assignee") ?? "Unassigned"}
+      </div>
     ),
+    filterFn: (row, id, value) => value.includes(row.original.assigneeId),
   },
   {
     accessorKey: "status",
@@ -85,11 +86,9 @@ export const columns: ColumnDef<Task>[] = [
         </div>
       );
     },
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
+    filterFn: (row, id, value) => value.includes(row.getValue(id)),
     sortingFn: (rowA, rowB, id) => {
-      const statusSeq = ["backlog", "todo", "in progress", "done", "canceled"];
+      const statusSeq = statuses.map((status) => status.value);
 
       return (
         statusSeq.indexOf(rowA.getValue(id)) -
@@ -124,7 +123,7 @@ export const columns: ColumnDef<Task>[] = [
       return value.includes(row.getValue(id));
     },
     sortingFn: (rowA, rowB, id) => {
-      const prioritySeq = ["low", "medium", "high"];
+      const prioritySeq = priorities.map((priority) => priority.value);
 
       return (
         prioritySeq.indexOf(rowA.getValue(id)) -

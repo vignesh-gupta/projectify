@@ -7,7 +7,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DataTableViewOptions } from "./data-table-view-options";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
-import { priorities, statuses } from "./options";
+import { TOptions, priorities, statuses } from "./options";
+import { useEffect, useState } from "react";
+import { useOrganization } from "@clerk/nextjs";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { UNASSIGNED_USER } from "@/lib/constants";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -16,24 +21,24 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  // const [userList, setUserList] = useState<TOptions | null>(null);
+  const [userList, setUserList] = useState<TOptions | null>(null);
   const isFiltered = table.getState().columnFilters.length > 0;
 
-  // const { organization } = useOrganization();
-  // const orgUsers = useQuery(api.users.list, {
-  //   teamId: organization?.id as string,
-  // });
+  const { organization } = useOrganization();
+  const orgUsers = useQuery(api.users.list, {
+    teamId: organization?.id as string,
+  });
 
-  // useEffect(() => {
-  //   let users = (orgUsers || []).map((user) => ({
-  //     label: user?.firstName as string,
-  //     value: user?._id as string,
-  //   }));
+  useEffect(() => {
+    let users = (orgUsers || []).map((user) => ({
+      label: user?.firstName || "Unassigned",
+      value: user?._id || "unassigned",
+    }));
 
-  //   users.push({ label: "Unassigned", value: "unassigned" });
+    users.push(UNASSIGNED_USER);
 
-  //   setUserList(users);
-  // }, [orgUsers]);
+    setUserList(users);
+  }, [orgUsers]);
 
   return (
     <div className="flex items-center justify-between">
@@ -53,13 +58,13 @@ export function DataTableToolbar<TData>({
             options={statuses}
           />
         )}
-        {/* {table.getColumn("assignee") && (
+        {table.getColumn("assignee") && (
           <DataTableFacetedFilter
             column={table.getColumn("assignee")}
             title="Assignee"
             options={userList || []}
           />
-        )} */}
+        )}
         {table.getColumn("priority") && (
           <DataTableFacetedFilter
             column={table.getColumn("priority")}

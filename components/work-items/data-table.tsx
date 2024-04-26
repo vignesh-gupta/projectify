@@ -23,15 +23,14 @@ import {
 } from "@/components/ui/table";
 import { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
-import { Input } from "../ui/input";
 import { DataTableToolbar } from "./data-table-toolbar";
 
 export type Task = {
   _id: string;
   projectId: string;
   title: string;
-  assignee: string;
-  assigneeId: string;
+  assignee?: string ;
+  assigneeId?: string;
   label: string;
   priority: string;
   status: string;

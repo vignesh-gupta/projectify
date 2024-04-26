@@ -10,7 +10,7 @@ import {
 import { Button } from "../ui/button";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { Row } from "@tanstack/react-table";
-import { Task } from "./data";
+import { Task } from "./data-table";
 
 type DataTableRowActionsProps = {
   row: Row<Task>;
