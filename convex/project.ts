@@ -1,12 +1,17 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 
 export const create = mutation({
   args: {
     title: v.string(),
     orgId: v.string(),
     description: v.optional(v.string()),
-    status: v.string(),
+    status: v.union(
+      v.literal("development"),
+      v.literal("live"),
+      v.literal("stale"),
+      v.literal("archived")
+    ),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -26,5 +31,73 @@ export const create = mutation({
     });
 
     return projectId;
+  },
+});
+
+export const get = query({
+  args: {
+    id: v.id("projects"),
+  },
+  handler: async (ctx, args) => {
+    const project = await ctx.db.get(args.id);
+    if (!project) {
+      throw new Error("Project not found");
+    }
+
+    return project;
+  },
+});
+
+export const remove = mutation({
+  args: {
+    id: v.id("projects"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthorized");
+    }
+
+    const project = await ctx.db.get(args.id);
+    if (!project) {
+      throw new Error("Project not found");
+    }
+
+    if (project.creatorId !== identity.subject) {
+      throw new Error("Unauthorized");
+    }
+
+    await ctx.db.delete(args.id);
+  },
+});
+
+export const update = mutation({
+  args: {
+    id: v.id("projects"),
+    title: v.optional(v.string()),
+    description: v.optional(v.string()),
+    status: v.optional(
+      v.union(
+        v.literal("development"),
+        v.literal("live"),
+        v.literal("stale"),
+        v.literal("archived")
+      )
+    ),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthorized");
+    }
+
+    const project = await ctx.db.get(args.id);
+    if (!project) throw new Error("Project not found");
+
+    await ctx.db.patch(args.id, {
+      title: args.title,
+      description: args.description,
+      status: args.status,
+    });
   },
 });

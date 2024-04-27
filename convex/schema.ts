@@ -6,7 +6,12 @@ export default defineSchema({
     title: v.string(),
     description: v.optional(v.string()),
     // icon: v.string(),
-    status: v.string(),
+    status: v.union(
+      v.literal("development"),
+      v.literal("live"),
+      v.literal("stale"),
+      v.literal("archived")
+    ),
     team: v.array(v.string()),
     creatorId: v.string(),
     creatorName: v.string(),

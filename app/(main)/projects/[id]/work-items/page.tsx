@@ -18,7 +18,7 @@ const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
   if (!tasks) return <div>Loading...</div>;
 
   return (
-    <div className="p-8 space-y-5  flex flex-col">
+    <div className="space-y-5 flex flex-col">
       <div className="flex justify-between">
         <h3 className="font-bold text-xl md:text-2xl lg:text-3xl">
           Work Items
