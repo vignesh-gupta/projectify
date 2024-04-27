@@ -27,6 +27,8 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
+import { toast } from "sonner";
+import { Textarea } from "@/components/ui/textarea";
 
 type ProjectSettingsPageProps = {
   params: {
@@ -43,11 +45,13 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
 
   const formSchema = z.object({
     title: z.string(),
+    description: z.string().optional(),
     status: z.union([
       z.literal("development"),
       z.literal("live"),
       z.literal("stale"),
       z.literal("archived"),
+      z.literal(""),
     ]),
   });
 
@@ -55,13 +59,21 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
     resolver: zodResolver(formSchema),
     values: {
       title: project?.title || "",
-      status: project?.status || "development",
+      status: project?.status || "",
+      description: project?.description || "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    updateProject({ id, ...values });
+  function onSubmit({ status, title, description }: z.infer<typeof formSchema>) {
+    if (status === "") return;
+
+    updateProject({ id, status, title, description })
+      .then(() => {
+        toast.success("Project updated successfully");
+      })
+      .catch(() => {
+        toast.error("An error occurred while updating the project");
+      });
   }
 
   return (
@@ -85,26 +97,48 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
         />
         <FormField
           control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="Tell us a little bit about yourself"
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="status"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Status</FormLabel>
               <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger className="w-full md:w-1/2">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {PROJECTS_STAGES.map((stage) => (
-                      <SelectItem key={stage} value={stage}>
-                        <ProjectStatus status={stage} />
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+                {field.value && (
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <SelectTrigger className="w-full md:w-1/2">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {PROJECTS_STAGES.map((stage) => (
+                        <SelectItem key={stage} value={stage}>
+                          <ProjectStatus status={stage} />
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                )}
               </FormControl>
               <FormDescription>
                 This is your public display name.
