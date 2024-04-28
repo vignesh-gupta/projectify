@@ -4,13 +4,13 @@ import ProjectTopBar from "./[id]/_components/project-top-bar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="h-[100dvh]">
+    <div className="h-[100dvh]">
       <ProjectTopBar />
       <div className="flex h-[calc(100dvh-56px)]">
         <ProjectSidebar />
-        <div className="flex-1 h-full p-8 flex justify-center">{children}</div>
+        <main className="flex-1 h-full p-8 flex justify-center">{children}</main>
       </div>
-    </main>
+    </div>
   );
 };
 

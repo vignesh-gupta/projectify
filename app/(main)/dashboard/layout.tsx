@@ -5,18 +5,18 @@ import DashboardTopBar from "./_component/dashboard-top-bar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <main className="h-[100dvh]">
+    <div className="h-[100dvh]">
       <OrganizationsSideBar />
       <div className="pl-[60px] h-full">
         <div className="flex h-full">
           <DashboardSidebar />
-          <div className="flex-1 h-full flex flex-col">
+          <main className="flex-1 h-full flex flex-col">
             <DashboardTopBar />
             <div className="overflow-y-auto">{children}</div>
-          </div>
+          </main>
         </div>
       </div>
-    </main>
+    </div>
   );
 };
 
