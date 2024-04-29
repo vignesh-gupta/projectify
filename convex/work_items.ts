@@ -12,7 +12,7 @@ export const list = query({
       throw new Error("Unauthorized");
     }
 
-    if (!args.projectId) return { error: "Please select an Project" };
+    if (!args.projectId) throw new Error("projectId is required");
 
     const workItems = await ctx.db
       .query("workItems")
@@ -21,6 +21,6 @@ export const list = query({
       )
       .collect();
 
-    return { success: true, data: workItems };
+    return workItems;
   },
 });

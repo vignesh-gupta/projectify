@@ -13,7 +13,7 @@ type WorkItemsPageProps = {
 };
 
 const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
-  const tasks = useQuery(api.work_items.list, { projectId: id })?.data;
+  const tasks = useQuery(api.work_items.list, { projectId: id });
 
   if (!tasks) return <div>Loading...</div>;
 

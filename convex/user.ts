@@ -62,9 +62,18 @@ export const remove = mutation({
 
 export const get = query({
   args: {
-    id: v.id("users"),
+    id: v.optional(v.id("users")),
+    clerkId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.get(args.id);
+    const { clerkId, id } = args;
+
+    if (id) return await ctx.db.get(id);
+
+    if (clerkId)
+      return await ctx.db
+        .query("users")
+        .withIndex("by_clerk", (q) => q.eq("clerkId", args.clerkId || ""))
+        .first();
   },
 });
