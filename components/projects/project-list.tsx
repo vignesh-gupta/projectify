@@ -19,7 +19,7 @@ const ProjectList = ({ orgId }: ProjectListProps) => {
   if (!projects?.data?.length) return <NoProject />;
 
   return (
-    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
+    <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
       {projects.data.map((project) => (
         <ProjectCard key={project._id} {...project} />
       ))}

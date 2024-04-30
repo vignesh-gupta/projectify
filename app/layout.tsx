@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 
 import "./globals.css";
 import { Toaster } from "sonner";
+import ModelProvider from "@/components/modals/modal-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default function RootLayout({
           <ConvexClientProvider>
             {children}
             <Toaster />
+            <ModelProvider />
           </ConvexClientProvider>
         </ThemeProvider>
       </body>
