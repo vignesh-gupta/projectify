@@ -35,10 +35,11 @@ import { useParams, useSearchParams } from "next/navigation";
 import { Id } from "@/convex/_generated/dataModel";
 
 const taskFormSchema = z.object({
+  id: z.string().optional(),
   title: z.string().min(5).max(50),
   description: z.string().optional(),
   assigneeId: z.string(),
-  status: z.enum(["backlog", "todo", "in progress", "done" , "canceled"]),
+  status: z.enum(["backlog", "todo", "in progress", "done", "canceled"]),
   priority: z.enum(["low", "medium", "high"]),
   type: z.enum(["documentation", "bug", "feature"]),
 });
@@ -58,19 +59,24 @@ const TaskModal = () => {
 
   const params = useParams();
 
-  const { mutate: createWorkItem, isPending } = useApiMutation(
+  const { mutate: createWorkItem, isPending: isCreating } = useApiMutation(
     api.work_item.create
+  );
+
+  const { mutate: updateWorkItem, isPending: isUpdating } = useApiMutation(
+    api.work_item.update
   );
 
   const form = useForm<z.infer<typeof taskFormSchema>>({
     resolver: zodResolver(taskFormSchema),
     defaultValues: {
-      title: "",
-      assigneeId: UNASSIGNED_USER.value,
-      status: "todo",
-      priority: "low",
-      type: "feature",
-      description: "",
+      id: values?._id ?? "",
+      title: values?.title ?? "",
+      assigneeId: values?.assigneeId ?? UNASSIGNED_USER.value,
+      status: values?.status ?? "todo",
+      priority: values?.priority ?? "low",
+      type: values?.label ?? "feature",
+      description: values?.description ?? "",
     },
   });
 
@@ -79,16 +85,26 @@ const TaskModal = () => {
       (user) => user.value === values.assigneeId
     );
 
-    createWorkItem({
+    const taskObject = {
+      title: values.title,
+      description: values.description,
       assignee: selectedUser?.label ?? UNASSIGNED_USER.label,
       assigneeId: (selectedUser?.value ?? UNASSIGNED_USER.value) as Id<"users">,
-      title: values.title,
       status: values.status,
       priority: values.priority,
       label: values.type,
-      description: values.description,
       projectId: params.id as Id<"projects">,
-    });
+    };
+
+    if (values?.id) {
+      updateWorkItem({
+        _id: values.id as Id<"workItems">,
+        ...taskObject,
+      });
+      return;
+    }
+
+    createWorkItem(taskObject);
   }
 
   return (
@@ -107,7 +123,7 @@ const TaskModal = () => {
                 <FormItem className="space-y-0">
                   <FormLabel>Title</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Summary of the work" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -257,7 +273,9 @@ const TaskModal = () => {
               )}
             />
 
-            <Button type="submit">Submit</Button>
+            <Button type="submit" disabled={isCreating || isUpdating}>
+              Submit
+            </Button>
           </form>
         </Form>
       </DialogContent>

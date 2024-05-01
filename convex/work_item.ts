@@ -67,3 +67,19 @@ export const update = mutation({
     return;
   },
 });
+
+export const remove = mutation({
+  args: {
+    _id: v.id("workItems"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthorized");
+    }
+
+    await ctx.db.delete(args._id);
+
+    return;
+  },
+});
