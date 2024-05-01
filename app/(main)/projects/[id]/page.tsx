@@ -1,11 +1,11 @@
 "use client";
 
-import { useAuth } from "@clerk/nextjs";
-import OwnedTaskTable from "./_components/owned-task-table";
-import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Loader2 } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
+import { useAuth } from "@clerk/nextjs";
+import { useQuery } from "convex/react";
+import { Loader2 } from "lucide-react";
+import OwnedTaskTable from "./_components/owned-task-table";
 
 type ProjectDashboardPageProps = {
   params: {
@@ -25,11 +25,11 @@ const ProjectDashboardPage = ({
   );
 
   return (
-    <div className="md:w-2/3 max-w-full md:flex-none">
+    <section>
       <h3 className="font-bold text-xl md:text-2xl lg:text-3xl mb-5">
         Project Dashboard
       </h3>
-      <section className="bg-primary-foreground/80 p-5 rounded-lg">
+      <section className="bg-primary-foreground/80 md:p-5 py-5 px-3 m-1 rounded-lg">
         <h4 className="mb-5 text-lg">Your task list</h4>
         {myTasks ? (
           <OwnedTaskTable tasks={myTasks} />
@@ -39,7 +39,7 @@ const ProjectDashboardPage = ({
           </div>
         )}
       </section>
-    </div>
+    </section>
   );
 };
 

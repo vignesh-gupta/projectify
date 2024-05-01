@@ -22,8 +22,8 @@ const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
   if (!tasks) return <div>Loading...</div>;
 
   return (
-    <div className="space-y-5 flex flex-col">
-      <div className="flex justify-between">
+    <div className="space-y-5">
+      <div className="flex justify-between bg-background/30 z-10 ">
         <h3 className="font-bold text-xl md:text-2xl lg:text-3xl">
           Work Items
         </h3>
@@ -31,7 +31,7 @@ const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
           Add Item
         </Button>
       </div>
-      <div className="flex-1 flex-col space-y-8  mx-auto">
+      <div className="flex-1 flex-col space-y-8 mx-auto bg-foreground/5 rounded-lg p-3">
         <DataTable data={tasks} columns={columns} />
       </div>
     </div>

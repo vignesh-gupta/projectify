@@ -44,10 +44,10 @@ const OwnedTaskTable = ({ tasks }: OwnedTaskTableProps) => {
   };
 
   return (
-    <Table className="overflow-x-hidden table-fixed">
+    <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="md:min-w-[300px]">Title</TableHead>
+          <TableHead className="md:min-w-64">Title</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Priority</TableHead>
         </TableRow>

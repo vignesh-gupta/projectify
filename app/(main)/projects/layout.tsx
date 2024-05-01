@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
       <ProjectTopBar />
       <div className="flex h-[calc(100dvh-56px)]">
         <ProjectSidebar />
-        <main className="flex-1 h-full md:p-8 flex justify-center">{children}</main>
+        <main className="w-full h-full md:p-8 p-3 *:max-w-4xl *:mx-auto">{children}</main>
       </div>
     </div>
   );

@@ -25,7 +25,7 @@ const ProjectSettingsLayout = ({
   const settingsURL = `/projects/${id}/settings`;
 
   return (
-    <div className="md:w-2/3 flex-1 md:flex-none">
+    <div>
       <h3 className="font-bold text-xl md:text-2xl lg:text-3xl mb-3">
         Project Settings
       </h3>

@@ -26,6 +26,7 @@ import { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 import { TLable } from "@/lib/constants";
+import { ScrollArea } from "../ui/scroll-area";
 
 export type Task = {
   _id: Id<"workItems">;
@@ -72,10 +73,10 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4">
-      <DataTableToolbar table={table} />
-      <div className="rounded-md border ">
-        <Table className="table-auto overflow-x-auto">
+    // <div className="space-y-4 relative">
+    //   <DataTableToolbar table={table} />
+    //   <div className="relative w-full overflow-auto bg-background/80 ">
+        <Table className="table-auto">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -102,7 +103,7 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="overflow-x-auto">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -123,8 +124,8 @@ export function DataTable<TData, TValue>({
             )}
           </TableBody>
         </Table>
-      </div>
-      <DataTablePagination table={table} />
-    </div>
+    //   </div>
+    //   <DataTablePagination table={table} />
+    // </div>
   );
 }

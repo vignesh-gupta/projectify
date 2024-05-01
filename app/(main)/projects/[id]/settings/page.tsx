@@ -66,7 +66,11 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
     },
   });
 
-  function onSubmit({ status, title, description }: z.infer<typeof formSchema>) {
+  function onSubmit({
+    status,
+    title,
+    description,
+  }: z.infer<typeof formSchema>) {
     if (status === "") return;
 
     updateProject({ id, status, title, description })
@@ -78,15 +82,16 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
       });
   }
 
-  if(!project) return (
-    <div className="flex justify-center items-center h-20">
-      <Loader2 className="animate-spin" />
-    </div>
-  )
+  if (!project)
+    return (
+      <div className="flex justify-center items-center h-20">
+        <Loader2 className="animate-spin" />
+      </div>
+    );
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
         <FormField
           control={form.control}
           name="title"
@@ -96,9 +101,6 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
               <FormControl>
                 <Input placeholder="shadcn" {...field} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -116,9 +118,6 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -148,9 +147,6 @@ const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
                   </Select>
                 )}
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
