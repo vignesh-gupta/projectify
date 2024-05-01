@@ -26,10 +26,20 @@ export default defineSchema({
   workItems: defineTable({
     assigneeId: v.id("users"),
     assignee: v.string(),
-    label: v.string(),
-    priority: v.string(),
+    label: v.union(
+      v.literal("documentation"),
+      v.literal("bug"),
+      v.literal("feature")
+    ),
+    priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
     projectId: v.id("projects"),
-    status: v.string(),
+    status: v.union(
+      v.literal("backlog"),
+      v.literal("todo"),
+      v.literal("in progress"),
+      v.literal("done"),
+      v.literal("canceled")
+    ),
     title: v.string(),
     description: v.optional(v.string()),
   })

@@ -19,11 +19,11 @@ import {
   Timer,
 } from "lucide-react";
 
-type TLables = {
+export type TLable = {
   value: string;
   label: string;
   variant: "destructive" | "default" | "outline" | "secondary";
-}[];
+};
 
 export type TOptions = {
   value: string;
@@ -31,7 +31,7 @@ export type TOptions = {
   icon?: LucideIcon;
 }[];
 
-export const LABELS: TLables = [
+export const LABELS: TLable[] = [
   {
     value: "bug",
     label: "Bug",

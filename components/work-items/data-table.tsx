@@ -21,19 +21,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Id } from "@/convex/_generated/dataModel";
 import { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
+import { TLable } from "@/lib/constants";
 
 export type Task = {
-  _id: string;
-  projectId: string;
+  _id: Id<"workItems">;
+  projectId: Id<"projects">;
   title: string;
-  assignee?: string ;
-  assigneeId?: string;
-  label: string;
-  priority: string;
-  status: string;
+  assignee: string;
+  assigneeId: Id<"users">;
+  label: "documentation" | "bug" | "feature";
+  priority: "low" | "medium" | "high";
+  status: "backlog" | "todo" | "in progress" | "done" | "canceled";
 };
 
 interface DataTableProps<TData, TValue> {

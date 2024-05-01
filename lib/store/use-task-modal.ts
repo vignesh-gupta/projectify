@@ -3,16 +3,16 @@ import { create } from "zustand";
 
 type TModalProvider = {
   isOpen: boolean;
-  values: Partial<Doc<"workItems">>;
-  onOpen: (values: Partial<Doc<"workItems">>) => void;
+  values?: Omit<Doc<"workItems">, "_creationTime">;
+  onOpen: (values?: Omit<Doc<"workItems">, "_creationTime">) => void;
   onClose: () => void;
 };
 
 export const useTaskModal = create<TModalProvider>((set) => {
   return {
     isOpen: false,
-    values: {},
+    values: undefined,
     onOpen: (values) => set({ isOpen: true, values }),
-    onClose: () => set({ isOpen: false, values: {} }),
+    onClose: () => set({ isOpen: false, values: undefined }),
   };
 });
