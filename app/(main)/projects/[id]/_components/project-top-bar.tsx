@@ -23,28 +23,30 @@ const ProjectTopBar = () => {
           <Image src="/logo.svg" height={30} width={30} alt="Projectify" />
         </Link>
         <ChevronRight className="h-5 w-5 text-muted-foreground" />
-        <OrganizationSwitcher
-          hidePersonal
-          afterCreateOrganizationUrl={DASHBOARD_ROUTE}
-          afterLeaveOrganizationUrl={DASHBOARD_ROUTE}
-          afterSelectOrganizationUrl={DASHBOARD_ROUTE}
-          appearance={{
-            elements: {
-              rootBox: {
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
+        <div className="hidden md:block">
+          <OrganizationSwitcher
+            hidePersonal
+            afterCreateOrganizationUrl={DASHBOARD_ROUTE}
+            afterLeaveOrganizationUrl={DASHBOARD_ROUTE}
+            afterSelectOrganizationUrl={DASHBOARD_ROUTE}
+            appearance={{
+              elements: {
+                rootBox: {
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                },
+                organizationSwitcherTrigger: {
+                  padding: "6px",
+                  width: "100%",
+                  borderRadius: "8px",
+                  justifyContent: "space-between",
+                },
               },
-              organizationSwitcherTrigger: {
-                padding: "6px",
-                width: "100%",
-                borderRadius: "8px",
-                justifyContent: "space-between",
-              },
-            },
-          }}
-        />
+            }}
+          />
+        </div>
         <ChevronRight className="h-5 w-5 text-muted-foreground" />
         {organization && <ProjectSwitcher orgId={organization.id} />}
       </div>

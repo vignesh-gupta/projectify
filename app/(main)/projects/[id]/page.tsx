@@ -25,7 +25,7 @@ const ProjectDashboardPage = ({
   );
 
   return (
-    <div className="md:w-2/3 flex-1 md:flex-none">
+    <div className="md:w-2/3 max-w-full md:flex-none">
       <h3 className="font-bold text-xl md:text-2xl lg:text-3xl mb-5">
         Project Dashboard
       </h3>

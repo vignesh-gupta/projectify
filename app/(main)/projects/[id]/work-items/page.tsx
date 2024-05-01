@@ -31,7 +31,7 @@ const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
           Add Item
         </Button>
       </div>
-      <div className="hidden flex-1 flex-col space-y-8 md:flex mx-auto">
+      <div className="flex-1 flex-col space-y-8  mx-auto">
         <DataTable data={tasks} columns={columns} />
       </div>
     </div>

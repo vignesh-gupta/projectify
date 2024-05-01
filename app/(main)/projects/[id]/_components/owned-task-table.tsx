@@ -23,7 +23,7 @@ const OwnedTaskTable = ({ tasks }: OwnedTaskTableProps) => {
     return (
       <div className="flex">
         {currStatus?.icon && (
-          <currStatus.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+          <currStatus.icon className="mr-2 h-4 w-4 text-muted-foreground  hidden md:block" />
         )}
         {currStatus?.label}
       </div>
@@ -36,7 +36,7 @@ const OwnedTaskTable = ({ tasks }: OwnedTaskTableProps) => {
     return (
       <div className="flex">
         {currPriority?.icon && (
-          <currPriority.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+          <currPriority.icon className="mr-2 h-4 w-4 text-muted-foreground hidden md:block" />
         )}
         {currPriority?.label}
       </div>
@@ -44,10 +44,10 @@ const OwnedTaskTable = ({ tasks }: OwnedTaskTableProps) => {
   };
 
   return (
-    <Table>
+    <Table className="overflow-x-hidden table-fixed">
       <TableHeader>
         <TableRow>
-          <TableHead className="min-w-[300px]">Title</TableHead>
+          <TableHead className="md:min-w-[300px]">Title</TableHead>
           <TableHead>Status</TableHead>
           <TableHead>Priority</TableHead>
         </TableRow>
@@ -55,7 +55,9 @@ const OwnedTaskTable = ({ tasks }: OwnedTaskTableProps) => {
       <TableBody>
         {tasks.map((task) => (
           <TableRow key={task._id}>
-            <TableCell className="truncate max-w-[300px]">{task.title}</TableCell>
+            <TableCell className="truncate max-w-[300px]">
+              {task.title}
+            </TableCell>
             <TableCell>{getStatus(task.status)}</TableCell>
             <TableCell>{getPriority(task.priority)}</TableCell>
           </TableRow>

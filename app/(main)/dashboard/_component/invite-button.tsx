@@ -8,7 +8,7 @@ const InviteButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button>
+        <Button className="hidden sm:flex">
           <Plus className="w-4 h-4 mr-2" /> Invite members
         </Button>
       </DialogTrigger>

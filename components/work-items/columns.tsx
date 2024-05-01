@@ -2,42 +2,41 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Checkbox } from "@/components/ui/checkbox";
+import { Badge } from "../ui/badge";
+import { Task } from "./data-table";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import DataTableRowActions from "./data-table-row-actions";
-import { Task } from "./data-table";
-import { Badge } from "../ui/badge";
 import { labels, priorities, statuses } from "./options";
 
 export const columns: ColumnDef<Task>[] = [
-  {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-        className="translate-y-[2px]"
-      />
-    ),
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-        className="translate-y-[2px]"
-      />
-    ),
-    enableSorting: false,
-    enableHiding: false,
-  },
+  // {
+  //   id: "select",
+  //   header: ({ table }) => (
+  //     <Checkbox
+  //       checked={
+  //         table.getIsAllPageRowsSelected() ||
+  //         (table.getIsSomePageRowsSelected() && "indeterminate")
+  //       }
+  //       onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+  //       aria-label="Select all"
+  //       className="translate-y-[2px] hidden lg:block"
+  //     />
+  //   ),
+  //   cell: ({ row }) => (
+  //     <Checkbox
+  //       checked={row.getIsSelected()}
+  //       onCheckedChange={(value) => row.toggleSelected(!!value)}
+  //       aria-label="Select row"
+  //       className="translate-y-[2px] hidden lg:block"
+  //     />
+  //   ),
+  //   enableSorting: false,
+  //   enableHiding: false,
+  // },
   {
     accessorKey: "title",
     header: ({ column }) => (
-      <div className="w-[300px]">
+      <div className="md:w-[300px]">
         <DataTableColumnHeader column={column} title="Title" />
       </div>
     ),
@@ -45,7 +44,7 @@ export const columns: ColumnDef<Task>[] = [
       const label = labels.find((label) => label.value === row.original.label);
 
       return (
-        <div className="flex space-x-2 w-[300px]">
+        <div className="flex space-x-2 md:w-[300px]">
           {label && <Badge variant={label.variant}>{label.label}</Badge>}
           <span className="truncate font-medium">{row.getValue("title")}</span>
         </div>
@@ -68,7 +67,7 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "status",
     header: ({ column }) => (
-      <div className="w-[100px]">
+      <div className="md:w-[100px]">
         <DataTableColumnHeader column={column} title="Status" />
       </div>
     ),
@@ -82,7 +81,7 @@ export const columns: ColumnDef<Task>[] = [
       }
 
       return (
-        <div className="flex w-[100px] items-center">
+        <div className="flex md:w-[100px] items-center">
           {status.icon && (
             <status.icon className="mr-2 h-4 w-4 text-muted-foreground" />
           )}
