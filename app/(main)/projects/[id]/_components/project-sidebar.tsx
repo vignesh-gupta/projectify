@@ -23,7 +23,7 @@ const ProjectSidebar = () => {
   const isSetting = pathname.includes("settings");
 
   return (
-    <div
+    <aside
       className={cn(
         "hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5 border-r pr-3",
         poppinsFont.className
@@ -58,7 +58,7 @@ const ProjectSidebar = () => {
           </Link>
         </Button>
       </div>
-    </div>
+    </aside>
   );
 };
 

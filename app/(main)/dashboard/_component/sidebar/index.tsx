@@ -21,7 +21,7 @@ const DashboardSidebar = () => {
   const team = searchParams.get("team");
 
   return (
-    <div
+    <aside
       className={cn(
         "hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5 border-r pr-3",
         poppinsFont.className
@@ -81,7 +81,7 @@ const DashboardSidebar = () => {
           </Link>
         </Button>
       </div>
-    </div>
+    </aside>
   );
 };
 

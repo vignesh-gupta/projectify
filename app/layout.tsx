@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={cn("flex flex-col min-h-[100dvh]", inter.className)}>
         <ThemeProvider
           attribute="class"
