@@ -14,32 +14,17 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Id } from "@/convex/_generated/dataModel";
 import { MoreHorizontalIcon, NotebookPen } from "lucide-react";
-import ProjectStatus from "./project-status";
 import Link from "next/link";
+import ProjectStatus from "./project-status";
 
 type ProjectCardProps = {
   _id: Id<"projects">;
-  _creationTime: number;
   description?: string | undefined;
   title: string;
-  orgId: string;
   status: string;
-  team: string[];
-  creatorId: string;
-  creatorName: string;
 };
 
-const ProjectCard = ({
-  _creationTime,
-  _id,
-  creatorId,
-  creatorName,
-  orgId,
-  status,
-  team,
-  title,
-  description,
-}: ProjectCardProps) => {
+const ProjectCard = ({ _id, status, title, description }: ProjectCardProps) => {
   return (
     <Link href={`/projects/${_id}`}>
       <Card className="group">
@@ -67,7 +52,7 @@ const ProjectCard = ({
             <DropdownMenuContent align="end">
               <DropdownMenuItem>View Project</DropdownMenuItem>
               <DropdownMenuItem>
-                <Link href={`/projects/${_id}/settings`} >Settings</Link>
+                <Link href={`/projects/${_id}/settings`}>Settings</Link>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

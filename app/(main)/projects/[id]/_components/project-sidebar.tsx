@@ -1,13 +1,11 @@
 "use client";
 
-import { OrganizationSwitcher } from "@clerk/nextjs";
-import { Layout, ListTodo, Notebook, Settings, Users } from "lucide-react";
+import { Layout, ListTodo, Settings } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { useParams, usePathname, useSearchParams } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { DASHBOARD_ROUTE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const poppinsFont = Poppins({

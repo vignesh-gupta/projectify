@@ -74,15 +74,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-.cl-organizationPreviewMainIdentifier,
-.cl-internal-1ntkffu {
-  @apply hidden;
-}
-
-@screen md {
-  .cl-organizationPreviewMainIdentifier,
-  .cl-internal-1ntkffu {
-    @apply block;
-  }
-}

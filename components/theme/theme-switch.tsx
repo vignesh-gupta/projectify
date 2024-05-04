@@ -4,8 +4,9 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
+import { ClassValue } from "clsx";
 
-export function ThemeSwitch() {
+export function ThemeSwitch({ className }: { className?: ClassValue }) {
   const { theme, setTheme } = useTheme();
 
   const handleToggle = () => {
