@@ -5,6 +5,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
 import { SignUpButton } from "@clerk/nextjs";
+import { Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,9 +39,10 @@ export default function Home() {
                 </Link>
                 <Link
                   className="inline-flex items-center justify-center h-10 px-8 text-sm font-medium transition-colors bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-                  href="/contact"
+                  href="https://github.com/vignesh-gupta/projectify"
                 >
-                  Connect with us
+                  <Github className="w-5 h-5 mr-2" />
+                  Star on GitHub
                 </Link>
               </div>
             </div>

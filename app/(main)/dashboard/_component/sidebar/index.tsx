@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 const poppinsFont = Poppins({
   weight: ["600"],
@@ -29,7 +30,7 @@ const DashboardSidebar = () => {
     >
       <Link href={DASHBOARD_ROUTE}>
         <div className="flex items-center gap-x-2">
-          {/* <Image src="logo.svg" alt="Logo" height={45} width={45} /> */}
+          <Image src="/logo.png" alt="Logo" height={45} width={45} />
           <h1>Projectify</h1>
         </div>
       </Link>

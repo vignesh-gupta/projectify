@@ -5,14 +5,13 @@ import {
   UserButton,
   useOrganization,
 } from "@clerk/nextjs";
-import { ChevronRight, Menu } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 import ProjectSwitcher from "@/components/projects/project-switcher";
 import { ThemeSwitch } from "@/components/theme/theme-switch";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import ProjectMobileBar from "./project-mobile-bar";
 
 const ProjectTopBar = () => {
@@ -23,7 +22,7 @@ const ProjectTopBar = () => {
       <ProjectMobileBar />
       <div className="flex-1 flex gap-1 items-center">
         <Link href={DASHBOARD_ROUTE}>
-          <Image src="/logo.svg" height={30} width={30} alt="Projectify" />
+          <Image src="/logo.png" height={45} width={45} alt="Projectify" />
         </Link>
         <ChevronRight className="h-5 w-5 text-muted-foreground" />
         <div className="hidden md:flex gap-1 items-center">

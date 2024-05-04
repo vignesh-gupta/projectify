@@ -1,3 +1,4 @@
+import { ThemeSwitch } from "@/components/theme/theme-switch";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -7,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { UserButton } from "@clerk/nextjs";
 import { Layout, ListTodo, Menu, Settings } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -26,7 +28,7 @@ const ProjectMobileBar = () => {
           <Menu className="w-6 h-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="md:hidden justify-start" side="left">
+      <SheetContent className="md:hidden" side="left">
         <SheetHeader>
           <SheetTitle>Project Menu</SheetTitle>
         </SheetHeader>
@@ -71,6 +73,10 @@ const ProjectMobileBar = () => {
               <Settings className="w-4 h-4 mr-2" /> Settings
             </Link>
           </SheetClose>
+        </div>
+        <div className="flex justify-evenly mt-5">
+          <UserButton />
+          <ThemeSwitch />
         </div>
       </SheetContent>
     </Sheet>

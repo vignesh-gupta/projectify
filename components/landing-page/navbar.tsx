@@ -10,6 +10,7 @@ import { Sheet, SheetTrigger } from "../ui/sheet";
 import { MenuIcon } from "lucide-react";
 import MobileNav from "./mobile-nav";
 import { useState } from "react";
+import Image from "next/image";
 
 const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 
@@ -32,11 +33,12 @@ const Navbar = () => {
     <header className="container z-50 flex items-center h-[70px] lg:px-6">
       <Link
         className={cn(
-          "flex items-center justify-center font-bold text-xl",
+          "flex items-center justify-center font-bold text-2xl gap-1",
           poppins.className
         )}
-        href="#"
+        href="/"
       >
+        <Image src="/logo.png" alt="Projectify" width={50} height={40} />
         <h1>Projectify</h1>
       </Link>
       <div className="ml-auto flex items-center gap-4">
