@@ -28,6 +28,18 @@ export const addMember = mutation({
       return;
     }
 
+    const existingMembership = await ctx.db
+      .query("team_memberships")
+      .withIndex("by_team_user", (q) =>
+        q.eq("teamId", org._id).eq("userId", member._id)
+      )
+      .first();
+
+    if (existingMembership) {
+      console.error("[ORG_ADD_MEMBER_ERR] : Membership already exists");
+      return;
+    }
+
     await ctx.db.insert("team_memberships", {
       teamId: org._id,
       userId: member._id,

@@ -2,7 +2,7 @@
 export default {
   providers: [
     {
-      domain: "https://devoted-hare-63.clerk.accounts.dev",
+      domain: process.env.NEXT_PUBLIC_CLERK_ISSUER_BASE_URL,
       applicationID: "convex",
     },
   ],
