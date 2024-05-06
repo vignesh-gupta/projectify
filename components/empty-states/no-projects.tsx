@@ -2,16 +2,13 @@
 
 import { useOrganization } from "@clerk/nextjs";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
-import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
+import useApiMutation from "@/lib/hooks/use-api-mutation";
 
 const NoProject = () => {
   const { organization } = useOrganization();
-  const router = useRouter();
   const { mutate: createProject, isPending } = useApiMutation(
     api.project.create
   );
