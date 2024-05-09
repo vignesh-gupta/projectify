@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { UNASSIGNED_USER } from "@/lib/constants";
 
 export const create = mutation({
   args: {
@@ -53,6 +54,22 @@ export const remove = mutation({
       console.error("[USER_DELETE_ERR] : User not found");
       throw new Error("User not found");
     }
+
+    // Remove all memberships and work items associated with the user
+    const userMemberships = await ctx.db
+      .query("team_memberships")
+      .withIndex("by_user", (q) => q.eq("userId", existingUser._id))
+      .collect();
+
+    const userWorkItems = await ctx.db
+      .query("workItems")
+      .filter((q) => q.eq(q.field("assigneeId"), existingUser._id))
+      .collect();
+
+    await Promise.all([
+      ...userMemberships.map((membership) => ctx.db.delete(membership._id)),
+      ...userWorkItems.map((workItem) => ctx.db.patch(workItem._id, { assignee: UNASSIGNED_USER.label, assigneeId: UNASSIGNED_USER.value })),
+    ]);
 
     console.log("[USER_DELETE_OPS] : Deleting user", existingUser._id);
 

@@ -26,7 +26,6 @@ const Navbar = () => {
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
-    console.log("clicked");
   };
 
   return (

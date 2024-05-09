@@ -15,11 +15,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import { LABELS, PRIORITIES, STATUSES, UNASSIGNED_USER } from "@/lib/constants";
+import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
+import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
@@ -30,9 +33,6 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
-import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { useParams, useSearchParams } from "next/navigation";
-import { Id } from "@/convex/_generated/dataModel";
 
 const taskFormSchema = z.object({
   id: z.string().optional(),
@@ -105,6 +105,7 @@ const TaskModal = () => {
     }
 
     createWorkItem(taskObject);
+    onClose();
   }
 
   return (

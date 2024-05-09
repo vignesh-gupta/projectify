@@ -1,12 +1,4 @@
-export const DASHBOARD_ROUTE = "/dashboard";
-
-export const UNASSIGNED_USER = {
-  label: "Unassigned",
-  value: "jd75ssjrcgeeh74f89vkt3th896qywhp",
-};
-
-export const PROJECTS_STAGES = ["development", "stale", "archived", "live"];
-
+import { Id } from "@/convex/_generated/dataModel";
 import {
   ArrowDownIcon,
   ArrowRightIcon,
@@ -18,6 +10,15 @@ import {
   LucideIcon,
   Timer,
 } from "lucide-react";
+
+export const DASHBOARD_ROUTE = "/dashboard";
+
+export const UNASSIGNED_USER = {
+  label: "Unassigned",
+  value: process.env.UNASSIGNED_USER_ID as Id<"users">,
+};
+
+export const PROJECTS_STAGES = ["development", "stale", "archived", "live"];
 
 export type TLable = {
   value: string;
