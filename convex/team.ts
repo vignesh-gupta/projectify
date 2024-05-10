@@ -85,13 +85,21 @@ export const remove = mutation({
 
     await ctx.db.delete(org._id);
 
-    let docs = await ctx.db
+    const team_memberships = await ctx.db
       .query("team_memberships")
       .withIndex("by_team", (q) => q.eq("teamId", org._id))
       .collect();
 
-    await Promise.all(docs.map((doc) => ctx.db.delete(doc._id)));
-    
+    const team_projects = await ctx.db
+      .query("projects")
+      .withIndex("by_org", (q) => q.eq("orgId", args.clerkId))
+      .collect();
+
+    await Promise.all([
+      ...team_memberships.map((doc) => ctx.db.delete(doc._id)),
+      ...team_projects.map((doc) => ctx.db.delete(doc._id)),
+    ]);
+
     console.log("[ORG_REMOVE_OPS] : Removed ORG", org._id);
   },
 });

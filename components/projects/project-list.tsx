@@ -54,7 +54,7 @@ const AddProject = () => {
       onClick={handleCreateProject}
       disabled={isPending}
       variant="outline"
-      className="flex flex-col items-center justify-center gap-2 h-full border-dashed"
+      className="flex flex-col items-center justify-center gap-2 h-full min-h-36 border-dashed"
     >
       <Plus className="w-8 h-8" />
       <span className="text-sm">Add Project</span>

@@ -1,6 +1,8 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { ProjectStatus } from "./types";
+import { fetchMutation } from "convex/nextjs";
+import { api } from "./_generated/api";
 
 export const create = mutation({
   args: {
@@ -49,19 +51,17 @@ export const remove = mutation({
     id: v.id("projects"),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Unauthorized");
-    }
-
     const project = await ctx.db.get(args.id);
     if (!project) {
       throw new Error("Project not found");
     }
 
-    if (project.creatorId !== identity.subject) {
-      throw new Error("Unauthorized");
-    }
+    const workItems = await ctx.db
+      .query("workItems")
+      .withIndex("by_project", (q) => q.eq("projectId", args.id))
+      .collect();
+
+    await Promise.all(workItems.map((wi) => ctx.db.delete(wi._id)));
 
     await ctx.db.delete(args.id);
   },
