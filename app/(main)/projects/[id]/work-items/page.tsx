@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { columns } from "@/components/work-items/columns";
 import { DataTable } from "@/components/work-items/data-table";
 import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import { useQuery } from "convex/react";
 
@@ -31,7 +30,7 @@ const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
           Add Item
         </Button>
       </div>
-      <div className="flex-1 flex-col space-y-8 mx-auto bg-foreground/5 rounded-lg p-3">
+      <div className="flex-1 flex-col space-y-8 mx-auto rounded-lg">
         <DataTable data={tasks} columns={columns} />
       </div>
     </div>

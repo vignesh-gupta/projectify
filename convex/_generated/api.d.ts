@@ -18,6 +18,7 @@ import type * as project from "../project.js";
 import type * as projects from "../projects.js";
 import type * as team from "../team.js";
 import type * as team_membership from "../team_membership.js";
+import type * as types from "../types.js";
 import type * as user from "../user.js";
 import type * as users from "../users.js";
 import type * as work_item from "../work_item.js";
@@ -36,6 +37,7 @@ declare const fullApi: ApiFromModules<{
   projects: typeof projects;
   team: typeof team;
   team_membership: typeof team_membership;
+  types: typeof types;
   user: typeof user;
   users: typeof users;
   work_item: typeof work_item;

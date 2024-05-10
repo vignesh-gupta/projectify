@@ -10,6 +10,7 @@ import {
   LucideIcon,
   Timer,
 } from "lucide-react";
+import { TaskPriority, TaskStatus, TaskType } from "./types";
 
 export const DASHBOARD_ROUTE = "/dashboard";
 
@@ -18,16 +19,21 @@ export const UNASSIGNED_USER = {
   value: process.env.UNASSIGNED_USER_ID as Id<"users">,
 };
 
-export const PROJECTS_STAGES = ["development", "stale", "archived", "live"];
+export const PROJECTS_STAGES = [
+  "development",
+  "stale",
+  "archived",
+  "live",
+] as const;
 
 export type TLable = {
-  value: string;
+  value: TaskType;
   label: string;
   variant: "destructive" | "default" | "outline" | "secondary";
 };
 
-export type TOption = {
-  value: string;
+export type TOption<T extends string> = {
+  value: T;
   label: string;
   icon?: LucideIcon;
 };
@@ -50,7 +56,7 @@ export const LABELS: TLable[] = [
   },
 ];
 
-export const STATUSES: TOption[] = [
+export const STATUSES: TOption<TaskStatus>[] = [
   {
     value: "backlog",
     label: "Backlog",
@@ -78,7 +84,7 @@ export const STATUSES: TOption[] = [
   },
 ] as const;
 
-export const PRIORITIES: TOption[] = [
+export const PRIORITIES: TOption<TaskPriority>[] = [
   {
     label: "Low",
     value: "low",

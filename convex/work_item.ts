@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation } from "./_generated/server";
+import { TaskPriority, TaskStatus, TaskType } from "./types";
 
 export const create = mutation({
   args: {
@@ -7,19 +8,9 @@ export const create = mutation({
     description: v.optional(v.string()),
     assignee: v.string(),
     assigneeId: v.id("users"),
-    label: v.union(
-      v.literal("documentation"),
-      v.literal("bug"),
-      v.literal("feature")
-    ),
-    priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
-    status: v.union(
-      v.literal("backlog"),
-      v.literal("todo"),
-      v.literal("in progress"),
-      v.literal("done"),
-      v.literal("canceled")
-    ),
+    label: TaskType,
+    priority: TaskPriority,
+    status: TaskStatus,
     projectId: v.id("projects"),
   },
   handler: async (ctx, args) => {
@@ -41,19 +32,9 @@ export const update = mutation({
     description: v.optional(v.string()),
     assignee: v.string(),
     assigneeId: v.id("users"),
-    label: v.union(
-      v.literal("documentation"),
-      v.literal("bug"),
-      v.literal("feature")
-    ),
-    priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
-    status: v.union(
-      v.literal("backlog"),
-      v.literal("todo"),
-      v.literal("in progress"),
-      v.literal("done"),
-      v.literal("canceled")
-    ),
+    label: TaskType,
+    priority: TaskPriority,
+    status: TaskStatus,
     projectId: v.id("projects"),
   },
   handler: async (ctx, args) => {

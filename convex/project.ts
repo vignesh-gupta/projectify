@@ -1,17 +1,13 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { ProjectStatus } from "./types";
 
 export const create = mutation({
   args: {
     title: v.string(),
     orgId: v.string(),
     description: v.optional(v.string()),
-    status: v.union(
-      v.literal("development"),
-      v.literal("live"),
-      v.literal("stale"),
-      v.literal("archived")
-    ),
+    status: ProjectStatus,
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();
@@ -76,14 +72,7 @@ export const update = mutation({
     id: v.id("projects"),
     title: v.optional(v.string()),
     description: v.optional(v.string()),
-    status: v.optional(
-      v.union(
-        v.literal("development"),
-        v.literal("live"),
-        v.literal("stale"),
-        v.literal("archived")
-      )
-    ),
+    status: v.optional(ProjectStatus),
   },
   handler: async (ctx, args) => {
     const identity = await ctx.auth.getUserIdentity();

@@ -1,3 +1,5 @@
+import { PROJECTS_STAGES } from "./constants";
+
 export type TaskStatus =
   | "backlog"
   | "todo"
@@ -8,3 +10,5 @@ export type TaskStatus =
 export type TaskPriority = "low" | "medium" | "high";
 
 export type TaskType = "documentation" | "bug" | "feature";
+
+export type ProjectStatus = typeof PROJECTS_STAGES[number];

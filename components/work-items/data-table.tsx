@@ -22,11 +22,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Id } from "@/convex/_generated/dataModel";
+import { TaskPriority, TaskStatus, TaskType } from "@/lib/types";
 import { useState } from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
-import { TLable } from "@/lib/constants";
-import { ScrollArea } from "../ui/scroll-area";
 
 export type Task = {
   _id: Id<"workItems">;
@@ -34,9 +33,9 @@ export type Task = {
   title: string;
   assignee: string;
   assigneeId: Id<"users">;
-  label: "documentation" | "bug" | "feature";
-  priority: "low" | "medium" | "high";
-  status: "backlog" | "todo" | "in progress" | "done" | "canceled";
+  label: TaskType;
+  priority: TaskPriority;
+  status: TaskStatus;
 };
 
 interface DataTableProps<TData, TValue> {
@@ -73,59 +72,51 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    // <div className="space-y-4 relative">
-    //   <DataTableToolbar table={table} />
-    //   <div className="relative w-full overflow-auto bg-background/80 ">
-        <Table className="table-auto">
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id} colSpan={header.colSpan}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+    <>
+      <DataTableToolbar table={table} />
+      <Table className="table-auto">
+        <TableHeader>
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => {
+                return (
+                  <TableHead key={header.id} colSpan={header.colSpan}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </TableHead>
+                );
+              })}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow
+                key={row.id}
+                data-state={row.getIsSelected() && "selected"}
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id} className="overflow-x-auto">
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="overflow-x-auto">
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-    //   </div>
-    //   <DataTablePagination table={table} />
-    // </div>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-16 text-center">
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+      <DataTablePagination table={table} />
+    </>
   );
 }

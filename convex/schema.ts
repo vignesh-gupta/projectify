@@ -1,17 +1,12 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
+import { ProjectStatus, TaskPriority, TaskStatus, TaskType } from "./types";
 
 export default defineSchema({
   projects: defineTable({
     title: v.string(),
     description: v.optional(v.string()),
-    // icon: v.string(),
-    status: v.union(
-      v.literal("development"),
-      v.literal("live"),
-      v.literal("stale"),
-      v.literal("archived")
-    ),
+    status: ProjectStatus,
     team: v.array(v.string()),
     creatorId: v.string(),
     creatorName: v.string(),
@@ -26,20 +21,10 @@ export default defineSchema({
   workItems: defineTable({
     assigneeId: v.id("users"),
     assignee: v.string(),
-    label: v.union(
-      v.literal("documentation"),
-      v.literal("bug"),
-      v.literal("feature")
-    ),
-    priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
+    label: TaskType,
+    priority: TaskPriority,
     projectId: v.id("projects"),
-    status: v.union(
-      v.literal("backlog"),
-      v.literal("todo"),
-      v.literal("in progress"),
-      v.literal("done"),
-      v.literal("canceled")
-    ),
+    status: TaskStatus,
     title: v.string(),
     description: v.optional(v.string()),
   })
