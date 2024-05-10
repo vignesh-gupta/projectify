@@ -26,11 +26,11 @@ export type TLable = {
   variant: "destructive" | "default" | "outline" | "secondary";
 };
 
-export type TOptions = {
+export type TOption = {
   value: string;
   label: string;
   icon?: LucideIcon;
-}[];
+};
 
 export const LABELS: TLable[] = [
   {
@@ -50,7 +50,7 @@ export const LABELS: TLable[] = [
   },
 ];
 
-export const STATUSES: TOptions = [
+export const STATUSES: TOption[] = [
   {
     value: "backlog",
     label: "Backlog",
@@ -76,9 +76,9 @@ export const STATUSES: TOptions = [
     label: "Canceled",
     icon: CircleX,
   },
-];
+] as const;
 
-export const PRIORITIES: TOptions = [
+export const PRIORITIES: TOption[] = [
   {
     label: "Low",
     value: "low",

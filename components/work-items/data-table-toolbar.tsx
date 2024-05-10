@@ -5,14 +5,18 @@ import { X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { DataTableViewOptions } from "./data-table-view-options";
-import { DataTableFacetedFilter } from "./data-table-faceted-filter";
-import { TOptions, priorities, statuses } from "./options";
-import { useEffect, useState } from "react";
+import { api } from "@/convex/_generated/api";
+import {
+  PRIORITIES,
+  STATUSES,
+  TOption,
+  UNASSIGNED_USER,
+} from "@/lib/constants";
 import { useOrganization } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import { UNASSIGNED_USER } from "@/lib/constants";
+import { useEffect, useState } from "react";
+import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { DataTableViewOptions } from "./data-table-view-options";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -21,7 +25,7 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const [userList, setUserList] = useState<TOptions | null>(null);
+  const [userList, setUserList] = useState<TOption[] | null>(null);
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const { organization } = useOrganization();
@@ -55,7 +59,7 @@ export function DataTableToolbar<TData>({
           <DataTableFacetedFilter
             column={table.getColumn("status")}
             title="Status"
-            options={statuses}
+            options={STATUSES}
           />
         )}
         {table.getColumn("assignee") && (
@@ -69,7 +73,7 @@ export function DataTableToolbar<TData>({
           <DataTableFacetedFilter
             column={table.getColumn("priority")}
             title="Priority"
-            options={priorities}
+            options={PRIORITIES}
           />
         )}
         {isFiltered && (
