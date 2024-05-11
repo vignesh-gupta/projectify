@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { FileBox, Layout, ListTodo, Settings } from "lucide-react";
 import { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 
@@ -55,3 +56,28 @@ export function constructMetaTags({
     ],
   };
 }
+
+export const getNavLinks = (id: string) => {
+  return [
+    {
+      name: "Dashboard",
+      href: `/projects/${id}/dashboard`,
+      Icon: Layout,
+    },
+    {
+      name: "Work Items",
+      href: `/projects/${id}/work-items`,
+      Icon: ListTodo,
+    },
+    {
+      name: "Resources",
+      href: `/projects/${id}/resources`,
+      Icon: FileBox,
+    },
+    {
+      name: "Settings",
+      href: `/projects/${id}/settings`,
+      Icon: Settings,
+    },
+  ];
+};

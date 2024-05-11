@@ -26,7 +26,7 @@ type ProjectCardProps = {
 
 const ProjectCard = ({ _id, status, title, description }: ProjectCardProps) => {
   return (
-    <Link href={`/projects/${_id}`}>
+    <Link href={`/projects/${_id}/dashboard`}>
       <Card className="group">
         <CardHeader className="flex flex-row items-center gap-4">
           <NotebookPen className="w-8 h-8 shrink-0" />

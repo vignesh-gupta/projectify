@@ -8,6 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { getNavLinks } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
 import { Layout, ListTodo, Menu, Settings } from "lucide-react";
 import Link from "next/link";
@@ -15,6 +16,8 @@ import { useParams } from "next/navigation";
 
 const ProjectMobileBar = () => {
   const param = useParams();
+
+  const navLinks = getNavLinks(param.id as string);
 
   return (
     <Sheet>
@@ -34,45 +37,20 @@ const ProjectMobileBar = () => {
         </SheetHeader>
 
         <div className="space-y-2 mt-5">
-          <SheetClose
-            asChild
-            className={buttonVariants({
-              variant: "ghost",
-              className: "w-full",
-            })}
-          >
-            <Link className="flex gap-1" href={`/projects/${param.id}`}>
-              <Layout className="w-4 h-4 mr-2" /> Dashboard
-            </Link>
-          </SheetClose>
-          <SheetClose
-            asChild
-            className={buttonVariants({
-              variant: "ghost",
-              className: "w-full",
-            })}
-          >
-            <Link
-              className="flex gap-1"
-              href={`/projects/${param.id}/work-items`}
+          {navLinks.map(({ href, Icon, name }) => (
+            <SheetClose
+              key={`${href}-mobile`}
+              asChild
+              className={buttonVariants({
+                variant: "ghost",
+                className: "w-full",
+              })}
             >
-              <ListTodo className="w-4 h-4 mr-2" /> Work Item
-            </Link>
-          </SheetClose>
-          <SheetClose
-            asChild
-            className={buttonVariants({
-              variant: "ghost",
-              className: "w-full",
-            })}
-          >
-            <Link
-              className="flex gap-1"
-              href={`/projects/${param.id}/settings`}
-            >
-              <Settings className="w-4 h-4 mr-2" /> Settings
-            </Link>
-          </SheetClose>
+              <Link className="flex gap-1" href={href}>
+                <Icon className="w-4 h-4 mr-2" /> {name}
+              </Link>
+            </SheetClose>
+          ))}
         </div>
         <div className="flex justify-evenly mt-5">
           <UserButton />

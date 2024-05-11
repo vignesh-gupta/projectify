@@ -5,7 +5,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useAuth } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { Loader2 } from "lucide-react";
-import OwnedTaskTable from "./_components/owned-task-table";
+import OwnedTaskTable from "../_components/owned-task-table";
 
 type ProjectDashboardPageProps = {
   params: {

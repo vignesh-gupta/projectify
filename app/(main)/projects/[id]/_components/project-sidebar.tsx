@@ -1,12 +1,11 @@
 "use client";
 
-import { Layout, ListTodo, Settings } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, getNavLinks } from "@/lib/utils";
 
 const poppinsFont = Poppins({
   weight: ["600"],
@@ -15,10 +14,9 @@ const poppinsFont = Poppins({
 
 const ProjectSidebar = () => {
   const param = useParams();
-
   const pathname = usePathname();
-  const isWorkItem = pathname.includes("work-items");
-  const isSetting = pathname.includes("settings");
+
+  const navLinks = getNavLinks(param.id as string);
 
   return (
     <aside
@@ -28,33 +26,18 @@ const ProjectSidebar = () => {
       )}
     >
       <div className="w-full space-y-2">
-        <Button
-          variant={!isSetting && !isWorkItem ? "default" : "ghost"}
-          asChild
-          className="justify-start w-full px-2 font-normal"
-        >
-          <Link href={`/projects/${param.id}`}>
-            <Layout className="w-4 h-4 mr-2" /> Dashboard
-          </Link>
-        </Button>
-        <Button
-          variant={isWorkItem ? "default" : "ghost"}
-          asChild
-          className="justify-start w-full px-2 font-normal"
-        >
-          <Link href={`/projects/${param.id}/work-items`}>
-            <ListTodo className="w-4 h-4 mr-2" /> Work Item
-          </Link>
-        </Button>
-        <Button
-          variant={isSetting ? "default" : "ghost"}
-          asChild
-          className="justify-start w-full px-2 font-normal"
-        >
-          <Link href={`/projects/${param.id}/settings`}>
-            <Settings className="w-4 h-4 mr-2" /> Settings
-          </Link>
-        </Button>
+        {navLinks.map(({ href, Icon, name }) => (
+          <Button
+            key={href}
+            variant={pathname.includes(href) ? "default" : "ghost"}
+            asChild
+            className="justify-start w-full px-2 font-normal"
+          >
+            <Link href={href}>
+              <Icon className="w-4 h-4 mr-2" /> {name}
+            </Link>
+          </Button>
+        ))}
       </div>
     </aside>
   );
