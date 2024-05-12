@@ -11,4 +11,6 @@ export type TaskPriority = "low" | "medium" | "high";
 
 export type TaskType = "documentation" | "bug" | "feature";
 
-export type ProjectStatus = typeof PROJECTS_STAGES[number];
+export type ProjectStatus = (typeof PROJECTS_STAGES)[number];
+
+export type ResourceType = "link" | "file";

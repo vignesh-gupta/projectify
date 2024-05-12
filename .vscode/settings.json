@@ -4,7 +4,8 @@
     "project",
     "work-items",
     "user",
-    "organization"
+    "organization",
+    "resource"
   ],
   "cSpell.words": [
     "nothanks"

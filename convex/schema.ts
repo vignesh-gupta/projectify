@@ -1,6 +1,7 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 import { ProjectStatus, TaskPriority, TaskStatus, TaskType } from "./types";
+import { icons } from "lucide-react";
 
 export default defineSchema({
   projects: defineTable({
@@ -63,4 +64,28 @@ export default defineSchema({
     .index("by_team", ["teamId"])
     .index("by_user", ["userId"])
     .index("by_team_user", ["teamId", "userId"]),
+
+  links: defineTable({
+    title: v.string(),
+    url: v.string(),
+    icons: v.optional(v.string()),
+    projectId: v.id("projects"),
+  })
+    .index("by_project", ["projectId"])
+    .searchIndex("search_title", {
+      searchField: "title",
+      filterFields: ["projectId"],
+    }),
+
+  files: defineTable({
+    title: v.string(),
+    url: v.string(),
+    projectId: v.id("projects"),
+    icon: v.optional(v.string()),
+  })
+    .index("by_project", ["projectId"])
+    .searchIndex("search_title", {
+      searchField: "title",
+      filterFields: ["projectId"],
+    }),
 });

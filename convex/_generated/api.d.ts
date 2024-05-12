@@ -14,8 +14,11 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as http from "../http.js";
 import type * as project from "../project.js";
 import type * as projects from "../projects.js";
+import type * as resources_link from "../resources/link.js";
+import type * as resources_links from "../resources/links.js";
 import type * as team from "../team.js";
 import type * as team_membership from "../team_membership.js";
 import type * as types from "../types.js";
@@ -33,8 +36,11 @@ import type * as work_items from "../work_items.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  http: typeof http;
   project: typeof project;
   projects: typeof projects;
+  "resources/link": typeof resources_link;
+  "resources/links": typeof resources_links;
   team: typeof team;
   team_membership: typeof team_membership;
   types: typeof types;

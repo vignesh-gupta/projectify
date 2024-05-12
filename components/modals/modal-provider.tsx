@@ -15,9 +15,9 @@ const ModelProvider = () => {
 
   if (!isMounted) return null;
 
-  if (!taskModal.isOpen) return null;
-
   if (taskModal.isOpen) return <TaskModal />;
+  
+  return null;
 };
 
 export default ModelProvider;

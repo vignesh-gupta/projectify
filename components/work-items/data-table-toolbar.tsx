@@ -6,6 +6,7 @@ import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import {
   PRIORITIES,
   STATUSES,
@@ -25,7 +26,7 @@ interface DataTableToolbarProps<TData> {
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const [userList, setUserList] = useState<TOption[] | null>(null);
+  const [userList, setUserList] = useState<TOption<Id<"users">>[] | null>(null);
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const { organization } = useOrganization();
@@ -36,7 +37,7 @@ export function DataTableToolbar<TData>({
   useEffect(() => {
     let users = (orgUsers || []).map((user) => ({
       label: user?.firstName || "Unassigned",
-      value: user?._id || "unassigned",
+      value: (user?._id || "unassigned") as Id<"users">,
     }));
 
     users.push(UNASSIGNED_USER);
