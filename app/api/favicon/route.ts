@@ -22,7 +22,12 @@ export const POST = async (req: NextRequest) => {
       },
     }
   )
-    .then(async (res) => await res.blob())
+    .then(async (res) => {
+      const test = await res.blob();
+      console.log({ test });
+
+      return test;
+    })
     .catch(console.error);
 
   if (icon) {

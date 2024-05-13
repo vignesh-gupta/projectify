@@ -10,6 +10,10 @@ module.exports = {
         hostname: "img.clerk.com",
         protocol: "https",
       },
+      {
+        hostname: "www.google.com",
+        protocol: "https",
+      },
     ],
   },
 };

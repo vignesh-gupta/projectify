@@ -7,9 +7,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Id } from "@/convex/_generated/dataModel";
-import { Link2, MoreHorizontalIcon } from "lucide-react";
-import Image from "next/image";
+import { MoreHorizontalIcon } from "lucide-react";
 import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 type ResourceCardProps = {
   resource: {
@@ -27,11 +27,12 @@ const ResourceCard = ({
     <Link href={url}>
       <Card className="group">
         <CardHeader className="flex flex-row items-center gap-4 p-3 px-5 space-y-0">
-          {icon ? (
-            <Image className="w-6 h-6 rounded-full" src={icon} alt={title} />
-          ) : (
-            <Link2 className="w-6 h-6 shrink-0" />
-          )}
+          <Avatar className="w-6 h-6">
+            <AvatarImage
+              src={`https://www.google.com/s2/favicons?domain=${url}&sz=50`}
+            />
+            <AvatarFallback>{title.charAt(0)}</AvatarFallback>
+          </Avatar>
           <CardTitle className="text-base truncate">{title}</CardTitle>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

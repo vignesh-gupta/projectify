@@ -68,7 +68,7 @@ export default defineSchema({
   links: defineTable({
     title: v.string(),
     url: v.string(),
-    icons: v.optional(v.string()),
+    icon: v.optional(v.id("_storage")),
     projectId: v.id("projects"),
   })
     .index("by_project", ["projectId"])
