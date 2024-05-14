@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
+import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { Edit, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { api } from "@/convex/_generated/api";
 
 type ResourceCardProps = {
   resource: {
@@ -26,12 +26,14 @@ const ResourceCard = ({
     api.resources.link.remove
   );
 
+  const hostName = new URL(url).hostname;
+
   return (
     <Card className="group">
       <CardHeader className="flex flex-row items-center gap-4 p-3 px-5 space-y-0">
         <Avatar className="w-6 h-6">
           <AvatarImage
-            src={`https://www.google.com/s2/favicons?domain=${url}&sz=50`}
+            src={`https://icons.duckduckgo.com/ip3/${hostName}.ico`}
           />
           <AvatarFallback>{title.charAt(0)}</AvatarFallback>
         </Avatar>

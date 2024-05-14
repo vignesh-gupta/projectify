@@ -54,12 +54,14 @@ const LinkModal = () => {
   function onSubmit(values: z.infer<typeof linkFormSchema>) {
     if (values.id) {
       updateLink({
-        ...values,
+        title: values.title,
+        url: values.url,
         _id: values.id as Id<"links">,
       });
     } else {
       createLink({
-        ...values,
+        title: values.title,
+        url: values.url,
         projectId: params.id as Id<"projects">,
       });
     }

@@ -14,6 +14,10 @@ module.exports = {
         hostname: "www.google.com",
         protocol: "https",
       },
+      {
+        hostname: "duckduckgo.com",
+        protocol: "https",
+      }
     ],
   },
 };
