@@ -1,26 +1,5 @@
 import { v } from "convex/values";
-import { action, mutation } from "../_generated/server";
-
-export const createLinkAction = action({
-  args: {
-    title: v.string(),
-    url: v.string(),
-    projectId: v.id("projects"),
-  },
-  handler: async (ctx, args) => {
-    const icon = await fetch(`/api/favicon?url=https://vigneshgupta.tech/`, {
-      method: "POST",
-      headers: {
-        AllowOrigin: "*",
-      },
-    })
-      .then((res) => res.blob())
-      .catch(console.error);
-
-    // const url = await ctx.storage.generateUploadUrl();
-    // await ctx.storage.store()
-  },
-});
+import { mutation } from "../_generated/server";
 
 export const create = mutation({
   args: {
@@ -42,5 +21,47 @@ export const create = mutation({
     }
 
     return ctx.db.insert("links", args);
+  },
+});
+
+export const update = mutation({
+  args: {
+    _id: v.id("links"),
+    title: v.optional(v.string()),
+    url: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const identity = ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthenticated user cannot update resources");
+    }
+
+    const link = await ctx.db.get(args._id);
+
+    if (!link) {
+      throw new Error("Link resource not found");
+    }
+
+    return ctx.db.patch(args._id, args);
+  },
+});
+
+export const remove = mutation({
+  args: {
+    _id: v.id("links"),
+  },
+  handler: async (ctx, args) => {
+    const identity = ctx.auth.getUserIdentity();
+    if (!identity) {
+      throw new Error("Unauthenticated user cannot delete resources");
+    }
+
+    const link = await ctx.db.get(args._id);
+
+    if (!link) {
+      throw new Error("Link resource not found");
+    }
+
+    return ctx.db.delete(args._id);
   },
 });

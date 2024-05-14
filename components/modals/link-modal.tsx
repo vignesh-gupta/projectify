@@ -10,29 +10,17 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { LABELS, PRIORITIES, STATUSES, UNASSIGNED_USER } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
-import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
-import { Textarea } from "../ui/textarea";
 
 const linkFormSchema = z.object({
   id: z.string().optional(),
@@ -41,22 +29,17 @@ const linkFormSchema = z.object({
 });
 
 const LinkModal = () => {
-  // Manage the task modal state.
+  // Manage the link modal state.
   const { isOpen, onClose, values } = useLinkModal();
-
-  // Fetch the organization users.
-  const { organization } = useOrganization();
-  const orgUsers = useQuery(api.users.list, {
-    teamId: organization?.id as string,
-  })?.map((user) => ({
-    label: user?.firstName as string,
-    value: user?._id as string,
-  }));
 
   const params = useParams();
 
   const { mutate: createLink, isPending: isCreating } = useApiMutation(
     api.resources.link.create
+  );
+
+  const { mutate: updateLink, isPending: isUpdating } = useApiMutation(
+    api.resources.link.update
   );
 
   const form = useForm<z.infer<typeof linkFormSchema>>({
@@ -69,11 +52,17 @@ const LinkModal = () => {
   });
 
   function onSubmit(values: z.infer<typeof linkFormSchema>) {
-    createLink({
-      title: values.title,
-      url: values.url,
-      projectId: params.id as Id<"projects">,
-    });
+    if (values.id) {
+      updateLink({
+        ...values,
+        _id: values.id as Id<"links">,
+      });
+    } else {
+      createLink({
+        ...values,
+        projectId: params.id as Id<"projects">,
+      });
+    }
     onClose();
   }
 
@@ -107,7 +96,7 @@ const LinkModal = () => {
               render={({ field }) => (
                 <FormItem className="space-y-0">
                   <FormControl>
-                    <Input placeholder="URL" {...field} />
+                    <Input placeholder="https://example.com" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
