@@ -6,23 +6,46 @@ import { useLinkModal } from "@/lib/store/use-link-modal";
 import { useQuery } from "convex/react";
 import { useParams } from "next/navigation";
 import { Button } from "../ui/button";
-import ResourceCard from "./resource-card";
+import { default as LinkCard, default as ResourceCard } from "./link-card";
+import FileCard from "./file-card";
 
 const ResourceList = () => {
   const param = useParams();
 
-  const resources = useQuery(api.resources.links.list, {
+  const links = useQuery(api.resources.links.list, {
     projectId: param.id as Id<"projects">,
   });
 
-  if (!resources || !resources.length) return <NoResource />;
+  const files = useQuery(api.resources.files.list, {
+    projectId: param.id as Id<"projects">,
+  });
+
+  if (!links || !links.length || !files || !files.length) return <NoResource />;
 
   return (
-    <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
-      {resources.map((res) => (
-        <ResourceCard key={res._id} resource={res} />
-      ))}
-    </div>
+    <>
+      {links.length > 0 && (
+        <section>
+          <h4 className="text-xl font-semibold">Links</h4>
+          <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
+            {links.map((res) => (
+              <LinkCard key={res._id} resource={res} />
+            ))}
+          </div>
+        </section>
+      )}
+      {files.length > 0 && (
+        <section>
+          <h4 className="text-xl font-semibold">Files</h4>
+          <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
+            {files.map((res) => (
+              <FileCard key={res._id} resource={res} />
+              // <ResourceCard key={res._id} resource={res} type="file" />
+            ))}
+          </div>
+        </section>
+      )}
+    </>
   );
 };
 

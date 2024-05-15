@@ -35,16 +35,30 @@ http.route({
 
     const storageId = await ctx.storage.store(blob);
 
-    return new Response(
-      JSON.stringify({ favicon: storageId || "No Icon" }),
-      {
-        status: storageId ? 200 : 500,
-        headers: new Headers({
-          "Access-Control-Allow-Origin": "*",
-          Vary: "origin",
-        }),
-      }
-    );
+    return new Response(JSON.stringify({ favicon: storageId || "No Icon" }), {
+      status: storageId ? 200 : 500,
+      headers: new Headers({
+        "Access-Control-Allow-Origin": "*",
+        Vary: "origin",
+      }),
+    });
+  }),
+});
+
+http.route({
+  path: "/getFile",
+  method: "GET",
+  handler: httpAction(async (ctx, request) => {
+    const { searchParams } = new URL(request.url);
+    // This storageId param should be an Id<"_storage">
+    const storageId = searchParams.get("storageId")!;
+    const blob = await ctx.storage.get(storageId);
+    if (blob === null) {
+      return new Response("File not found", {
+        status: 404,
+      });
+    }
+    return new Response(blob);
   }),
 });
 

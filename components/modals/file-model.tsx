@@ -16,55 +16,37 @@ import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { useLinkModal } from "@/lib/store/use-link-modal";
+import { useFileModal } from "@/lib/store/use-file-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-const linkFormSchema = z.object({
-  id: z.string().optional(),
+const fileFormSchema = z.object({
+  id: z.string(),
   title: z.string().min(5).max(50),
-  url: z.string().url(),
 });
 
-const LinkModal = () => {
+const FileModal = () => {
   // Manage the link modal state.
-  const { isOpen, onClose, values } = useLinkModal();
-
-  const params = useParams();
-
-  const { mutate: createLink, isPending: isCreating } = useApiMutation(
-    api.resources.link.create
+  const { isOpen, onClose, values } = useFileModal();
+  const { mutate: updateTitle, isPending } = useApiMutation(
+    api.resources.file.update
   );
 
-  const { mutate: updateLink, isPending: isUpdating } = useApiMutation(
-    api.resources.link.update
-  );
-
-  const form = useForm<z.infer<typeof linkFormSchema>>({
-    resolver: zodResolver(linkFormSchema),
+  const form = useForm<z.infer<typeof fileFormSchema>>({
+    resolver: zodResolver(fileFormSchema),
     defaultValues: {
       id: values?._id ?? "",
       title: values?.title ?? "",
-      url: values?.url ?? "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof linkFormSchema>) {
-    if (values.id) {
-      updateLink({
-        title: values.title,
-        url: values.url,
-        _id: values.id as Id<"links">,
-      });
-    } else {
-      createLink({
-        title: values.title,
-        url: values.url,
-        projectId: params.id as Id<"projects">,
-      });
-    }
+  function onSubmit(values: z.infer<typeof fileFormSchema>) {
+    if (isPending) return;
+    updateTitle({
+      id: values.id as Id<"files">,
+      title: values.title,
+    });
     onClose();
   }
 
@@ -92,22 +74,7 @@ const LinkModal = () => {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="url"
-              render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormControl>
-                    <Input placeholder="https://example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" disabled={isCreating || isUpdating}>
-              Submit
-            </Button>
+            <Button type="submit">Submit</Button>
           </form>
         </Form>
       </DialogContent>
@@ -115,4 +82,4 @@ const LinkModal = () => {
   );
 };
 
-export default LinkModal;
+export default FileModal;

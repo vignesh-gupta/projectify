@@ -79,9 +79,8 @@ export default defineSchema({
 
   files: defineTable({
     title: v.string(),
-    url: v.string(),
+    storageId: v.id("_storage"),
     projectId: v.id("projects"),
-    icon: v.optional(v.string()),
   })
     .index("by_project", ["projectId"])
     .searchIndex("search_title", {

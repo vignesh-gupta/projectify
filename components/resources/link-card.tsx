@@ -8,7 +8,7 @@ import { Edit, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
-type ResourceCardProps = {
+type LinkCardProps = {
   resource: {
     _id: Id<"links">;
     title: string;
@@ -17,9 +17,9 @@ type ResourceCardProps = {
   };
 };
 
-const ResourceCard = ({
+const LinkCard = ({
   resource: { _id, title, url, projectId },
-}: ResourceCardProps) => {
+}: LinkCardProps) => {
   const { onOpen } = useLinkModal();
 
   const { mutate: deleteLink, isPending } = useApiMutation(
@@ -37,9 +37,13 @@ const ResourceCard = ({
           />
           <AvatarFallback>{title.charAt(0)}</AvatarFallback>
         </Avatar>
-        <CardTitle className="text-base truncate hover:underline underline-offset-2">
-          <Link className="flex items-center gap-2" href={url}>
-            {title} <SquareArrowOutUpRight className="w-4 h-4" />
+        <CardTitle className="text-base truncate hover:underline underline-offset-2 flex-1">
+          <Link
+            className="flex items-center gap-2 w-1/2 sm:w-2/3 md:w-auto"
+            href={url}
+          >
+            <span className="truncate shrink ">{title}</span>
+            <SquareArrowOutUpRight className="shrink-0 w-4 h-4 hidden md:flex" />
           </Link>
         </CardTitle>
 
@@ -55,7 +59,7 @@ const ResourceCard = ({
           <Button
             variant="ghost"
             className="hover:bg-destructive hover:text-destructive-foreground"
-            size="icon"
+            size="sm"
             onClick={() => deleteLink({ _id })}
             disabled={isPending}
           >
@@ -67,4 +71,4 @@ const ResourceCard = ({
   );
 };
 
-export default ResourceCard;
+export default LinkCard;
