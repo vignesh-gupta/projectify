@@ -14,11 +14,12 @@ type LinkCardProps = {
     title: string;
     url: string;
     projectId: Id<"projects">;
+    icon?: Id<"_storage"> | undefined;
   };
 };
 
 const LinkCard = ({
-  resource: { _id, title, url, projectId },
+  resource: { _id, title, url, projectId, icon },
 }: LinkCardProps) => {
   const { onOpen } = useLinkModal();
 
@@ -26,19 +27,20 @@ const LinkCard = ({
     api.resources.link.remove
   );
 
-  const hostName = new URL(url).hostname;
-
   return (
     <Card className="group">
       <CardHeader className="flex flex-row items-center gap-4 p-3 px-5 space-y-0">
         <Avatar className="w-6 h-6">
           <AvatarImage
-            src={`https://icons.duckduckgo.com/ip3/${hostName}.ico`}
+            src={`https://${process.env.NEXT_PUBLIC_CONVEX_DEPLOYMENT_SITE}/getFile?storageId=${icon}`}
           />
-          <AvatarFallback>{title.charAt(0)}</AvatarFallback>
+          <AvatarFallback>
+            {new URL(url).hostname.charAt(0).toUpperCase()}
+          </AvatarFallback>
         </Avatar>
         <CardTitle className="text-base truncate hover:underline underline-offset-2 flex-1">
           <Link
+            target="_blank"
             className="flex items-center gap-2 w-1/2 sm:w-2/3 md:w-auto"
             href={url}
           >

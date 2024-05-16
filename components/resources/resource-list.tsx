@@ -20,31 +20,30 @@ const ResourceList = () => {
     projectId: param.id as Id<"projects">,
   });
 
-  if (!links || !links.length || !files || !files.length) return <NoResource />;
+  if ((!links || !links.length) && (!files || !files.length))
+    return <NoResource />;
 
   return (
     <>
-      {links.length > 0 && (
+      {links?.length ? (
         <section>
           <h4 className="text-xl font-semibold">Links</h4>
           <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
-            {links.map((res) => (
-              <LinkCard key={res._id} resource={res} />
-            ))}
+            {links?.map((res) => <LinkCard key={res._id} resource={res} />)}
           </div>
         </section>
-      )}
-      {files.length > 0 && (
+      ) : null}
+      {files?.length ? (
         <section>
           <h4 className="text-xl font-semibold">Files</h4>
           <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
-            {files.map((res) => (
+            {files?.map((res) => (
               <FileCard key={res._id} resource={res} />
               // <ResourceCard key={res._id} resource={res} type="file" />
             ))}
           </div>
         </section>
-      )}
+      ) : null}
     </>
   );
 };

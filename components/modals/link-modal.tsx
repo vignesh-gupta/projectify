@@ -18,6 +18,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "convex/react";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -33,6 +34,8 @@ const LinkModal = () => {
   const { isOpen, onClose, values } = useLinkModal();
 
   const params = useParams();
+
+  const saveFavicon = useAction(api.resources.storage.saveFavicon);
 
   const { mutate: createLink, isPending: isCreating } = useApiMutation(
     api.resources.link.create
@@ -51,20 +54,28 @@ const LinkModal = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof linkFormSchema>) {
-    if (values.id) {
+  async function onSubmit(values: z.infer<typeof linkFormSchema>) {
+    let resourceId = values.id as Id<"links"> | undefined;
+
+    if (resourceId) {
       updateLink({
         title: values.title,
         url: values.url,
-        _id: values.id as Id<"links">,
+        _id: resourceId,
       });
     } else {
-      createLink({
+      resourceId = await createLink({
         title: values.title,
         url: values.url,
         projectId: params.id as Id<"projects">,
       });
     }
+
+    saveFavicon({
+      id: resourceId,
+      url: values.url,
+    });
+
     onClose();
   }
 

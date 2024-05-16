@@ -23,7 +23,7 @@ const ProjectMobileBar = () => {
     <Sheet>
       <SheetTrigger asChild>
         <Button
-          className="md:hidden mr-3"
+          className="lg:hidden mr-3"
           variant="outline"
           size="icon"
           aria-label="Open Menu"
@@ -31,7 +31,7 @@ const ProjectMobileBar = () => {
           <Menu className="w-6 h-6" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="md:hidden" side="left">
+      <SheetContent className="lg:hidden" side="left">
         <SheetHeader>
           <SheetTitle>Project Menu</SheetTitle>
         </SheetHeader>

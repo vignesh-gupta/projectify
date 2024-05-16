@@ -29,8 +29,11 @@ export const update = mutation({
     _id: v.id("links"),
     title: v.optional(v.string()),
     url: v.optional(v.string()),
+    icon: v.optional(v.id("_storage")),
   },
   handler: async (ctx, args) => {
+    console.log("Updating link", args);
+
     const identity = ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error("Unauthenticated user cannot update resources");
@@ -38,11 +41,11 @@ export const update = mutation({
 
     const link = await ctx.db.get(args._id);
 
-    if (!link) {
-      throw new Error("Link resource not found");
-    }
+    if (!link) throw new Error("Link resource not found");
 
-    return ctx.db.patch(args._id, args);
+    await ctx.db.patch(args._id, args);
+
+    return args._id;
   },
 });
 

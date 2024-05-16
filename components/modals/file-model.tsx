@@ -54,9 +54,7 @@ const FileModal = () => {
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>
-            {values?._id ? "Edit" : "Create"} Link Resource
-          </DialogTitle>
+          <DialogTitle>Edit File Title</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>
