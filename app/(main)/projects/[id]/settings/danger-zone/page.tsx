@@ -1,5 +1,6 @@
 "use client";
 
+import ConfirmModal from "@/components/modals/confirm-modal";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { api } from "@/convex/_generated/api";
@@ -39,13 +40,15 @@ const ProjectSettingsDangerZonePage = ({
     <div>
       <div className="mb-3">
         <p className="text-sm mb-1">Delete the project</p>
-        <Button
-          variant="destructive"
+        <ConfirmModal
+          onConfirm={handleDeleteProject}
+          header="Delete project"
           disabled={isPending}
-          onClick={handleDeleteProject}
         >
-          Delete Project
-        </Button>
+          <Button variant="destructive" disabled={isPending}>
+            Delete Project
+          </Button>
+        </ConfirmModal>
       </div>
     </div>
   );

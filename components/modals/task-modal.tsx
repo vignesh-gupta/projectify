@@ -101,10 +101,10 @@ const TaskModal = () => {
         _id: values.id as Id<"workItems">,
         ...taskObject,
       });
-      return;
+    } else {
+      createWorkItem(taskObject);
     }
 
-    createWorkItem(taskObject);
     onClose();
   }
 

@@ -19,9 +19,7 @@ export const create = mutation({
       throw new Error("Unauthorized");
     }
 
-    const workItem = await ctx.db.insert("workItems", args);
-
-    return workItem;
+    return await ctx.db.insert("workItems", args);
   },
 });
 
@@ -43,9 +41,9 @@ export const update = mutation({
       throw new Error("Unauthorized");
     }
 
-    const workItem = await ctx.db.patch(args._id, args);
+    await ctx.db.patch(args._id, args);
 
-    return;
+    return args._id;
   },
 });
 

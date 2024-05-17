@@ -6,6 +6,7 @@ import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFileModal } from "@/lib/store/use-file-modal";
 import { Edit, File, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
+import ConfirmModal from "../modals/confirm-modal";
 
 type FileCardProps = {
   resource: {
@@ -53,15 +54,19 @@ const FileCard = ({
           >
             <Edit className="w-4 h-4" />
           </Button>
-          <Button
-            variant="ghost"
-            className="hover:bg-destructive hover:text-destructive-foreground"
-            size="sm"
-            onClick={() => deleteFile({ _id })}
+          <ConfirmModal
+            onConfirm={() => deleteFile({ _id })}
+            header={"Delete file: " + title}
             disabled={isPending}
           >
-            <Trash className="w-4 h-4" />
-          </Button>
+            <Button
+              variant="ghost"
+              className="hover:bg-destructive hover:text-destructive-foreground"
+              size="sm"
+            >
+              <Trash className="w-4 h-4" />
+            </Button>
+          </ConfirmModal>
         </div>
       </CardHeader>
     </Card>

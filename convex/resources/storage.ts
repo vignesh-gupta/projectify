@@ -12,14 +12,15 @@ export const saveFavicon = action({
     url: v.string(),
   },
   handler: async (ctx, args) => {
-    const icon = await fetch(
+    const iconReq = await fetch(
       `https://icons.duckduckgo.com/ip3/${new URL(args.url).hostname}.ico`
-    ).then((res) => res.blob());
+    );
 
-    console.log({ icon });
+    if (!iconReq.ok) return;
 
+    const icon = await iconReq.blob();
+    
     const storageRes = await ctx.storage.store(icon);
-
     await ctx.runMutation(api.resources.link.update, {
       _id: args.id,
       icon: storageRes,

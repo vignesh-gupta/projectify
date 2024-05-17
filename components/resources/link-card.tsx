@@ -4,9 +4,10 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
-import { Edit, SquareArrowOutUpRight, Trash } from "lucide-react";
+import { Edit, LinkIcon, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import ConfirmModal from "../modals/confirm-modal";
 
 type LinkCardProps = {
   resource: {
@@ -30,14 +31,18 @@ const LinkCard = ({
   return (
     <Card className="group">
       <CardHeader className="flex flex-row items-center gap-4 p-3 px-5 space-y-0">
-        <Avatar className="w-6 h-6">
-          <AvatarImage
-            src={`https://${process.env.NEXT_PUBLIC_CONVEX_DEPLOYMENT_SITE}/getFile?storageId=${icon}`}
-          />
-          <AvatarFallback>
-            {new URL(url).hostname.charAt(0).toUpperCase()}
-          </AvatarFallback>
-        </Avatar>
+        {icon ? (
+          <Avatar className="w-6 h-6">
+            <AvatarImage
+              src={`https://${process.env.NEXT_PUBLIC_CONVEX_DEPLOYMENT_SITE}/getFile?storageId=${icon}`}
+            />
+            <AvatarFallback>
+              {new URL(url).hostname.charAt(0).toUpperCase()}
+            </AvatarFallback>
+          </Avatar>
+        ) : (
+          <LinkIcon className="w-5 h-5" />
+        )}
         <CardTitle className="text-base truncate hover:underline underline-offset-2 flex-1">
           <Link
             target="_blank"
@@ -58,15 +63,19 @@ const LinkCard = ({
           >
             <Edit className="w-4 h-4" />
           </Button>
-          <Button
-            variant="ghost"
-            className="hover:bg-destructive hover:text-destructive-foreground"
-            size="sm"
-            onClick={() => deleteLink({ _id })}
+          <ConfirmModal
+            onConfirm={() => deleteLink({ _id })}
+            header={`Delete link: ${title}`}
             disabled={isPending}
           >
-            <Trash className="w-4 h-4" />
-          </Button>
+            <Button
+              variant="ghost"
+              className="hover:bg-destructive hover:text-destructive-foreground"
+              size="sm"
+            >
+              <Trash className="w-4 h-4" />
+            </Button>
+          </ConfirmModal>
         </div>
       </CardHeader>
     </Card>
