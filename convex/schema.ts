@@ -81,6 +81,7 @@ export default defineSchema({
     title: v.string(),
     storageId: v.id("_storage"),
     projectId: v.id("projects"),
+    type: v.string(),
   })
     .index("by_project", ["projectId"])
     .searchIndex("search_title", {

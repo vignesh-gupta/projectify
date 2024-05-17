@@ -39,7 +39,6 @@ const ResourceList = () => {
           <div className="grid xl:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-5">
             {files?.map((res) => (
               <FileCard key={res._id} resource={res} />
-              // <ResourceCard key={res._id} resource={res} type="file" />
             ))}
           </div>
         </section>

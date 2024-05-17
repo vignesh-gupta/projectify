@@ -2,8 +2,8 @@ import { v } from "convex/values";
 import { action, mutation } from "../_generated/server";
 import { api } from "../_generated/api";
 
-export const generateUploadUrl = mutation(async (ctx) => {
-  return await ctx.storage.generateUploadUrl();
+export const generateUploadUrl = mutation((ctx) => {
+  return ctx.storage.generateUploadUrl();
 });
 
 export const saveFavicon = action({

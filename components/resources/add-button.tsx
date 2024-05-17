@@ -11,22 +11,23 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
-import { useUploadFiles, UploadFileResponse } from "@xixixao/uploadstuff/react";
+import { useUploadFiles } from "@xixixao/uploadstuff/react";
 import { ChevronDown, File, Link } from "lucide-react";
 import { useParams } from "next/navigation";
 
 const AddButton = () => {
-  const { onOpen } = useLinkModal();
-
   const params = useParams();
+
+  const { onOpen } = useLinkModal();
 
   const { mutate: generateUploadUrl, isPending } = useApiMutation(
     api.resources.storage.generateUploadUrl
   );
-  const { startUpload } = useUploadFiles(generateUploadUrl);
   const { mutate: createFileResource } = useApiMutation(
     api.resources.file.create
   );
+
+  const { startUpload, isUploading } = useUploadFiles(generateUploadUrl);
 
   const handleAddFile = () => {
     const fileInput = document.createElement("input");
@@ -44,6 +45,7 @@ const AddButton = () => {
         title: res.name,
         storageId: (res.response as { storageId: Id<"_storage"> }).storageId,
         projectId: params.id as Id<"projects">,
+        type: res.type,
       });
     });
 
@@ -59,7 +61,10 @@ const AddButton = () => {
         <DropdownMenuItem onClick={() => onOpen()}>
           <Link className="w-4 h-4 mr-2" /> Add Link
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={handleAddFile} disabled={isPending}>
+        <DropdownMenuItem
+          onClick={handleAddFile}
+          disabled={isPending || isUploading}
+        >
           <File className="w-4 h-4 mr-2" /> Add File
         </DropdownMenuItem>
       </DropdownMenuContent>

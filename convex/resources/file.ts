@@ -6,8 +6,9 @@ export const create = mutation({
     title: v.string(),
     storageId: v.id("_storage"),
     projectId: v.id("projects"),
+    type: v.string(),
   },
-  handler: async (ctx, { title, storageId, projectId }) => {
+  handler: async (ctx, { title, storageId, projectId, type }) => {
     const identity = await ctx.auth.getUserIdentity();
 
     if (!identity) {
@@ -25,6 +26,7 @@ export const create = mutation({
       title,
       storageId,
       projectId,
+      type,
     });
   },
 });

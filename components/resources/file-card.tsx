@@ -7,6 +7,7 @@ import { useFileModal } from "@/lib/store/use-file-modal";
 import { Edit, File, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
 import ConfirmModal from "../modals/confirm-modal";
+import FileIcon from "./file-icon";
 
 type FileCardProps = {
   resource: {
@@ -14,11 +15,12 @@ type FileCardProps = {
     title: string;
     storageId: Id<"_storage">;
     projectId: Id<"projects">;
+    type: string;
   };
 };
 
 const FileCard = ({
-  resource: { _id, title, storageId, projectId },
+  resource: { _id, title, storageId, projectId, type },
 }: FileCardProps) => {
   const { onOpen } = useFileModal();
 
@@ -29,7 +31,7 @@ const FileCard = ({
   return (
     <Card className="group max-w-full">
       <CardHeader className="flex flex-row items-center gap-4 p-3 px-5 space-y-0">
-        <File className="w-6 h-6" />
+        <FileIcon type={type} />
         <CardTitle className="text-base truncate hover:underline underline-offset-2 flex-1">
           <Link
             target="_blank"
@@ -50,7 +52,7 @@ const FileCard = ({
             variant="ghost"
             size="icon"
             disabled={isPending}
-            onClick={() => onOpen({ _id, projectId, storageId, title })}
+            onClick={() => onOpen({ _id, projectId, storageId, title, type })}
           >
             <Edit className="w-4 h-4" />
           </Button>
