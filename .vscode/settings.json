@@ -6,7 +6,8 @@
     "user",
     "organization",
     "resource",
-    "cypress"
+    "cypress",
+    "e2e"
   ],
   "cSpell.words": [
     "nothanks",
