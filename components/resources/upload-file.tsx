@@ -41,7 +41,11 @@ const UploadFile = () => {
   };
 
   return (
-    <Button size="sm" onClick={handleAddFile}>
+    <Button
+      size="sm"
+      onClick={handleAddFile}
+      disabled={isPending || isUploading}
+    >
       <Upload className="mr-2 h-4 w-4" />
       Upload
     </Button>
