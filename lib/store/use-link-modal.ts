@@ -1,10 +1,12 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import { create } from "zustand";
 
+type TValue = Pick<Doc<"links">, "_id" | "title" | "url">;
+
 type TModal = {
   isOpen: boolean;
-  values?: Omit<Doc<"links">, "_creationTime">;
-  onOpen: (values?: Omit<Doc<"links">, "_creationTime">) => void;
+  values?: TValue;
+  onOpen: (values?: TValue) => void;
   onClose: () => void;
 };
 

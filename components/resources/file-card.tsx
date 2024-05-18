@@ -1,10 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFileModal } from "@/lib/store/use-file-modal";
-import { Edit, File, SquareArrowOutUpRight, Trash } from "lucide-react";
+import { Edit, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
 import ConfirmModal from "../modals/confirm-modal";
 import FileIcon from "./file-icon";
@@ -24,15 +23,18 @@ const FileCard = ({
 }: FileCardProps) => {
   const { onOpen } = useFileModal();
 
-  const { isPending, mutate: deleteFile } = useApiMutation(
+  const { mutate: deleteFile, isPending: isDeleting } = useApiMutation(
     api.resources.file.remove
   );
 
   return (
-    <Card className="group max-w-full">
-      <CardHeader className="flex flex-row items-center gap-4 p-3 px-5 space-y-0">
-        <FileIcon type={type} />
-        <CardTitle className="text-base truncate hover:underline underline-offset-2 flex-1">
+    <div
+      key={_id}
+      className="grid grid-cols-[48px_1fr_auto] items-center gap-4"
+    >
+      <FileIcon type={type} />
+      <div>
+        <div className="font-medium">
           <Link
             target="_blank"
             className="flex items-center gap-2 w-1/2 sm:w-2/3 md:w-auto"
@@ -45,33 +47,29 @@ const FileCard = ({
             <span className="truncate shrink">{title}</span>
             <SquareArrowOutUpRight className="shrink-0 w-4 h-4 hidden md:flex" />
           </Link>
-        </CardTitle>
-
-        <div className="flex gap-1 ml-auto">
-          <Button
-            variant="ghost"
-            size="icon"
-            disabled={isPending}
-            onClick={() => onOpen({ _id, projectId, storageId, title, type })}
-          >
-            <Edit className="w-4 h-4" />
-          </Button>
-          <ConfirmModal
-            onConfirm={() => deleteFile({ _id })}
-            header={"Delete file: " + title}
-            disabled={isPending}
-          >
-            <Button
-              variant="ghost"
-              className="hover:bg-destructive hover:text-destructive-foreground"
-              size="sm"
-            >
-              <Trash className="w-4 h-4" />
-            </Button>
-          </ConfirmModal>
         </div>
-      </CardHeader>
-    </Card>
+        <div className="text-gray-500 dark:text-gray-400 text-sm">12.3 MB</div>
+      </div>
+      <div className="flex items-center gap-2">
+        <Button
+          size="icon"
+          variant="ghost"
+          onClick={() => onOpen({ _id, title })}
+          disabled={isDeleting}
+        >
+          <Edit className="h-5 w-5" />
+        </Button>
+        <ConfirmModal
+          header={`Delete file : ${title}`}
+          onConfirm={() => deleteFile({ _id })}
+          disabled={isDeleting}
+        >
+          <Button size="icon" variant="ghost">
+            <Trash className="h-5 w-5" />
+          </Button>
+        </ConfirmModal>
+      </div>
+    </div>
   );
 };
 

@@ -12,7 +12,7 @@ type FileIconProps = {
 };
 
 const FileIcon = ({ type }: FileIconProps) => {
-  const className = "w-6 h-6";
+  const className = "w-8 h-8";
 
   if (type.includes("image")) return <FileImage className={className} />;
 

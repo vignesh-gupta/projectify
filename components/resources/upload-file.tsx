@@ -1,24 +1,13 @@
-"use client";
-
-import { buttonVariants } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { useLinkModal } from "@/lib/store/use-link-modal";
 import { useUploadFiles } from "@xixixao/uploadstuff/react";
-import { ChevronDown, File, Link } from "lucide-react";
+import { Upload } from "lucide-react";
 import { useParams } from "next/navigation";
+import { Button } from "../ui/button";
 
-const AddButton = () => {
+const UploadFile = () => {
   const params = useParams();
-
-  const { onOpen } = useLinkModal();
 
   const { mutate: generateUploadUrl, isPending } = useApiMutation(
     api.resources.storage.generateUploadUrl
@@ -26,7 +15,6 @@ const AddButton = () => {
   const { mutate: createFileResource } = useApiMutation(
     api.resources.file.create
   );
-
   const { startUpload, isUploading } = useUploadFiles(generateUploadUrl);
 
   const handleAddFile = () => {
@@ -53,23 +41,11 @@ const AddButton = () => {
   };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger className={buttonVariants({ size: "sm" })}>
-        Add <ChevronDown className="w-4 h-4 ml-2" />
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => onOpen()}>
-          <Link className="w-4 h-4 mr-2" /> Add Link
-        </DropdownMenuItem>
-        <DropdownMenuItem
-          onClick={handleAddFile}
-          disabled={isPending || isUploading}
-        >
-          <File className="w-4 h-4 mr-2" /> Add File
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <Button size="sm" onClick={handleAddFile}>
+      <Upload className="mr-2 h-4 w-4" />
+      Upload
+    </Button>
   );
 };
 
-export default AddButton;
+export default UploadFile;
