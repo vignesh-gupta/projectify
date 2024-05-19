@@ -4,8 +4,8 @@ import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { Edit, LinkIcon, Trash } from "lucide-react";
+import ConfirmModal from "@/components/modals/confirm-modal";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import ConfirmModal from "../modals/confirm-modal";
 
 type LinkCardProps = {
   resource: {
@@ -45,7 +45,7 @@ const LinkCard = ({
           className="font-medium hover:underline hover:text-gray-900 dark:hover:text-gray-50"
           href={url}
         >
-          {title}
+          {title.length > 10 ? `${title.slice(0, 10)}...` : title}
         </a>
       </div>
       <div>
@@ -60,6 +60,8 @@ const LinkCard = ({
         <ConfirmModal
           onConfirm={() => deleteLink({ _id })}
           header={`Delete link:${title}`}
+          disabled={isPending}
+          toastMessage="Link deleted successfully"
         >
           <Button size="icon" variant="ghost" disabled={isPending}>
             <Trash className="h-5 w-5" />

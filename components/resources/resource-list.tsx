@@ -20,12 +20,13 @@ const ResourceList = () => {
   const files = useQuery(api.resources.files.list, {
     projectId: param.id as Id<"projects">,
   });
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 gap-2">
       <Card className="col-span-3 overflow-hidden">
         <CardHeader className="bg-gray-100 dark:bg-gray-800 flex-row flex items-center justify-between py-3">
           <h2 className="text-lg font-semibold">Files</h2>
-          <UploadFile />
+          <UploadFile fileCount={files?.length} />
         </CardHeader>
         <CardContent className="p-6 grid gap-6">
           {files && files.length > 0 ? (

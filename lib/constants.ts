@@ -14,6 +14,9 @@ import { TaskPriority, TaskStatus, TaskType } from "./types";
 
 export const DASHBOARD_ROUTE = "/dashboard";
 
+export const MAX_FILE_SIZE = 1024 * 1024 * 5; // 5MB
+export const MAX_FILE_COUNT = 10;
+
 export const UNASSIGNED_USER = {
   label: "Unassigned",
   value: process.env.UNASSIGNED_USER_ID as Id<"users">,

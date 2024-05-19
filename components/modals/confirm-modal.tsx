@@ -10,13 +10,15 @@ import {
 } from "@/components/ui/alert-dialog";
 import { ReactNode } from "react";
 import { buttonVariants } from "../ui/button";
+import { toast } from "sonner";
 
 type ConfirmModalProps = {
   children: ReactNode;
   disabled?: boolean;
-  onConfirm: () => void;
+  onConfirm: () => Promise<any>;
   header: string;
   description?: string;
+  toastMessage?: string;
 };
 
 const ConfirmModal = ({
@@ -25,9 +27,12 @@ const ConfirmModal = ({
   disabled,
   header,
   onConfirm,
+  toastMessage = "Action completed successfully.",
 }: ConfirmModalProps) => {
   const handleConfirm = () => {
-    onConfirm();
+    onConfirm()
+      .then(() => toast.success(toastMessage))
+      .catch(() => toast.error("Failed to perform action. Please try again."));
   };
 
   return (

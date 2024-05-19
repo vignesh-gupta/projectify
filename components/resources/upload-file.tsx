@@ -5,8 +5,14 @@ import { useUploadFiles } from "@xixixao/uploadstuff/react";
 import { Upload } from "lucide-react";
 import { useParams } from "next/navigation";
 import { Button } from "../ui/button";
+import { MAX_FILE_COUNT, MAX_FILE_SIZE } from "@/lib/constants";
+import { toast } from "sonner";
 
-const UploadFile = () => {
+type UploadFileProps = {
+  fileCount?: number;
+};
+
+const UploadFile = ({ fileCount = 0 }: UploadFileProps) => {
   const params = useParams();
 
   const { mutate: generateUploadUrl, isPending } = useApiMutation(
@@ -23,18 +29,32 @@ const UploadFile = () => {
     fileInput.accept = "*/*";
 
     fileInput.addEventListener("change", async (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0];
-      if (!file) {
+      if (fileCount >= MAX_FILE_COUNT) {
+        toast.error(`A project can have a maximum of ${MAX_FILE_COUNT} files.`);
         return;
       }
 
-      const [res] = await startUpload([file]);
-      createFileResource({
-        title: res.name,
-        storageId: (res.response as { storageId: Id<"_storage"> }).storageId,
-        projectId: params.id as Id<"projects">,
-        type: res.type,
-      });
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (!file) return;
+
+      if (file.size > MAX_FILE_SIZE) {
+        toast.error("File size should be less than 5MB");
+        return;
+      }
+
+      try {
+        const [res] = await startUpload([file]);
+        createFileResource({
+          title: res.name,
+          storageId: (res.response as { storageId: Id<"_storage"> }).storageId,
+          projectId: params.id as Id<"projects">,
+          type: res.type,
+        });
+
+        toast.success("File uploaded successfully.");
+      } catch (e) {
+        toast.error("Failed to upload file. Please try again.");
+      }
     });
 
     fileInput.click();

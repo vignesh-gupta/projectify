@@ -63,6 +63,7 @@ const FileCard = ({
           header={`Delete file : ${title}`}
           onConfirm={() => deleteFile({ _id })}
           disabled={isDeleting}
+          toastMessage="File deleted successfully"
         >
           <Button size="icon" variant="ghost">
             <Trash className="h-5 w-5" />

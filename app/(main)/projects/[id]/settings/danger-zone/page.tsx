@@ -25,16 +25,10 @@ const ProjectSettingsDangerZonePage = ({
   );
   const router = useRouter();
 
-  const handleDeleteProject = () => {
-    deleteProject({ id })
-      .then(() => {
-        toast.success("Project deleted successfully");
-        router.push(DASHBOARD_ROUTE);
-      })
-      .catch(() => {
-        toast.error("Failed to delete project");
-      });
-  };
+  const handleDeleteProject = () =>
+    deleteProject({ id }).then(() => {
+      router.push(DASHBOARD_ROUTE);
+    });
 
   return (
     <div>
@@ -44,6 +38,7 @@ const ProjectSettingsDangerZonePage = ({
           onConfirm={handleDeleteProject}
           header="Delete project"
           disabled={isPending}
+          toastMessage="Project deleted successfully"
         >
           <Button variant="destructive" disabled={isPending}>
             Delete Project
