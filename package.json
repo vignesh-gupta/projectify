@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.12",
@@ -48,6 +49,7 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@clerk/testing": "^1.1.2",
     "@playwright/test": "^1.44.0",
     "@types/node": "^20",
     "@types/react": "^18",
