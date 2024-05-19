@@ -6,7 +6,6 @@
     "user",
     "organization",
     "resource",
-    "cypress",
     "e2e"
   ],
   "cSpell.words": [

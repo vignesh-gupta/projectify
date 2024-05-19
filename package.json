@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "cy:open": "cypress open"
+    "lint": "next lint"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.12",
@@ -54,7 +53,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "cypress": "^13.9.0",
     "eslint": "^8",
     "eslint-config-next": "14.1.4",
     "postcss": "^8",
