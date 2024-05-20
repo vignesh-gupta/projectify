@@ -4,7 +4,7 @@ import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useUploadFiles } from "@xixixao/uploadstuff/react";
 import { Upload } from "lucide-react";
 import { useParams } from "next/navigation";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { MAX_FILE_COUNT, MAX_FILE_SIZE } from "@/lib/constants";
 import { toast } from "sonner";
 

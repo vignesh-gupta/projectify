@@ -3,10 +3,10 @@
 import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 import { ThemeSwitch } from "../theme/theme-switch";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { Sheet, SheetTrigger } from "../ui/sheet";
+import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { MenuIcon } from "lucide-react";
 import MobileNav from "./mobile-nav";
 import { useState } from "react";

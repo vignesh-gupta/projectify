@@ -4,17 +4,18 @@ import { Button } from "@/components/ui/button";
 import { columns } from "@/components/work-items/columns";
 import { DataTable } from "@/components/work-items/data-table";
 import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import { useQuery } from "convex/react";
 
 type WorkItemsPageProps = {
   params: {
-    id: string;
+    id: Id<"projects">;
   };
 };
 
 const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
-  const tasks = useQuery(api.work_items.list, { projectId: id });
+  const tasks = useQuery(api.work_item.list, { projectId: id });
 
   const { onOpen } = useTaskModal();
 

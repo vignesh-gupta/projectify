@@ -16,19 +16,14 @@ import type {
 } from "convex/server";
 import type * as http from "../http.js";
 import type * as project from "../project.js";
-import type * as projects from "../projects.js";
 import type * as resources_file from "../resources/file.js";
-import type * as resources_files from "../resources/files.js";
 import type * as resources_link from "../resources/link.js";
-import type * as resources_links from "../resources/links.js";
 import type * as resources_storage from "../resources/storage.js";
 import type * as team from "../team.js";
 import type * as team_membership from "../team_membership.js";
 import type * as types from "../types.js";
 import type * as user from "../user.js";
-import type * as users from "../users.js";
 import type * as work_item from "../work_item.js";
-import type * as work_items from "../work_items.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -41,19 +36,14 @@ import type * as work_items from "../work_items.js";
 declare const fullApi: ApiFromModules<{
   http: typeof http;
   project: typeof project;
-  projects: typeof projects;
   "resources/file": typeof resources_file;
-  "resources/files": typeof resources_files;
   "resources/link": typeof resources_link;
-  "resources/links": typeof resources_links;
   "resources/storage": typeof resources_storage;
   team: typeof team;
   team_membership: typeof team_membership;
   types: typeof types;
   user: typeof user;
-  users: typeof users;
   work_item: typeof work_item;
-  work_items: typeof work_items;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,

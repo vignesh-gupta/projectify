@@ -31,8 +31,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Textarea } from "../ui/textarea";
+} from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 
 const taskFormSchema = z.object({
@@ -51,7 +51,7 @@ const TaskModal = () => {
 
   // Fetch the organization users.
   const { organization } = useOrganization();
-  const orgUsers = useQuery(api.users.list, {
+  const orgUsers = useQuery(api.user.list, {
     teamId: organization?.id as string,
   })?.map((user) => ({
     label: user?.firstName as string,

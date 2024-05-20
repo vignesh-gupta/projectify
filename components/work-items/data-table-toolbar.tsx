@@ -30,7 +30,7 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0;
 
   const { organization } = useOrganization();
-  const orgUsers = useQuery(api.users.list, {
+  const orgUsers = useQuery(api.user.list, {
     teamId: organization?.id as string,
   });
 
