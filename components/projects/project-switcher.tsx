@@ -25,7 +25,7 @@ type ProjectSwitcherProps = {
 };
 
 const ProjectSwitcher = ({ orgId }: ProjectSwitcherProps) => {
-  const projectList = useQuery(api.projects.list, { orgId });
+  const projectList = useQuery(api.project.list, { orgId });
 
   const param = useParams();
   const router = useRouter();

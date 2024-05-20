@@ -1,6 +1,6 @@
-import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
 import { UNASSIGNED_USER } from "@/lib/constants";
+import { v } from "convex/values";
+import { mutation, query } from "@/convex/_generated//server";
 
 export const create = mutation({
   args: {
@@ -68,7 +68,12 @@ export const remove = mutation({
 
     await Promise.all([
       ...userMemberships.map((membership) => ctx.db.delete(membership._id)),
-      ...userWorkItems.map((workItem) => ctx.db.patch(workItem._id, { assignee: UNASSIGNED_USER.label, assigneeId: UNASSIGNED_USER.value })),
+      ...userWorkItems.map((workItem) =>
+        ctx.db.patch(workItem._id, {
+          assignee: UNASSIGNED_USER.label,
+          assigneeId: UNASSIGNED_USER.value,
+        })
+      ),
     ]);
 
     console.log("[USER_DELETE_OPS] : Deleting user", existingUser._id);
@@ -92,5 +97,38 @@ export const get = query({
         .query("users")
         .withIndex("by_clerk", (q) => q.eq("clerkId", args.clerkId || ""))
         .first();
+  },
+});
+
+export const list = query({
+  args: {
+    teamId: v.string(),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      console.error("[USER_GET_ERR] : User is not authenticated");
+      return;
+    }
+
+    const team = await ctx.db
+      .query("teams")
+      .withIndex("by_clerkId", (q) => q.eq("clerkId", args.teamId))
+      .first();
+
+    if (!team) {
+      console.error("[USERS_GET_ERR] : Team not found");
+      return;
+    }
+
+    const userIdList = await ctx.db
+      .query("team_memberships")
+      .withIndex("by_team", (q) => q.eq("teamId", team?._id))
+      .collect();
+
+    return await Promise.all(
+      userIdList.map((userId) => ctx.db.get(userId.userId))
+    );
   },
 });

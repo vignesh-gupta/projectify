@@ -5,7 +5,7 @@ import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { Edit, LinkIcon, Trash } from "lucide-react";
 import ConfirmModal from "@/components/modals/confirm-modal";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 type LinkCardProps = {
   resource: {

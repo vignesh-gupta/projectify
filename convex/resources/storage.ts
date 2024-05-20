@@ -1,6 +1,6 @@
 import { v } from "convex/values";
-import { action, mutation } from "../_generated/server";
-import { api } from "../_generated/api";
+import { action, mutation } from "@/convex/_generated//server";
+import { api } from "@/convex/_generated//api";
 
 export const generateUploadUrl = mutation((ctx) => {
   return ctx.storage.generateUploadUrl();

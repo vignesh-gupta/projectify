@@ -6,7 +6,7 @@ import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useOrganization } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { Plus } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import ProjectCard from "./project-card";
 import { toast } from "sonner";
 
@@ -15,7 +15,7 @@ type ProjectListProps = {
 };
 
 const ProjectList = ({ orgId }: ProjectListProps) => {
-  const projects = useQuery(api.projects.list, { orgId });
+  const projects = useQuery(api.project.list, { orgId });
 
   if (projects?.error) {
     console.error("[PROJECT_FETCH_ERROR]", projects.error);

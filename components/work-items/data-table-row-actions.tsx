@@ -7,7 +7,7 @@ import {
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import { Row } from "@tanstack/react-table";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Task } from "./data-table";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";

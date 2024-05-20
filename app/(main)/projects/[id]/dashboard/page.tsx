@@ -20,7 +20,7 @@ const ProjectDashboardPage = ({
 
   const convexUser = useQuery(api.user.get, { clerkId: userId ?? "" });
 
-  const myTasks = useQuery(api.work_items.list, { projectId: id })?.filter(
+  const myTasks = useQuery(api.work_item.list, { projectId: id })?.filter(
     (task) => task.assigneeId === convexUser?._id
   );
 
