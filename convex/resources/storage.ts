@@ -12,7 +12,6 @@ export const saveFavicon = action({
     url: v.string(),
   },
   handler: async (ctx, args) => {
-    throw new Error("Not implemented");
     const iconReq = await fetch(
       `https://icons.duckduckgo.com/ip3/${new URL(args.url).hostname}.ico`
     );
