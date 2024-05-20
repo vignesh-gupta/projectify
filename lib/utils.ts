@@ -1,5 +1,11 @@
 import { type ClassValue, clsx } from "clsx";
-import { FileBox, Layout, ListTodo, Settings } from "lucide-react";
+import {
+  FileBox,
+  Layout,
+  ListTodo,
+  MessageCircle,
+  Settings,
+} from "lucide-react";
 import { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
 
@@ -73,6 +79,11 @@ export const getNavLinks = (id: string) => {
       name: "Resources",
       href: `/projects/${id}/resources`,
       Icon: FileBox,
+    },
+    {
+      name: "Messages",
+      href: `/projects/${id}/messages`,
+      Icon: MessageCircle,
     },
     {
       name: "Settings",

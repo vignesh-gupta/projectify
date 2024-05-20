@@ -5,7 +5,8 @@
     "work-items",
     "user",
     "organization",
-    "resource"
+    "resource",
+    "messages"
   ],
   "cSpell.words": [
     "nothanks",
