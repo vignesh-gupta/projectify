@@ -21,6 +21,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useAction } from "convex/react";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const linkFormSchema = z.object({
@@ -57,24 +58,31 @@ const LinkModal = () => {
   async function onSubmit(values: z.infer<typeof linkFormSchema>) {
     let resourceId = values.id as Id<"links"> | undefined;
 
-    if (resourceId) {
-      updateLink({
-        title: values.title,
-        url: values.url,
-        _id: resourceId,
-      });
-    } else {
-      resourceId = await createLink({
-        title: values.title,
-        url: values.url,
-        projectId: params.id as Id<"projects">,
-      });
-    }
+    try {
+      if (resourceId) {
+        await updateLink({
+          title: values.title,
+          url: values.url,
+          _id: resourceId,
+        });
+      } else {
+        resourceId = await createLink({
+          title: values.title,
+          url: values.url,
+          projectId: params.id as Id<"projects">,
+        });
+      }
 
-    saveFavicon({
-      id: resourceId,
-      url: values.url,
-    });
+      saveFavicon({
+        id: resourceId,
+        url: values.url,
+      }).catch(() => toast.error("Failed to save favicon"));
+
+      toast.success("Link saved successfully.");
+    } catch (error) {
+      console.log("Failed to save link", error);
+      toast.error("Failed to save link. Please try again.");
+    }
 
     onClose();
   }

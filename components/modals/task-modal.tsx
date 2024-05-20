@@ -33,6 +33,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
+import { toast } from "sonner";
 
 const taskFormSchema = z.object({
   id: z.string().optional(),
@@ -80,7 +81,7 @@ const TaskModal = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof taskFormSchema>) {
+  async function onSubmit(values: z.infer<typeof taskFormSchema>) {
     const selectedUser = orgUsers?.find(
       (user) => user.value === values.assigneeId
     );
@@ -96,13 +97,20 @@ const TaskModal = () => {
       projectId: params.id as Id<"projects">,
     };
 
-    if (values?.id) {
-      updateWorkItem({
-        _id: values.id as Id<"workItems">,
-        ...taskObject,
-      });
-    } else {
-      createWorkItem(taskObject);
+    try {
+      if (values?.id) {
+        await updateWorkItem({
+          _id: values.id as Id<"workItems">,
+          ...taskObject,
+        });
+      } else {
+        await createWorkItem(taskObject);
+      }
+
+      toast.success("Work item saved successfully.");
+    } catch (e) {
+      console.error("Failed to save work item", e);
+      toast.error("Failed to save work item. Please try again.");
     }
 
     onClose();

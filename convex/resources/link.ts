@@ -34,6 +34,8 @@ export const update = mutation({
   handler: async (ctx, args) => {
     console.log("Updating link", args);
 
+    throw new Error("Unauthenticated user cannot create resources");
+
     const identity = ctx.auth.getUserIdentity();
     if (!identity) {
       throw new Error("Unauthenticated user cannot update resources");

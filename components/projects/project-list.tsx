@@ -8,6 +8,7 @@ import { useQuery } from "convex/react";
 import { Plus } from "lucide-react";
 import { Button } from "../ui/button";
 import ProjectCard from "./project-card";
+import { toast } from "sonner";
 
 type ProjectListProps = {
   orgId: string;
@@ -38,15 +39,17 @@ const AddProject = () => {
     api.project.create
   );
 
-  const handleCreateProject = async () => {
+  const handleCreateProject = () => {
     if (!organization) return;
 
-    await createProject({
+    createProject({
       orgId: organization.id,
       title: "New Project",
       status: "development",
       description: "I'm planning to do something awesome!",
-    });
+    })
+      .then(() => toast.success("Project created successfully"))
+      .catch(() => toast.error("Failed to create project"));
   };
 
   return (

@@ -11,6 +11,7 @@ import { Button } from "../ui/button";
 import { Task } from "./data-table";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 type DataTableRowActionsProps = {
   row: Row<Task>;
@@ -27,7 +28,9 @@ const DataTableRowActions = ({ row }: DataTableRowActionsProps) => {
   };
 
   const handleDelete = () => {
-    deleteTask({ _id: row.original._id });
+    deleteTask({ _id: row.original._id })
+      .then(() => toast.success("Task deleted successfully"))
+      .catch(() => toast.error("Failed to delete task. Please try again."));
   };
 
   return (

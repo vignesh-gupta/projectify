@@ -19,6 +19,7 @@ import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFileModal } from "@/lib/store/use-file-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const fileFormSchema = z.object({
@@ -46,7 +47,11 @@ const FileModal = () => {
     updateTitle({
       id: values.id as Id<"files">,
       title: values.title,
-    });
+    })
+      .then(() => toast.success("File title updated successfully."))
+      .catch(() =>
+        toast.error("Failed to update file title. Please try again.")
+      );
     onClose();
   }
 
