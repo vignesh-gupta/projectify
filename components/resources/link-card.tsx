@@ -44,6 +44,7 @@ const LinkCard = ({
         <a
           className="font-medium hover:underline hover:text-gray-900 dark:hover:text-gray-50"
           href={url}
+          target="_blank"
         >
           {title.length > 10 ? `${title.slice(0, 10)}...` : title}
         </a>

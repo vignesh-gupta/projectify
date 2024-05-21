@@ -15,6 +15,7 @@ import type {
   FunctionReference,
 } from "convex/server";
 import type * as http from "../http.js";
+import type * as message from "../message.js";
 import type * as project from "../project.js";
 import type * as resources_file from "../resources/file.js";
 import type * as resources_link from "../resources/link.js";
@@ -35,6 +36,7 @@ import type * as work_item from "../work_item.js";
  */
 declare const fullApi: ApiFromModules<{
   http: typeof http;
+  message: typeof message;
   project: typeof project;
   "resources/file": typeof resources_file;
   "resources/link": typeof resources_link;

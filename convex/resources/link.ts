@@ -1,5 +1,5 @@
-import { v } from "convex/values";
 import { mutation, query } from "@/convex/_generated/server";
+import { v } from "convex/values";
 
 export const create = mutation({
   args: {
@@ -62,6 +62,8 @@ export const remove = mutation({
     if (!link) {
       throw new Error("Link resource not found");
     }
+
+    if (link.icon) ctx.storage.delete(link.icon);
 
     return ctx.db.delete(args._id);
   },

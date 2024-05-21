@@ -97,6 +97,8 @@ export const get = query({
         .query("users")
         .withIndex("by_clerk", (q) => q.eq("clerkId", args.clerkId || ""))
         .first();
+
+    return null;
   },
 });
 
