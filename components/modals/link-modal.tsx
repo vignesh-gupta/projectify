@@ -73,7 +73,7 @@ const LinkModal = () => {
         });
       }
 
-      saveFavicon({
+      await saveFavicon({
         id: resourceId,
         url: values.url,
       }).catch(() => toast.error("Failed to save favicon"));
