@@ -2,7 +2,7 @@
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { useAuth } from "@clerk/nextjs";
+import { useCurrentUser } from "@/lib/hooks/use-current-user";
 import { useQuery } from "convex/react";
 import { Loader2 } from "lucide-react";
 import OwnedTaskTable from "../_components/owned-task-table";
@@ -16,12 +16,10 @@ type ProjectDashboardPageProps = {
 const ProjectDashboardPage = ({
   params: { id },
 }: ProjectDashboardPageProps) => {
-  const { userId } = useAuth();
-
-  const convexUser = useQuery(api.user.get, { clerkId: userId ?? "" });
+  const currentUser = useCurrentUser();
 
   const myTasks = useQuery(api.work_item.list, { projectId: id })?.filter(
-    (task) => task.assigneeId === convexUser?._id
+    (task) => task.assigneeId === currentUser?._id
   );
 
   return (

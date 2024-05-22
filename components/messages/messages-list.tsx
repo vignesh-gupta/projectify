@@ -1,90 +1,53 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { cn } from "@/lib/utils";
-import { useAuth } from "@clerk/nextjs";
-import { usePaginatedQuery, useQuery } from "convex/react";
-import { useEffect, useRef } from "react";
-import Hint from "../hint";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { useMessages } from "@/lib/hooks/use-messages";
+import { useScroll } from "@/lib/hooks/use-scroll";
+import { Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
+import MessageChat from "./message-chat";
 
 type MessagesListProps = {
   projectId: Id<"projects">;
 };
 
 const MessagesList = ({ projectId }: MessagesListProps) => {
-  const scrollRef = useRef<null | HTMLDivElement>(null);
+  const { messages, isLoading, fetchMore, status } = useMessages(projectId);
 
-  const { userId } = useAuth();
-
-  const currentUser = useQuery(api.user.get, { clerkId: userId as string });
-
-  const messages = usePaginatedQuery(
-    api.message.list,
-    { projectId },
-    {
-      initialNumItems: 10,
-    }
-  );
-
-  useEffect(() => {
-    if (!scrollRef.current) return;
-
-    scrollRef.current.scrollIntoView({
-      block: "end",
-    });
-  }, []);
+  const scrollRef = useScroll("instant", "end");
 
   return (
     <ScrollArea className="h-[calc(100dvh-200px)] rounded-md border">
       <div
-        className="flex flex-col-reverse h-[calc(100dvh-220px)]"
+        className="flex flex-col-reverse min-h-[calc(100dvh-220px)] md:px-3 py-5"
         ref={scrollRef}
       >
-        {!messages || messages.isLoading ? (
+        {!messages.length ? (
           <div className="flex-1 flex items-center justify-center text-gray-500 py-5 self-center ">
             No messages yet
           </div>
+        ) : isLoading ? (
+          <div className="flex-1 flex items-center justify-center text-gray-500 py-5 self-center ">
+            <Loader2 className="animate-spin" size={32} />
+          </div>
         ) : (
-          messages.results.map((message) => (
-            <div
-              key={message._id}
-              className={cn("flex items-center gap-x-2 p-2", {
-                "flex-row-reverse ": currentUser?.clerkId === userId,
-              })}
-            >
-              <Hint label={message.senderName}>
-                <Avatar className="flex justify-center items-center border-foreground">
-                  <AvatarImage
-                    src={message.senderImageUrl}
-                    alt={message.senderName}
-                    width={6}
-                    height={6}
-                  />
-
-                  <AvatarFallback>{message.senderName[0]}</AvatarFallback>
-                </Avatar>
-              </Hint>
-              <div
-                className={cn("p-3 rounded-lg", {
-                  "bg-blue-700 text-white": currentUser?.clerkId === userId,
-                  "bg-accent": currentUser?.clerkId !== userId,
-                })}
-              >
-                <p>{message.content}</p>
-              </div>
-            </div>
+          messages.map((message) => (
+            <MessageChat message={message} key={message._id} />
           ))
         )}
 
-        {messages.status === "CanLoadMore" && (
+        {status === "CanLoadMore" && (
           <div className="flex items-center justify-center gap-x-2 p-2">
-            <Button variant="ghost" onClick={() => messages.loadMore(1)}>
+            <Button variant="ghost" onClick={fetchMore}>
               Load More
             </Button>
+          </div>
+        )}
+
+        {status === "Exhausted" && (
+          <div className="flex items-center justify-center gap-x-2 p-2 text-muted-foreground">
+            <p>No more messages</p>
           </div>
         )}
       </div>
