@@ -76,7 +76,10 @@ const LinkModal = () => {
       await saveFavicon({
         id: resourceId,
         url: values.url,
-      }).catch(() => toast.error("Failed to save favicon"));
+      }).catch((err) => {
+        console.log("Failed to save favicon", err);
+        toast.error("Failed to save favicon");
+      });
 
       toast.success("Link saved successfully.");
     } catch (error) {
