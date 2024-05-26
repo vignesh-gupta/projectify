@@ -15,7 +15,7 @@ type MessagesListProps = {
 const MessagesList = ({ projectId }: MessagesListProps) => {
   const { messages, isLoading, fetchMore, status } = useMessages(projectId);
 
-  const scrollRef = useScroll("instant", "end");
+  const scrollRef = useScroll("instant", "end", [messages]);
 
   return (
     <ScrollArea className="h-[calc(100dvh-200px)] rounded-md border">
