@@ -1,5 +1,5 @@
-import { v } from "convex/values";
 import { mutation, query } from "@/convex/_generated//server";
+import { v } from "convex/values";
 import { ProjectStatus } from "./types";
 
 export const create = mutation({
@@ -23,7 +23,6 @@ export const create = mutation({
       creatorName: identity.name!,
       description: args.description,
       status: args.status,
-      team: [identity.subject],
     });
 
     return projectId;
@@ -59,7 +58,21 @@ export const remove = mutation({
       .withIndex("by_project", (q) => q.eq("projectId", args.id))
       .collect();
 
-    await Promise.all(workItems.map((wi) => ctx.db.delete(wi._id)));
+    workItems.map((wi) => ctx.db.delete(wi._id));
+
+    const files = await ctx.db
+      .query("files")
+      .withIndex("by_project", (q) => q.eq("projectId", args.id))
+      .collect();
+
+    files.map((file) => ctx.db.delete(file._id));
+
+    const links = await ctx.db
+      .query("links")
+      .withIndex("by_project", (q) => q.eq("projectId", args.id))
+      .collect();
+
+    links.map((link) => ctx.db.delete(link._id));
 
     await ctx.db.delete(args.id);
   },

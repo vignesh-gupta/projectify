@@ -1,0 +1,84 @@
+
+title Project Management System
+
+projects [icon: briefcase, color: lightblue]{
+  id string pk
+  title string
+  description string
+  status string
+  creatorId string
+  creatorName string
+  orgId string
+}
+
+workItems [icon: check-square, color: yellow]{
+  id string pk
+  title string
+  description string
+  assigneeId string fk
+  assignee string
+  label string
+  priority string
+  projectId string fk
+  status string
+}
+
+users [icon: user, color: green]{
+  id string pk
+  email string
+  firstName string
+  imageUrl string
+  clerkId string
+}
+
+teams [icon: users, color: blue]{
+  id string pk
+  name string
+  clerkId string
+  imageUrl string
+  createdBy string fk
+}
+
+team_memberships [icon: user-check, color: purple]{
+  id string pk
+  teamId string fk
+  userId string fk
+  isAdmin boolean
+}
+
+links [icon: link, color: orange]{
+  id string pk
+  title string
+  url string
+  icon string
+  projectId string fk
+}
+
+files [icon: file, color: red]{
+  id string pk
+  title string
+  storageId string
+  projectId string fk
+  type string
+}
+
+messages [icon: message-circle, color: pink]{
+  id string pk
+  content string
+  projectId string fk
+  senderId string fk
+  senderName string
+  senderImageUrl string
+}
+// End of tables
+// define relationships
+projects.orgId > orgs.id
+workItems.projectId > projects.id
+workItems.assigneeId > users.id
+teams.createdBy > users.id
+team_memberships.teamId > teams.id
+team_memberships.userId > users.id
+links.projectId > projects.id
+files.projectId > projects.id
+messages.projectId > projects.id
+messages.senderId > users.id

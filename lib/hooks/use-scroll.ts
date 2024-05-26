@@ -2,7 +2,8 @@ import { useEffect, useRef } from "react";
 
 export const useScroll = (
   behavior?: ScrollBehavior | undefined,
-  block?: ScrollLogicalPosition | undefined
+  block?: ScrollLogicalPosition | undefined,
+  dependencies: any[] = []
 ) => {
   const scrollRef = useRef<null | HTMLDivElement>(null);
 
@@ -13,7 +14,8 @@ export const useScroll = (
       block,
       behavior,
     });
-  }, [behavior, block]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [behavior, block, ...dependencies]);
 
   return scrollRef;
 };

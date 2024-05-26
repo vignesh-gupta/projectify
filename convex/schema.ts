@@ -7,21 +7,20 @@ export default defineSchema({
     title: v.string(),
     description: v.optional(v.string()),
     status: ProjectStatus,
-    team: v.array(v.string()),
     creatorId: v.string(),
     creatorName: v.string(),
     orgId: v.string(),
   }).index("by_org", ["orgId"]),
 
   workItems: defineTable({
+    title: v.string(),
+    description: v.optional(v.string()),
     assigneeId: v.id("users"),
     assignee: v.string(),
     label: TaskType,
     priority: TaskPriority,
     projectId: v.id("projects"),
     status: TaskStatus,
-    title: v.string(),
-    description: v.optional(v.string()),
   }).index("by_project", ["projectId"]),
 
   users: defineTable({
