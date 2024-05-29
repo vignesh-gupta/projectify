@@ -8,11 +8,11 @@ import { Button } from "@/components/ui/button";
 import { MAX_FILE_COUNT, MAX_FILE_SIZE } from "@/lib/constants";
 import { toast } from "sonner";
 
-type UploadFileProps = {
+type FileUploadProps = {
   fileCount?: number;
 };
 
-const UploadFile = ({ fileCount = 0 }: UploadFileProps) => {
+const FileUpload = ({ fileCount = 0 }: FileUploadProps) => {
   const params = useParams();
 
   const { mutate: generateUploadUrl, isPending } = useApiMutation(
@@ -66,10 +66,10 @@ const UploadFile = ({ fileCount = 0 }: UploadFileProps) => {
       onClick={handleAddFile}
       disabled={isPending || isUploading}
     >
-      <Upload className="mr-2 h-4 w-4" />
+      <Upload className="w-4 h-4 mr-2" />
       Upload
     </Button>
   );
 };
 
-export default UploadFile;
+export default FileUpload;

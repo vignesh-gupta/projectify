@@ -12,6 +12,8 @@ type MessageChatProps = {
 const MessageChat = ({ message }: MessageChatProps) => {
   const currentUser = useCurrentUser();
 
+  if(!currentUser) return null
+
   return (
     <div
       className={cn("flex items-center gap-x-2 p-2 group", {

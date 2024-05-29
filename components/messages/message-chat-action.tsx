@@ -4,6 +4,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import ConfirmModal from "../modals/confirm-modal";
 
 type MessageChatActionProps = {
   messageId: Id<"messages">;
@@ -20,8 +21,8 @@ const MessageChatAction = ({ content, messageId }: MessageChatActionProps) => {
     toast.success("Message copied to clipboard");
   };
 
-  const handleDelete = () => {
-    deleteMessage({ messageId })
+  const handleDelete = async () => {
+    return deleteMessage({ messageId })
       .then(() => toast.success("Message deleted"))
       .catch(() => toast.error("Failed to delete message"));
   };
@@ -31,14 +32,11 @@ const MessageChatAction = ({ content, messageId }: MessageChatActionProps) => {
       <Button size="icon" variant="ghost" onClick={handleCopy}>
         <Copy className="w-4 h-4" />
       </Button>
-      <Button
-        size="icon"
-        variant="ghost"
-        disabled={isPending}
-        onClick={handleDelete}
-      >
-        <Trash2 className="w-4 h-4" />
-      </Button>
+      <ConfirmModal header="Delete this message" onConfirm={handleDelete}>
+        <Button size="icon" variant="ghost" disabled={isPending}>
+          <Trash2 className="w-4 h-4" />
+        </Button>
+      </ConfirmModal>
     </>
   );
 };

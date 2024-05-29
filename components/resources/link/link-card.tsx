@@ -6,6 +6,7 @@ import { useLinkModal } from "@/lib/store/use-link-modal";
 import { Edit, LinkIcon, Trash } from "lucide-react";
 import ConfirmModal from "@/components/modals/confirm-modal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Skeleton } from "../../ui/skeleton";
 
 type LinkCardProps = {
   resource: {
@@ -25,6 +26,7 @@ const LinkCard = ({
   const { mutate: deleteLink, isPending } = useApiMutation(
     api.resources.link.remove
   );
+
 
   return (
     <div className="flex items-center justify-between">
@@ -56,7 +58,7 @@ const LinkCard = ({
           disabled={isPending}
           onClick={() => onOpen({ _id, title, url })}
         >
-          <Edit className="h-5 w-5" />
+          <Edit className="w-5 h-5" />
         </Button>
         <ConfirmModal
           onConfirm={() => deleteLink({ _id })}
@@ -65,7 +67,7 @@ const LinkCard = ({
           toastMessage="Link deleted successfully"
         >
           <Button size="icon" variant="ghost" disabled={isPending}>
-            <Trash className="h-5 w-5" />
+            <Trash className="w-5 h-5" />
           </Button>
         </ConfirmModal>
       </div>
