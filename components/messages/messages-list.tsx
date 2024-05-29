@@ -7,6 +7,8 @@ import { useScroll } from "@/lib/hooks/use-scroll";
 import { Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
 import MessageChat from "./message-chat";
+import { Skeleton } from "../ui/skeleton";
+import { cn } from "@/lib/utils";
 
 type MessagesListProps = {
   projectId: Id<"projects">;
@@ -23,30 +25,33 @@ const MessagesList = ({ projectId }: MessagesListProps) => {
         className="flex flex-col-reverse min-h-[calc(100dvh-220px)] md:px-3 py-5"
         ref={scrollRef}
       >
-        {!messages.length ? (
-          <div className="flex-1 flex items-center justify-center text-gray-500 py-5 self-center ">
-            No messages yet
-          </div>
-        ) : isLoading ? (
-          <div className="flex-1 flex items-center justify-center text-gray-500 py-5 self-center ">
-            <Loader2 className="animate-spin" size={32} />
-          </div>
-        ) : (
+        {isLoading ? (
+          Array.from({ length: 20 }).map((_, i) => (
+            <MessageSkeleton
+              key={`message-skeleton-${i}`}
+              isRight={i % 2 == 0}
+            />
+          ))
+        ) : messages.length > 0 ? (
           messages.map((message) => (
             <MessageChat message={message} key={message._id} />
           ))
+        ) : (
+          <div className="flex items-center self-center justify-center flex-1 py-5 text-gray-500 ">
+            No messages yet
+          </div>
         )}
 
-        {status === "CanLoadMore" && (
-          <div className="flex items-center justify-center gap-x-2 p-2">
+        {!isLoading && status == "CanLoadMore" && (
+          <div className="flex items-center justify-center p-2 gap-x-2">
             <Button variant="ghost" onClick={fetchMore}>
               Load More
             </Button>
           </div>
         )}
 
-        {status === "Exhausted" && (
-          <div className="flex items-center justify-center gap-x-2 p-2 text-muted-foreground">
+        {!isLoading && status == "Exhausted" && (
+          <div className="flex items-center justify-center p-2 gap-x-2 text-muted-foreground">
             <p>No more messages</p>
           </div>
         )}
@@ -56,3 +61,18 @@ const MessagesList = ({ projectId }: MessagesListProps) => {
 };
 
 export default MessagesList;
+
+const MessageSkeleton = ({ isRight }: { isRight: boolean }) => (
+  <div
+    className={cn("flex items-center gap-2 p-2", {
+      "flex-row-reverse": isRight,
+    })}
+  >
+    <Skeleton className="w-8 h-8 rounded-full" />
+    <Skeleton
+      className={cn("w-32 p-3 h-4 rounded-lg bg-accent/60", {
+        "bg-accent": isRight,
+      })}
+    />
+  </div>
+);

@@ -1,8 +1,10 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import React from "react";
-import FileUpload from "./file-upload";
-import FileCard from "./file-card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Doc } from "@/convex/_generated/dataModel";
+import { Edit, Trash } from "lucide-react";
+import FileCard from "./file-card";
+import FileUpload from "./file-upload";
 
 type FileListProps = {
   files: Doc<"files">[] | undefined;
@@ -16,13 +18,12 @@ const FileList = ({ files }: FileListProps) => {
         <FileUpload fileCount={files?.length} />
       </CardHeader>
       <CardContent className="grid gap-6 p-6">
-        {files && files.length > 0 ? (
-          files?.map((res) => <FileCard key={res._id} resource={res} />)
+        {!files ? (
+          <FileSkeleton />
+        ) : files.length <= 0 ? (
+          <NoFiles />
         ) : (
-          <div className="flex flex-col items-center justify-center h-48 gap-3 border border-dashed rounded-md bg-foreground/5">
-            <h3>There are no resources</h3>
-            <FileUpload />
-          </div>
+          files?.map((res) => <FileCard key={res._id} resource={res} />)
         )}
       </CardContent>
     </Card>
@@ -30,3 +31,25 @@ const FileList = ({ files }: FileListProps) => {
 };
 
 export default FileList;
+
+const NoFiles = () => (
+  <div className="flex flex-col items-center justify-center h-48 gap-3 border border-dashed rounded-md bg-foreground/5">
+    <h3>There are no resources</h3>
+    <FileUpload />
+  </div>
+);
+
+const FileSkeleton = () => (
+  <div className="grid grid-cols-[48px_1fr_auto] items-center gap-4">
+    <Skeleton className="w-10 h-10" />
+    <Skeleton className="w-32 h-4" />
+    <div className="flex items-center gap-2">
+      <Button size="icon" variant="ghost" disabled>
+        <Edit className="w-5 h-5" />
+      </Button>
+      <Button size="icon" variant="ghost" disabled>
+        <Trash className="w-5 h-5" />
+      </Button>
+    </div>
+  </div>
+);

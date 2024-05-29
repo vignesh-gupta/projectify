@@ -1,3 +1,4 @@
+import ConfirmModal from "@/components/modals/confirm-modal";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
@@ -5,7 +6,6 @@ import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFileModal } from "@/lib/store/use-file-modal";
 import { Edit, SquareArrowOutUpRight, Trash } from "lucide-react";
 import Link from "next/link";
-import ConfirmModal from "../modals/confirm-modal";
 import FileIcon from "./file-icon";
 
 type FileCardProps = {
@@ -37,7 +37,7 @@ const FileCard = ({
         <div className="font-medium">
           <Link
             target="_blank"
-            className="flex items-center gap-2 w-1/2 sm:w-2/3 md:w-auto"
+            className="flex items-center w-1/2 gap-2 sm:w-2/3 md:w-auto hover:underline"
             href={{
               host: process.env.NEXT_PUBLIC_CONVEX_DEPLOYMENT_SITE,
               pathname: "/getFile",
@@ -45,10 +45,9 @@ const FileCard = ({
             }}
           >
             <span className="truncate shrink">{title}</span>
-            <SquareArrowOutUpRight className="shrink-0 w-4 h-4 hidden md:flex" />
           </Link>
         </div>
-        <div className="text-gray-500 dark:text-gray-400 text-sm">12.3 MB</div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">12.3 MB</div>
       </div>
       <div className="flex items-center gap-2">
         <Button
@@ -57,7 +56,7 @@ const FileCard = ({
           onClick={() => onOpen({ _id, title })}
           disabled={isDeleting}
         >
-          <Edit className="h-5 w-5" />
+          <Edit className="w-5 h-5" />
         </Button>
         <ConfirmModal
           header={`Delete file : ${title}`}
@@ -66,7 +65,7 @@ const FileCard = ({
           toastMessage="File deleted successfully"
         >
           <Button size="icon" variant="ghost">
-            <Trash className="h-5 w-5" />
+            <Trash className="w-5 h-5" />
           </Button>
         </ConfirmModal>
       </div>

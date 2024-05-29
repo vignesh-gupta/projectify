@@ -17,11 +17,11 @@ const MessageChat = ({ message }: MessageChatProps) => {
   return (
     <div
       className={cn("flex items-center gap-x-2 p-2 group", {
-        "flex-row-reverse ": currentUser?._id === message.senderId,
+        "flex-row-reverse": currentUser?._id === message.senderId,
       })}
     >
       <Hint label={message.senderName}>
-        <Avatar className="flex justify-center items-center border-foreground">
+        <Avatar className="flex items-center justify-center border-foreground">
           <AvatarImage
             src={message.senderImageUrl}
             alt={message.senderName}

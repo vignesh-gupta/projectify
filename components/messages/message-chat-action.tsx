@@ -32,7 +32,7 @@ const MessageChatAction = ({ content, messageId }: MessageChatActionProps) => {
       <Button size="icon" variant="ghost" onClick={handleCopy}>
         <Copy className="w-4 h-4" />
       </Button>
-      <ConfirmModal header="Delete this message" onConfirm={handleDelete}>
+      <ConfirmModal header="Delete this message" onConfirm={handleDelete} toastMessage="Message deleted successfully">
         <Button size="icon" variant="ghost" disabled={isPending}>
           <Trash2 className="w-4 h-4" />
         </Button>
