@@ -33,7 +33,7 @@ export const columns: ColumnDef<Task>[] = [
         {row.getValue("assignee") ?? "Unassigned"}
       </div>
     ),
-    filterFn: (row, value) => value.includes(row.original.assigneeId),
+    filterFn: (row, _, value) => value.includes(row.original.assigneeId),
   },
   {
     accessorKey: "status",

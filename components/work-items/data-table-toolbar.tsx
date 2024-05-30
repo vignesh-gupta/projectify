@@ -54,6 +54,7 @@ export function DataTableToolbar<TData>({
           onChange={(event) =>
             table.getColumn("title")?.setFilterValue(event.target.value)
           }
+          name="filter-search"
           className="h-8 w-[150px] lg:w-[250px]"
         />
         {table.getColumn("status") && (
