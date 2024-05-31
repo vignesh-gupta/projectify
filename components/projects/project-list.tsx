@@ -1,14 +1,14 @@
 "use client";
 
 import NoProject from "@/components/empty-states/no-projects";
+import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useOrganization } from "@clerk/nextjs";
 import { useQuery } from "convex/react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import InputModal from "../modals/input-modal";
 import ProjectCard from "./project-card";
-import { toast } from "sonner";
 
 type ProjectListProps = {
   orgId: string;
@@ -39,29 +39,32 @@ const AddProject = () => {
     api.project.create
   );
 
-  const handleCreateProject = () => {
-    if (!organization) return;
+  const handleCreateProject = (title?: string, description?: string) => {
+    if (!organization) throw new Error("Organization not found");
 
-    createProject({
+    return createProject({
       orgId: organization.id,
-      title: "New Project",
+      title: title ?? "New Project",
+      description: description ?? "Planning to do something awesome!",
       status: "development",
-      description: "I'm planning to do something awesome!",
-    })
-      .then(() => toast.success("Project created successfully"))
-      .catch(() => toast.error("Failed to create project"));
+    });
   };
 
   return (
-    <Button
-      onClick={handleCreateProject}
-      disabled={isPending}
-      variant="outline"
-      className="flex flex-col items-center justify-center gap-2 h-full min-h-36 border-dashed"
+    <InputModal
+      onConfirm={handleCreateProject}
+      header="Create a new project"
+      description="Provide Project details to create a new project."
+      toastMessage="Project created successfully"
     >
-      <Plus className="w-8 h-8" />
-      <span className="text-sm">Add Project</span>
-    </Button>
+      <Button
+        variant="outline"
+        className="flex flex-col items-center justify-center gap-2 h-full min-h-36 border-dashed"
+      >
+        <Plus className="w-8 h-8" />
+        <span className="text-sm">Add Project</span>
+      </Button>
+    </InputModal>
   );
 };
 

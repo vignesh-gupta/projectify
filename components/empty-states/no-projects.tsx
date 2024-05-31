@@ -3,6 +3,7 @@
 import { useOrganization } from "@clerk/nextjs";
 import Image from "next/image";
 
+import InputModal from "@/components/modals/input-modal";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
@@ -13,14 +14,14 @@ const NoProject = () => {
     api.project.create
   );
 
-  const handleCreateProject = async () => {
-    if (!organization) return;
+  const handleCreateProject = (title?: string, description?: string) => {
+    if (!organization) throw new Error("Organization not found");
 
-    await createProject({
+    return createProject({
       orgId: organization.id,
-      title: "New Project",
+      title: title ?? "New Project",
+      description: description ?? "Planning to do something awesome!",
       status: "development",
-      description: "I'm planning to do something awesome!",
     });
   };
 
@@ -34,9 +35,14 @@ const NoProject = () => {
         Start by creating a Project for your team
       </p>
       <div className="mt-6">
-        <Button disabled={isPending} size="lg" onClick={handleCreateProject}>
-          Create Project
-        </Button>
+        <InputModal
+          onConfirm={handleCreateProject}
+          header="Create a new project"
+          description="Provide Project details to create a new project."
+          toastMessage="Project created successfully"
+        >
+          <Button>Create Project</Button>
+        </InputModal>
       </div>
     </div>
   );
