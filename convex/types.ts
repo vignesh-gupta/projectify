@@ -10,7 +10,7 @@ export const ProjectStatus = v.union(
 export const TaskStatus = v.union(
   v.literal("backlog"),
   v.literal("todo"),
-  v.literal("in progress"),
+  v.literal("in-progress"),
   v.literal("done"),
   v.literal("canceled")
 );

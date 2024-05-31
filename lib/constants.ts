@@ -71,7 +71,7 @@ export const STATUSES: TOption<TaskStatus>[] = [
     icon: CircleIcon,
   },
   {
-    value: "in progress",
+    value: "in-progress",
     label: "In Progress",
     icon: Timer,
   },

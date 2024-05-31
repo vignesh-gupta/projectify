@@ -3,7 +3,7 @@ import { PROJECTS_STAGES } from "./constants";
 export type TaskStatus =
   | "backlog"
   | "todo"
-  | "in progress"
+  | "in-progress"
   | "done"
   | "canceled";
 
