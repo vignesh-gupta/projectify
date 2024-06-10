@@ -1,16 +1,16 @@
 "use client";
 
-import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
-import Link from "next/link";
-import { ThemeSwitch } from "../theme/theme-switch";
 import { Button } from "@/components/ui/button";
-import { Poppins } from "next/font/google";
-import { cn } from "@/lib/utils";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
+import { cn } from "@/lib/utils";
+import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
 import { MenuIcon } from "lucide-react";
-import MobileNav from "./mobile-nav";
-import { useState } from "react";
+import { Poppins } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
+import { ThemeSwitch } from "../theme/theme-switch";
+import MobileNav from "./mobile-nav";
 
 const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 
@@ -55,9 +55,9 @@ const Navbar = () => {
         {isSignedIn ? (
           <UserButton afterSignOutUrl="/" />
         ) : (
-          <SignInButton mode="modal">
-            <Button>Sign In</Button>
-          </SignInButton>
+          <Button asChild>
+            <SignInButton mode="modal">Sign In</SignInButton>
+          </Button>
         )}
         <ThemeSwitch />
       </div>

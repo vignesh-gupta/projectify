@@ -8,7 +8,7 @@ import {
   AlertDialogHeader,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { toast } from "sonner";
 

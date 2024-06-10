@@ -5,7 +5,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type ProjectSettingsLayoutProps = {
   children: ReactNode;

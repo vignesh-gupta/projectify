@@ -1,10 +1,10 @@
 "use client";
 
 import { OrganizationSwitcher } from "@clerk/nextjs";
-import { Notebook, Settings, Users } from "lucide-react";
+import { Notebook, Settings } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
@@ -17,9 +17,8 @@ const poppinsFont = Poppins({
 });
 
 const DashboardSidebar = () => {
-  const searchParams = useSearchParams();
-  const settings = searchParams.get("settings");
-  const team = searchParams.get("team");
+  const url = usePathname();
+  const settings = url.includes("/dashboard/settings");
 
   return (
     <aside
@@ -57,7 +56,7 @@ const DashboardSidebar = () => {
 
       <div className="w-full space-y-2">
         <Button
-          variant={!settings && !team ? "default" : "ghost"}
+          variant={!settings ? "default" : "ghost"}
           asChild
           size="lg"
           className="justify-start w-full px-2 font-normal"
@@ -67,15 +66,14 @@ const DashboardSidebar = () => {
           </Link>
         </Button>
         <Button
-          variant={!team && settings ? "default" : "ghost"}
+          variant={settings ? "default" : "ghost"}
           asChild
           size="lg"
           className="justify-start w-full px-2 font-normal"
         >
           <Link
             href={{
-              pathname: DASHBOARD_ROUTE,
-              query: { settings: true },
+              pathname: DASHBOARD_ROUTE + "/settings",
             }}
           >
             <Settings className="w-4 h-4 mr-2" /> Settings

@@ -107,7 +107,7 @@ export async function POST(req: Request) {
         break;
     }
 
-    return new Response("", { status: 200 });
+    return new Response("Request completed successfully!", { status: 200 });
   } catch (err) {
     console.error("Error processing webhook:", err);
     return new Response("Internal Server Error", {
