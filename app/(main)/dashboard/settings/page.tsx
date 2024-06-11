@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useQuery } from "convex/react";
-import { Copy, Loader2, RefreshCcw, Trash } from "lucide-react";
+import { Copy, RefreshCcw, Trash } from "lucide-react";
 import { toast } from "sonner";
 
 const AccountSettingsPage = () => {
@@ -37,8 +37,6 @@ const AccountSettingsPage = () => {
       .then(() => toast.success("API key revoked"))
       .catch(() => toast.error("Failed to revoke API key"));
   };
-
-  if (existingAPIKey === undefined) return <Loader2 className="animate-spin" />;
 
   return (
     <>

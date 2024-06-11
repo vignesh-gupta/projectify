@@ -33,7 +33,7 @@ function mapUserJsonToUser(userJson: UserJSON): User {
       userJson.email_addresses.find(
         (email) => email.id === userJson.primary_email_address_id
       )?.email_address || `${userJson.id}@nothanks.com`,
-    firstName: userJson.first_name,
+    firstName: userJson.first_name ?? userJson.id,
     imageUrl: userJson.image_url,
   };
 }
