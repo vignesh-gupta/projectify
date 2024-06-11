@@ -33,7 +33,7 @@ function mapOrgJsonToOrg(orgJson: OrganizationJSON): Organization {
   return {
     clerkId: orgJson.id,
     name: orgJson.name,
-    imageUrl: orgJson.image_url,
+    imageUrl: orgJson.image_url || "",
     createdBy: orgJson.created_by,
   };
 }
