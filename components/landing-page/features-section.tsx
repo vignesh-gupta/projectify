@@ -22,12 +22,12 @@ const features = [
       "Get a clear overview of project status, upcoming deadlines, and team performance at a glance.",
   },
   {
-    title: "Resource Management 🚧",
+    title: "Resource Management ",
     description:
       "Share documents, images, and other files securely within the platform, keeping all project-related information in one place.",
   },
   {
-    title: "Team Communication 🚧",
+    title: "Team Communication",
     description:
       "Stay connected with your team members through built-in chat and messaging features.",
   },

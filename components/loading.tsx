@@ -10,7 +10,7 @@ const Loading = () => {
         width={100}
         height={100}
         priority={true}
-        className="animate-pulse duration-700"
+        className="animate-pulse duration-1000"
       />
     </div>
   );

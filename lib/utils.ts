@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from "clsx";
+import { clsx, type ClassValue } from "clsx";
 import {
   FileBox,
   Layout,
@@ -23,7 +23,7 @@ type MetaTagProps = {
 export function constructMetaTags({
   SITE_URL = "https://projectify.vigneshgupta.tech/",
   description = "Struggling to stay organized and meet deadlines? Projectify is the ultimate free project management tool for you!  Boost your productivity and achieve your goals effortlessly with our intuitive features.  Manage tasks, deadlines, resources, and collaborate seamlessly with your team.  Sign up today and experience the difference!",
-  title = "Projectify - Your projects, simplified",
+  title = "Projectify - Manage your projects effortlessly!",
   keywords = [],
 }: MetaTagProps): Metadata {
   return {
@@ -34,12 +34,20 @@ export function constructMetaTags({
       title,
       description,
       creator: "@VighneshGupta9",
-      images: "/thumbnail.png",
+      images: {
+        url: "/thumbnail.png",
+        width: "100%",
+        height: "auto",
+        alt: title,
+      },
     },
     openGraph: {
       title,
       description,
-      images: "/thumbnail.png",
+      images: {
+        url: "/thumbnail.png",
+        alt: title,
+      },
       type: "website",
       url: SITE_URL,
     },

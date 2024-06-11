@@ -38,7 +38,7 @@ const Navbar = () => {
         href="/"
       >
         <Image src="/logo.png" alt="Projectify" width={50} height={40} />
-        <h1>Projectify</h1>
+        <h1 className="hidden sm:block">Projectify</h1>
       </Link>
       <div className="ml-auto flex items-center gap-4">
         <nav className="md:flex items-center gap-4  sm:gap-6 hidden">
