@@ -69,4 +69,9 @@ export default defineSchema({
     senderName: v.string(),
     senderImageUrl: v.string(),
   }).index("by_project", ["projectId"]),
+
+  api_keys: defineTable({
+    userId: v.id("users"),
+    key: v.string(),
+  }).index("by_user", ["userId"]),
 });
