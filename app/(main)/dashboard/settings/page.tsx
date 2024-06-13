@@ -41,17 +41,19 @@ const AccountSettingsPage = () => {
   return (
     <>
       {existingAPIKey ? (
-        <div className="flex gap-3 items-center">
-          <Input value={existingAPIKey.key} disabled className="w-auto" />
-          <Button onClick={handleCopy} disabled={isPending} size="icon">
-            <Copy />
-          </Button>
-          <Button onClick={handleCreate} disabled={isPending} size="icon">
-            <RefreshCcw />
-          </Button>
-          <Button onClick={handleRevoke} disabled={isRevoking} size="icon">
-            <Trash />
-          </Button>
+        <div className="flex gap-2 items-center flex-col sm:flex-row">
+          <Input value={existingAPIKey.key} disabled className="sm:w-96 w-auto" />
+          <div className="flex gap-2">
+            <Button onClick={handleCopy} disabled={isPending} size="icon">
+              <Copy />
+            </Button>
+            <Button onClick={handleCreate} disabled={isPending} size="icon">
+              <RefreshCcw />
+            </Button>
+            <Button onClick={handleRevoke} disabled={isRevoking} size="icon">
+              <Trash />
+            </Button>
+          </div>
         </div>
       ) : (
         <Button onClick={handleCreate} disabled={isPending}>

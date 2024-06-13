@@ -18,7 +18,7 @@ const AccountSettingsLayout = ({ children }: AccountSettingsLayoutProps) => {
 
   return (
     <div className="px-5">
-      <div className="flex gap-x-4 [&>*]:text-lg pt-3 pb-2">
+      <div className="flex gap-x-4 md:[&>*]:text-lg sm:[&>*]:text-base text-sm pt-3 pb-2">
         <h4
           className={cn({
             "underline underline-offset-[15px]": !isOrgSettings,

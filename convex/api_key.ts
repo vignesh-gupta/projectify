@@ -1,10 +1,11 @@
+import { generateAPIKey } from "@/lib/utils";
 import { mutation, query } from "./_generated/server";
 
 export const create = mutation({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
-      throw new Error("Unauthenticated user cannot create messages");
+      throw new Error("Unauthenticated user cannot generate API key");
     }
 
     const user = await ctx.db
@@ -27,7 +28,7 @@ export const create = mutation({
 
     return ctx.db.insert("api_keys", {
       userId: user._id,
-      key: Math.random().toString(36).substring(2),
+      key: generateAPIKey(32),
     });
   },
 });

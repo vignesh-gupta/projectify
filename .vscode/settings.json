@@ -6,7 +6,8 @@
     "user",
     "organization",
     "resource",
-    "messages"
+    "messages",
+    "api_key"
   ],
   "cSpell.words": [
     "nothanks",
