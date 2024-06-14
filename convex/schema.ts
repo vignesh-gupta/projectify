@@ -1,6 +1,13 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
-import { ProjectStatus, TaskPriority, TaskStatus, TaskType } from "./types";
+import {
+  FeedbackStatus,
+  FeedbackType,
+  ProjectStatus,
+  TaskPriority,
+  TaskStatus,
+  TaskType,
+} from "./types";
 
 export default defineSchema({
   projects: defineTable({
@@ -74,4 +81,13 @@ export default defineSchema({
     userId: v.id("users"),
     key: v.string(),
   }).index("by_user", ["userId"]),
+
+  feedbacks: defineTable({
+    content: v.string(),
+    projectId: v.id("projects"),
+    senderName: v.string(),
+    senderEmail: v.string(),
+    status: FeedbackStatus,
+    type: FeedbackType,
+  }).index("by_project", ["projectId"]),
 });

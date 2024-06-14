@@ -10,14 +10,13 @@ module.exports = {
         hostname: "img.clerk.com",
         protocol: "https",
       },
-      {
-        hostname: "www.google.com",
-        protocol: "https",
-      },
-      {
-        hostname: "duckduckgo.com",
-        protocol: "https",
-      }
     ],
   },
+  redirects: async () => [
+    {
+      source: "/projects",
+      destination: "/dashboard",
+      permanent: true,
+    },
+  ],
 };

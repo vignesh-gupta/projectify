@@ -26,3 +26,18 @@ export const TaskType = v.union(
   v.literal("bug"),
   v.literal("feature")
 );
+
+export const FeedbackStatus = v.union(
+  v.literal("needs-review"),
+  v.literal("work-item"),
+  v.literal("closed")
+);
+
+export const FeedbackType = v.union(
+  v.literal("issue"),
+  v.literal("feature"),
+  v.literal("documentation"),
+  v.literal("question"),
+  v.literal("idea"),
+  v.literal("other")
+);
