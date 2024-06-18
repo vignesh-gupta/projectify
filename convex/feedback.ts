@@ -15,7 +15,7 @@ export const list = query({
 
     return await ctx.db
       .query("feedbacks")
-      .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
+      .withIndex("by_project", (q) => q.eq("projectId", args.projectId)).order("desc")
       .collect();
   },
 });

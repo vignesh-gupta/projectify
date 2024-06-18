@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  ColumnDef,
-  flexRender
-} from "@tanstack/react-table";
-
+import { ColumnDef, flexRender } from "@tanstack/react-table";
 import {
   Table,
   TableBody,
@@ -15,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Id } from "@/convex/_generated/dataModel";
 import { useWorkItemTable } from "@/lib/hooks/use-workItem-table";
-import { TaskPriority, TaskStatus, TaskType } from "@/lib/types";
+import type { TaskPriority, TaskStatus, TaskType } from "@/lib/types";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 

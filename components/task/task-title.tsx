@@ -1,7 +1,7 @@
 import { LABELS } from "@/lib/constants";
 import React from "react";
 import { Badge } from "@/components/ui/badge";
-import { TaskType } from "@/lib/types";
+import type { TaskType } from "@/lib/types";
 import { ClassNameValue } from "tailwind-merge";
 import { cn } from "@/lib/utils";
 

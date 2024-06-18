@@ -1,11 +1,11 @@
 import { PRIORITIES } from "@/lib/constants";
-import { TaskPriority as TPriority } from "@/lib/types";
+import type { TaskPriority } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { ClassNameValue } from "tailwind-merge";
 
 type TaskPriorityProps = {
-  priority: TPriority;
+  priority: TaskPriority;
   className?: ClassNameValue;
 };
 

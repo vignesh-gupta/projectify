@@ -1,11 +1,10 @@
 import { STATUSES } from "@/lib/constants";
-import { TaskStatus as TStatus } from "@/lib/types";
+import type { TaskStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import React from "react";
 import { ClassNameValue } from "tailwind-merge";
 
 type TaskStatusProps = {
-  status: TStatus;
+  status: TaskStatus;
   className?: ClassNameValue;
 };
 

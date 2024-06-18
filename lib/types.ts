@@ -14,3 +14,13 @@ export type TaskType = "documentation" | "bug" | "feature";
 export type ProjectStatus = (typeof PROJECTS_STAGES)[number];
 
 export type ResourceType = "link" | "file";
+
+export type FeedbackType =
+  | "documentation"
+  | "feature"
+  | "issue"
+  | "question"
+  | "idea"
+  | "other";
+
+export type FeedbackStatus = "open" | "reviewed" | "closed";
