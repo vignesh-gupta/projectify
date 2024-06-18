@@ -1,11 +1,11 @@
 "use client";
 
-import { AuthLoading, Authenticated } from "convex/react";
-import React from "react";
 import Loading from "@/components/loading";
+import { AuthLoading, Authenticated } from "convex/react";
+import type { ReactNode } from "react";
 
 type AuthLoadProviderProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const AuthLoadProvider = ({ children }: AuthLoadProviderProps) => {

@@ -2,8 +2,9 @@ import { clsx, type ClassValue } from "clsx";
 import {
   FileBox,
   Layout,
-  ListTodo,
-  MessageCircle,
+  ListTodo, 
+  MessageCircleReply,
+  MessageSquareText,
   Settings,
 } from "lucide-react";
 import { Metadata } from "next";
@@ -89,9 +90,14 @@ export const getNavLinks = (id: string) => {
       Icon: FileBox,
     },
     {
+      name: "Feedbacks",
+      href: `/projects/${id}/feedbacks`,
+      Icon: MessageCircleReply,
+    },
+    {
       name: "Messages",
       href: `/projects/${id}/messages`,
-      Icon: MessageCircle,
+      Icon: MessageSquareText,
     },
     {
       name: "Settings",

@@ -28,8 +28,8 @@ export const TaskType = v.union(
 );
 
 export const FeedbackStatus = v.union(
-  v.literal("needs-review"),
-  v.literal("work-item"),
+  v.literal("open"),
+  v.literal("reviewed"),
   v.literal("closed")
 );
 

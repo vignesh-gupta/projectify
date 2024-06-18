@@ -23,7 +23,7 @@ const FileList = ({ files }: FileListProps) => {
         ) : files.length <= 0 ? (
           <NoFiles />
         ) : (
-          files?.map((res) => <FileCard key={res._id} resource={res} />)
+          files.map((res) => <FileCard key={res._id} resource={res} />)
         )}
       </CardContent>
     </Card>
