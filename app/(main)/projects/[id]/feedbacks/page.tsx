@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import useApiMutation from "@/lib/hooks/use-api-mutation";
+import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
 import { useQuery } from "convex/react";
 import { Plus } from "lucide-react";
 
@@ -18,33 +18,29 @@ type FeedbacksPageProps = {
 const FeedbacksPage = ({ params }: FeedbacksPageProps) => {
   const feedbacks = useQuery(api.feedback.list, { projectId: params.id });
 
-  // const feedbacks = Array.from({ length: 121 }).fill(0);
+  const { onOpen } = useFeedbackModal();
 
-  const { mutate: addFeedback, isPending } = useApiMutation(
-    api.feedback.create
-  );
+  // const { mutate: addFeedback, isPending } = useApiMutation(
+  //   api.feedback.create
+  // );
 
-  // if (!feedbacks?.length) return <NoFeedbacks />;
-
-  const handleAddFeedback = () => {
-    addFeedback({
-      content: "This is a feedback",
-      projectId: params.id,
-      type: "issue",
-      senderEmail: "abc@xyz.com",
-      senderName: "John Doe",
-      status: "open",
-    });
-  };
+  // const handleAddFeedback = () => {
+  //   addFeedback({
+  //     content: "This is a feedback",
+  //     projectId: params.id,
+  //     type: "issue",
+  //     senderEmail: "abc@xyz.com",
+  //     senderName: "John Doe",
+  //     status: "open",
+  //   });
+  // };
 
   return (
     <>
       <div className="flex justify-between gap-2 border-b pb-2">
-        <h3 className="text-xl font-bold md:text-2xl lg:text-3xl">
-          Feedbacks
-        </h3>
+        <h3 className="text-xl font-bold md:text-2xl lg:text-3xl">Feedbacks</h3>
 
-        <Button onClick={handleAddFeedback}>
+        <Button onClick={() => onOpen()}>
           <Plus className="mr-2" /> Add Feedback
         </Button>
       </div>

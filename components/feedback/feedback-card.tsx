@@ -27,7 +27,7 @@ const FeedbackCard = ({ feedback }: FeedbackCardProps) => {
         <FeedbackType type={feedback?.type} />
       </CardContent>
       <CardFooter className="flex items-center gap-2">
-        <FeedbackActions status={feedback?.status} />
+        <FeedbackActions feedback={feedback} />
       </CardFooter>
     </Card>
   );

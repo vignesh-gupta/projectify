@@ -4,7 +4,7 @@ import ConvexClientProvider from "@/components/providers/convex-client-provider"
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { cn, constructMetaTags } from "@/lib/utils";
 
-import ModelProvider from "@/components/modals/modal-provider";
+import ModelProvider from "@/components/providers/modal-provider";
 import { Toaster } from "sonner";
 import "./globals.css";
 

@@ -10,7 +10,13 @@ import {
   LucideIcon,
   Timer,
 } from "lucide-react";
-import { TaskPriority, TaskStatus, TaskType } from "./types";
+import {
+  FeedbackStatus,
+  FeedbackType,
+  TaskPriority,
+  TaskStatus,
+  TaskType,
+} from "./types";
 
 export const DASHBOARD_ROUTE = "/dashboard";
 
@@ -102,5 +108,47 @@ export const PRIORITIES: TOption<TaskPriority>[] = [
     label: "High",
     value: "high",
     icon: ArrowUpIcon,
+  },
+];
+
+export const FEEDBACK_STATUS: TOption<FeedbackStatus>[] = [
+  {
+    label: "Open",
+    value: "open",
+  },
+  {
+    label: "Closed",
+    value: "closed",
+  },
+  {
+    label: "Reviewed",
+    value: "reviewed",
+  },
+];
+
+export const FEEDBACK_TYPES: TOption<FeedbackType>[] = [
+  {
+    label: "Issue",
+    value: "issue",
+  },
+  {
+    label: "Feature",
+    value: "feature",
+  },
+  {
+    label: "Documentation",
+    value: "documentation",
+  },
+  {
+    label: "Question",
+    value: "question",
+  },
+  {
+    label: "Idea",
+    value: "idea",
+  },
+  {
+    label: "Other",
+    value: "other",
   },
 ];
