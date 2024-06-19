@@ -1,5 +1,6 @@
 import { Doc } from "@/convex/_generated/dataModel";
-import { Card, CardFooter, CardHeader } from "../ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
+import FeedbackActions from "./feedback-actions";
 import FeedbackStatus from "./feedback-status";
 import FeedbackType from "./feedback-type";
 
@@ -19,9 +20,14 @@ const FeedbackCard = ({ feedback }: FeedbackCardProps) => {
         </div>
         <FeedbackStatus status={feedback?.status} />
       </CardHeader>
-      <CardFooter className="flex flex-col items-start gap-2">
-        <p className="text-muted-foreground">{feedback?.content}</p>
+      <CardContent className="pt-0">
+        <div className="text-gray-500 dark:text-gray-400">
+          {feedback?.content}
+        </div>
         <FeedbackType type={feedback?.type} />
+      </CardContent>
+      <CardFooter className="flex items-center gap-2">
+        <FeedbackActions status={feedback?.status} />
       </CardFooter>
     </Card>
   );
