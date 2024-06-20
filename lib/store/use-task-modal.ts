@@ -1,10 +1,13 @@
 import { Doc } from "@/convex/_generated/dataModel";
 import { create } from "zustand";
+import { OptionalProperty } from "../types";
+
+type TValue = Omit<OptionalProperty<Doc<"workItems">, "_id">, "_creationTime">;
 
 type TModalProvider = {
   isOpen: boolean;
-  values?: Omit<Doc<"workItems">, "_creationTime">;
-  onOpen: (values?: Omit<Doc<"workItems">, "_creationTime">) => void;
+  values?: TValue;
+  onOpen: (values?: TValue) => void;
   onClose: () => void;
 };
 

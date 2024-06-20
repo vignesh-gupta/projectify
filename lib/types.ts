@@ -1,5 +1,9 @@
 import { PROJECTS_STAGES } from "./constants";
 
+export type OptionalProperty<T, K extends keyof T> = Omit<T, K> & {
+  [P in K]?: T[P];
+};
+
 export type TaskStatus =
   | "backlog"
   | "todo"

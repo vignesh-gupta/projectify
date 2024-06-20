@@ -42,15 +42,16 @@ export const create = mutation({
 
 export const update = mutation({
   args: {
-    id: v.id("feedbacks"),
+    _id: v.id("feedbacks"),
     status: v.optional(FeedbackStatus),
     type: v.optional(FeedbackType),
     content: v.optional(v.string()),
     senderName: v.optional(v.string()),
     senderEmail: v.optional(v.string()),
+    projectId: v.id("projects"),
   },
   handler: async (ctx, args) => {
-    return await ctx.db.patch(args.id, args);
+    return await ctx.db.patch(args._id, args);
   },
 });
 
