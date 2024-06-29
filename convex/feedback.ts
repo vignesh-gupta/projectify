@@ -1,6 +1,9 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { action, mutation, query } from "./_generated/server";
 import { FeedbackStatus, FeedbackType } from "./types";
+import { TaskType } from "@/lib/types";
+import { api } from "./_generated/api";
+import { PRIORITIES, STATUSES, UNASSIGNED_USER } from "@/lib/constants";
 
 export const list = query({
   args: {
@@ -15,7 +18,8 @@ export const list = query({
 
     return await ctx.db
       .query("feedbacks")
-      .withIndex("by_project", (q) => q.eq("projectId", args.projectId)).order("desc")
+      .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
+      .order("desc")
       .collect();
   },
 });
@@ -48,7 +52,7 @@ export const update = mutation({
     content: v.optional(v.string()),
     senderName: v.optional(v.string()),
     senderEmail: v.optional(v.string()),
-    projectId: v.id("projects"),
+    projectId: v.optional(v.id("projects")),
   },
   handler: async (ctx, args) => {
     return await ctx.db.patch(args._id, args);

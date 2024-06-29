@@ -13,6 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import { toast } from "sonner";
 
 type FeedbackActionsProps = {
   feedback: Doc<"feedbacks"> | undefined;
@@ -21,7 +22,8 @@ type FeedbackActionsProps = {
 const FeedbackActions = ({ feedback }: FeedbackActionsProps) => {
   const { onOpen } = useFeedbackModal();
 
-  const { onOpen: OnTaskModalOpen } = useTaskModal();
+  const { mutate: createTask } = useApiMutation(api.work_item.create);
+  const { mutate: updateFeedback } = useApiMutation(api.feedback.update);
 
   const { mutate: deleteFeedback, isPending } = useApiMutation(
     api.feedback.remove
@@ -41,16 +43,31 @@ const FeedbackActions = ({ feedback }: FeedbackActionsProps) => {
 
     const label = findLabel[feedback.type] as TaskType;
 
-    OnTaskModalOpen({
+    createTask({
       assignee: UNASSIGNED_USER.label,
       assigneeId: UNASSIGNED_USER.value,
       description: feedback.content,
       label,
-      title: `${feedback.senderName}'s Feedback for a ${feedback.type}`,
+      title: `${feedback.senderName}'s ${feedback.type} (Feedback)`,
       priority: "low",
       projectId: feedback.projectId,
       status: "backlog",
     })
+      .then(() => {
+        updateFeedback({
+          _id: feedback._id,
+          status: "closed",
+        });
+
+        toast.success("WorkItem created successfully");
+      })
+      .catch((error) => {
+        console.error(
+          "[FEEDBACK_ACTIONS] [handleCreateWorkItem] [createTask]",
+          error
+        );
+        toast.error("Failed to create WorkItem");
+      });
   };
 
   return (

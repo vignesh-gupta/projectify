@@ -5,7 +5,7 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { cn, constructMetaTags } from "@/lib/utils";
 
 import ModelProvider from "@/components/providers/modal-provider";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });

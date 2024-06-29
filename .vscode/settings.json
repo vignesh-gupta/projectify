@@ -8,7 +8,8 @@
     "resource",
     "messages",
     "api_key",
-    "feedback"
+    "feedback",
+    "changelog"
   ],
   "cSpell.words": [
     "nothanks",
