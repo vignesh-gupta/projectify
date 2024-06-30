@@ -1,8 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import {
+  BookOpenText,
   FileBox,
   Layout,
-  ListTodo, 
+  ListTodo,
   MessageCircleReply,
   MessageSquareText,
   Settings,
@@ -93,6 +94,11 @@ export const getNavLinks = (id: string) => {
       name: "Feedbacks",
       href: `/projects/${id}/feedbacks`,
       Icon: MessageCircleReply,
+    },
+    {
+      name: "Changelog",
+      href: `/projects/${id}/changelogs`,
+      Icon: BookOpenText,
     },
     {
       name: "Messages",

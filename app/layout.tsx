@@ -31,7 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={cn("flex flex-col min-h-[100dvh]", inter.className)}>
+      <body
+        className={cn(
+          "flex flex-col h-[100dvh] overflow-y-hidden",
+          inter.className
+        )}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
