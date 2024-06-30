@@ -1,9 +1,14 @@
+"use client";
+
 import ChangelogCard from "@/components/changelogs/changelog-card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Clock, FileText, Plus } from "lucide-react";
+import { useConstructions } from "@/lib/hooks/use-constructions";
+import { Eye, FileText, Plus } from "lucide-react";
 
 const ChangelogsPage = () => {
+  useConstructions("page"); // TODO: Remove this line when the page is ready
+
   return (
     <>
       <div className="flex justify-between gap-2 border-b pb-2">
@@ -17,13 +22,17 @@ const ChangelogsPage = () => {
             Add Changelog
           </Button>
           <Button variant="outline">
+            <Eye className="h-4 w-4 mr-2" />
+            Preview
+          </Button>
+          <Button variant="outline">
             <FileText className="h-4 w-4 mr-2" />
             View Integration Docs
           </Button>
         </div>
       </div>
 
-      <ScrollArea className="h-[calc(100dvh-130px)] pr-3 pt-2">
+      <ScrollArea className="h-[calc(100dvh-150px)] pr-3 pt-2">
         <div className="space-y-5">
           {Array.from({ length: 10 }).map((_, index) => (
             <ChangelogCard key={index} />
