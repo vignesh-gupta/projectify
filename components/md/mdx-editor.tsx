@@ -1,9 +1,18 @@
 "use client";
 
+import { cn } from "@/lib/utils";
+
 import Bold from "@tiptap/extension-bold";
+import BulletList from "@tiptap/extension-bullet-list";
+import CodeBlock from "@tiptap/extension-code-block";
+import Document from "@tiptap/extension-document";
+import Italic from "@tiptap/extension-italic";
+import Link from "@tiptap/extension-link";
+import ListItem from "@tiptap/extension-list-item";
+import Paragraph from "@tiptap/extension-paragraph";
+import Text from "@tiptap/extension-text";
 import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import { useState } from "react";
+
 import Toolbar from "./toolbar";
 
 type MDXEditorProps = {
@@ -12,27 +21,28 @@ type MDXEditorProps = {
 };
 
 const MDXEditor = ({ content, readonly }: MDXEditorProps) => {
-  const [value, setValue] = useState(content);
-
   const editor = useEditor({
     extensions: [
-      StarterKit.configure(),
+      Document,
+      Paragraph,
+      Text,
+      ListItem,
+      BulletList,
+      CodeBlock,
+      Link,
+      Italic,
       Bold.extend({
         renderHTML({ HTMLAttributes }) {
           return ["b", HTMLAttributes, 0];
         },
       }),
     ],
-    content: value,
+    content,
     editable: !readonly,
     editorProps: {
       attributes: {
-        class:
-          "prose focus:outline-none dark:text-white",
+        class: "prose focus:outline-none dark:text-white",
       },
-    },
-    onUpdate({ editor }) {
-      setValue(editor.getHTML());
     },
   });
 
@@ -41,7 +51,10 @@ const MDXEditor = ({ content, readonly }: MDXEditorProps) => {
       {!readonly && editor && <Toolbar editor={editor} />}
       <EditorContent
         editor={editor}
-        className="p-2 border rounded-b-lg focus:outline-none"
+        disabled={readonly}
+        className={cn("p-2  focus:outline-none", {
+          "border rounded-b-lg": !readonly,
+        })}
       />
     </>
   );

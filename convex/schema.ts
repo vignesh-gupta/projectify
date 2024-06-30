@@ -90,4 +90,12 @@ export default defineSchema({
     status: FeedbackStatus,
     type: FeedbackType,
   }).index("by_project", ["projectId"]),
+
+  changeLogs: defineTable({
+    version: v.string(),
+    date: v.string(),
+    title: v.string(),
+    changes: v.string(),
+    projectId: v.id("projects"),
+  }).index("by_project", ["projectId"]),
 });

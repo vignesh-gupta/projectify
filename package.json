@@ -29,6 +29,7 @@
     "@radix-ui/react-toggle": "^1.1.0",
     "@radix-ui/react-tooltip": "^1.0.7",
     "@tanstack/react-table": "^8.16.0",
+    "@tiptap/extension-link": "^2.4.0",
     "@tiptap/pm": "^2.4.0",
     "@tiptap/react": "^2.4.0",
     "@tiptap/starter-kit": "^2.4.0",

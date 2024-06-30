@@ -14,18 +14,7 @@ const changelogs: ChangeLog[] = [
     date: "16 March - 2024",
     title: "80% faster widgets",
     version: "v1.2.0",
-    changes: `A paragraph with *emphasis* and **strong importance**.
-
-> A block quote with ~strikethrough~ and a URL: https://reactjs.org.
-
-* Lists
-* [ ] todo
-* [x] done
-
-A table:
-
-| a | b |
-| - | - |`,
+    changes: `<ol><li>hello</li></ol>`,
   },
 ];
 
@@ -63,7 +52,6 @@ const ChangeLogPage = () => {
                     {entry.title}
                   </h1>
                   <MDXEditor content={entry.changes} />
-                  {/* <p>{entry.changes}</p> */}
                 </div>
               </div>
             </div>
