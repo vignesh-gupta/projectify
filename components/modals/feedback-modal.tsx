@@ -114,7 +114,7 @@ const FeedbackModal = () => {
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{values?._id ? "Edit" : "Create"} Work item</DialogTitle>
+          <DialogTitle>{values?._id ? "Edit" : "Create"} Feedback</DialogTitle>
         </DialogHeader>
 
         <Form {...form}>

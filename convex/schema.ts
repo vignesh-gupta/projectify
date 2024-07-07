@@ -97,5 +97,6 @@ export default defineSchema({
     title: v.string(),
     changes: v.string(),
     projectId: v.id("projects"),
+    isPublished: v.boolean(),
   }).index("by_project", ["projectId"]),
 });

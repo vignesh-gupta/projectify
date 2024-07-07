@@ -9,6 +9,8 @@ import { useLinkModal } from "@/lib/store/use-link-modal";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import { useEffect, useState } from "react";
 import FeedbackModal from "../modals/feedback-modal";
+import { useChangelogModal } from "@/lib/store/use-changelog-modal";
+import ChangelogModal from "../modals/changelog-modal";
 
 const ModelProvider = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -16,6 +18,7 @@ const ModelProvider = () => {
   const linkModal = useLinkModal();
   const fileModal = useFileModal();
   const feedbackModal = useFeedbackModal();
+  const changelogModal = useChangelogModal();
 
   useEffect(() => {
     setIsMounted(true);
@@ -31,6 +34,8 @@ const ModelProvider = () => {
   if (taskModal.isOpen) return <TaskModal />;
 
   if (feedbackModal.isOpen) return <FeedbackModal />;
+
+  if (changelogModal.isOpen) return <ChangelogModal />;
 
   return null;
 };

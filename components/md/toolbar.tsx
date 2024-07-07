@@ -1,5 +1,5 @@
 import type { Editor } from "@tiptap/react";
-import { Bold, Code, Italic, Link, List, Unlink } from "lucide-react";
+import { Bold, Code, Italic, Link, List, Redo, Undo, Unlink } from "lucide-react";
 import { Toggle } from "../ui/toggle";
 import LinkModal from "./link-modal";
 
@@ -24,7 +24,7 @@ const Toolbar = ({ editor }: ToolbarProps) => {
   };
 
   return (
-    <div className="border border-input bg-transparent rounded-t-lg space-x-2 p-2">
+    <div className="border border-input bg-transparent rounded-t-lg flex items-center gap-2 flex-wrap p-2">
       <Toggle
         size="sm"
         pressed={editor.isActive("bold")}
@@ -71,6 +71,25 @@ const Toolbar = ({ editor }: ToolbarProps) => {
         onPressedChange={() => editor.chain().focus().toggleCodeBlock().run()}
       >
         <Code className="w-4 h-4" />
+      </Toggle>
+
+
+      <Toggle
+        size="sm"
+        pressed={false}
+        disabled={!editor.can().undo()}
+        onPressedChange={() => editor.chain().undo().run()}
+      >
+        <Undo className="w-4 h-4" />
+      </Toggle>
+
+      <Toggle
+        size="sm"
+        pressed={false}
+        disabled={!editor.can().redo()}
+        onPressedChange={() => editor.chain().redo().run()}
+      >
+        <Redo className="w-4 h-4" />
       </Toggle>
     </div>
   );

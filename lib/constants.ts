@@ -151,4 +151,4 @@ export const FEEDBACK_TYPES: TOption<FeedbackType>[] = [
     label: "Other",
     value: "other",
   },
-];
+] as const
