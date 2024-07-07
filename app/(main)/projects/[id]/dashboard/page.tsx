@@ -1,21 +1,16 @@
 "use client";
 
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { useCurrentUser } from "@/lib/hooks/use-current-user";
+import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { Loader2 } from "lucide-react";
 import OwnedTaskTable from "../_components/owned-task-table";
 
-type ProjectDashboardPageProps = {
-  params: {
-    id: Id<"projects">;
-  };
-};
 
 const ProjectDashboardPage = ({
   params: { id },
-}: ProjectDashboardPageProps) => {
+}: PagePropsWithProjectId) => {
   const currentUser = useCurrentUser();
 
   const myTasks = useQuery(api.work_item.list, { projectId: id })?.filter(

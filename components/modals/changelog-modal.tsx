@@ -21,11 +21,11 @@ import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import MDXEditor from "../md/mdx-editor";
-import { DatePicker } from "../ui/date-picker";
+import { DatePicker } from "@/components/ui/date-picker";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { Switch } from "../ui/switch";
+import { Switch } from "@/components/ui/switch";
 
 const changelogFormSchema = z.object({
   title: z.string().min(5),

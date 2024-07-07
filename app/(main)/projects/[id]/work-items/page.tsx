@@ -4,17 +4,11 @@ import { Button } from "@/components/ui/button";
 import { columns } from "@/components/work-items/columns";
 import { DataTable } from "@/components/work-items/data-table";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { useTaskModal } from "@/lib/store/use-task-modal";
+import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 
-type WorkItemsPageProps = {
-  params: {
-    id: Id<"projects">;
-  };
-};
-
-const WorkItemsPage = ({ params: { id } }: WorkItemsPageProps) => {
+const WorkItemsPage = ({ params: { id } }: PagePropsWithProjectId) => {
   const tasks = useQuery(api.work_item.list, { projectId: id });
 
   const { onOpen } = useTaskModal();

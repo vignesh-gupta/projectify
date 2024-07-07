@@ -12,7 +12,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,17 +27,11 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { PROJECTS_STAGES } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
+import type { PagePropsWithProjectId } from "@/lib/types";
 
-type ProjectSettingsPageProps = {
-  params: {
-    id: Id<"projects">;
-  };
-};
-
-const ProjectSettingsPage = ({ params: { id } }: ProjectSettingsPageProps) => {
+const ProjectSettingsPage = ({ params: { id } }: PagePropsWithProjectId) => {
   const project = useQuery(api.project.get, { id });
 
   const { mutate: updateProject, isPending } = useApiMutation(

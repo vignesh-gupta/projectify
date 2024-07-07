@@ -1,6 +1,6 @@
 import type { Editor } from "@tiptap/react";
 import { Bold, Code, Italic, Link, List, Redo, Undo, Unlink } from "lucide-react";
-import { Toggle } from "../ui/toggle";
+import { Toggle } from "@/components/ui/toggle";
 import LinkModal from "./link-modal";
 
 type ToolbarProps = {

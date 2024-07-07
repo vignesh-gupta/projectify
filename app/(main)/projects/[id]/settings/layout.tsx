@@ -1,18 +1,13 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
-import { Id } from "@/convex/_generated/dataModel";
+import type { PagePropsWithProjectId } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 
-type ProjectSettingsLayoutProps = {
-  children: ReactNode;
-  params: {
-    id: Id<"projects">;
-  };
-};
+type ProjectSettingsLayoutProps = PropsWithChildren & PagePropsWithProjectId;
 
 const ProjectSettingsLayout = ({
   children,

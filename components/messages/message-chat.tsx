@@ -2,7 +2,7 @@ import { Doc } from "@/convex/_generated/dataModel";
 import { useCurrentUser } from "@/lib/hooks/use-current-user";
 import { cn } from "@/lib/utils";
 import Hint from "../hint";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import MessageChatAction from "./message-chat-action";
 
 type MessageChatProps = {

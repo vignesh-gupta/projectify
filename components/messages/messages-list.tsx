@@ -5,9 +5,9 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useMessages } from "@/lib/hooks/use-messages";
 import { useScroll } from "@/lib/hooks/use-scroll";
 import { Loader2 } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import MessageChat from "./message-chat";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 type MessagesListProps = {

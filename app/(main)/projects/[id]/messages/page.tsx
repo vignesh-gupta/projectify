@@ -1,14 +1,8 @@
 import MessageInput from "@/components/messages/message-input";
 import MessagesList from "@/components/messages/messages-list";
-import { Id } from "@/convex/_generated/dataModel";
+import type { PagePropsWithProjectId } from "@/lib/types";
 
-type MessagesPageProps = {
-  params: {
-    id: Id<"projects">;
-  };
-};
-
-const MessagesPage = ({ params: { id } }: MessagesPageProps) => {
+const MessagesPage = ({ params: { id } }: PagePropsWithProjectId) => {
  
   return (
     <div className="min-h-full px-2 space-y-2">

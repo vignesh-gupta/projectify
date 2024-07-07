@@ -1,7 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import MDXEditor from "../md/mdx-editor";
-import { Badge } from "../ui/badge";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { format } from "date-fns";
 
 

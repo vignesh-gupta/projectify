@@ -6,7 +6,7 @@ import { useLinkModal } from "@/lib/store/use-link-modal";
 import { Edit, LinkIcon, Trash } from "lucide-react";
 import ConfirmModal from "@/components/modals/confirm-modal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Skeleton } from "../../ui/skeleton";
+import { Skeleton } from "../@/components/ui/skeleton";
 
 type LinkCardProps = {
   resource: {

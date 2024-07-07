@@ -4,18 +4,12 @@ import FeedbackCard from "@/components/feedback/feedback-card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
+import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { Plus } from "lucide-react";
 
-type FeedbacksPageProps = {
-  params: {
-    id: Id<"projects">;
-  };
-};
-
-const FeedbacksPage = ({ params }: FeedbacksPageProps) => {
+const FeedbacksPage = ({ params }: PagePropsWithProjectId) => {
   const feedbacks = useQuery(api.feedback.list, { projectId: params.id });
 
   const { onOpen } = useFeedbackModal();

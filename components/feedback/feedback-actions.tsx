@@ -6,13 +6,13 @@ import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import { TaskType } from "@/lib/types";
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
 
 type FeedbackActionsProps = {
