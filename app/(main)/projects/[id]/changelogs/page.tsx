@@ -9,14 +9,19 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { api } from "@/convex/_generated/api";
 import { useConstructions } from "@/lib/hooks/use-constructions";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
+import type { PagePropsWithProjectId } from "@/lib/types";
+import { useQuery } from "convex/react";
 import { Eye, FileText, MoreHorizontal, Plus } from "lucide-react";
 
-const ChangelogsPage = () => {
+const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
   useConstructions("page"); // TODO: Remove this line when the page is ready
 
   const { onOpen } = useChangelogModal();
+
+  const changelogs = useQuery(api.changelog.list, { projectId: id });
 
   return (
     <>
@@ -65,8 +70,14 @@ const ChangelogsPage = () => {
 
       <ScrollArea className="h-[calc(100dvh-150px)] pr-3 pt-2">
         <div className="space-y-5">
-          {Array.from({ length: 10 }).map((_, index) => (
-            <ChangelogCard key={index} />
+          {changelogs?.map((log) => (
+            <ChangelogCard
+              content={log.changes}
+              title={log.title}
+              date={log.date}
+              version={log.version}
+              key={log._id}
+            />
           ))}
         </div>
       </ScrollArea>

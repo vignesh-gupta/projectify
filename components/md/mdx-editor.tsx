@@ -27,7 +27,7 @@ const MDXEditor = ({
   content,
   readonly,
   onChange,
-  rows = 1,
+  rows,
 }: MDXEditorProps) => {
   const editor = useEditor({
     extensions: [

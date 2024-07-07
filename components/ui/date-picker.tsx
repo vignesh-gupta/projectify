@@ -2,7 +2,6 @@
 
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
-import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -12,7 +11,6 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import type { SelectSingleEventHandler } from "react-day-picker";
 
 type DatePickerProps = {
   value?: Date;
@@ -20,10 +18,6 @@ type DatePickerProps = {
 };
 
 export function DatePicker({ value, onSelect }: DatePickerProps) {
-  const handleSelect: SelectSingleEventHandler = (date: Date | undefined) => {
-    if (!date) return;
-    onSelect(date);
-  };
 
   return (
     <Popover>
