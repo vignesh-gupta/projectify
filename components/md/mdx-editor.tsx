@@ -50,7 +50,7 @@ const MDXEditor = ({
     editable: !readonly,
     editorProps: {
       attributes: {
-        class: "prose focus:outline-none dark:text-white",
+        class: "prose focus:outline-none dark:text-white *:my-1",
       },
     },
     onUpdate: ({ editor }) => {
@@ -68,6 +68,7 @@ const MDXEditor = ({
         className={cn("p-2 focus:outline-none", {
           "border rounded-b-lg": !readonly,
           "*:min-h-40": rows,
+          "h-fit": !rows,
         })}
       />
     </>

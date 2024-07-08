@@ -4,6 +4,7 @@ import { mutation, query } from "./_generated/server";
 export const list = query({
   args: {
     projectId: v.id("projects"),
+    showPublished: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const project = await ctx.db.get(args.projectId);
@@ -12,11 +13,17 @@ export const list = query({
       throw new Error("Project not found");
     }
 
-    return await ctx.db
+    const changeLogs = await ctx.db
       .query("changeLogs")
       .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
       .order("desc")
       .collect();
+
+    if (args.showPublished) {
+      return changeLogs.filter((changeLog) => changeLog.isPublished);
+    }
+
+    return changeLogs;
   },
 });
 

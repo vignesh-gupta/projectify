@@ -19,4 +19,10 @@ module.exports = {
       permanent: true,
     },
   ],
+  rewrites: async () => [
+    {
+      source: "/changelog",
+      destination: "/changelog/j5751yv98q3gahnprrwbxzd9th6ssfvm"
+    }
+  ]
 };

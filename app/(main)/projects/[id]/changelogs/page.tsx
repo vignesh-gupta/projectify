@@ -15,13 +15,19 @@ import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { Eye, FileText, MoreHorizontal, Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
   useConstructions("page"); // TODO: Remove this line when the page is ready
 
+  const router = useRouter();
   const { onOpen } = useChangelogModal();
 
   const changelogs = useQuery(api.changelog.list, { projectId: id });
+
+  const redirectToPreview = () => {
+    router.push(`/changelog/${id}`);
+  };
 
   return (
     <>
@@ -42,7 +48,7 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
               <Plus className="h-4 w-4 mr-2" /> Add Changelog
             </DropdownMenuItem>
 
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={redirectToPreview}>
               <Eye className="h-4 w-4 mr-2" /> Preview
             </DropdownMenuItem>
 
@@ -57,7 +63,7 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
             <Plus className="h-4 w-4 mr-2" />
             Add Changelog
           </Button>
-          <Button variant="outline">
+          <Button variant="outline" onClick={redirectToPreview}>
             <Eye className="h-4 w-4 mr-2" />
             Preview
           </Button>
