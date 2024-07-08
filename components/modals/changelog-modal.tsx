@@ -24,7 +24,7 @@ import MDXEditor from "../md/mdx-editor";
 import { DatePicker } from "@/components/ui/date-picker";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { Switch } from "@/components/ui/switch";
 
 const changelogFormSchema = z.object({

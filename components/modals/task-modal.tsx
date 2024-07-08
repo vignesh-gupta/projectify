@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { LABELS, PRIORITIES, STATUSES, UNASSIGNED_USER } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useTaskModal } from "@/lib/store/use-task-modal";

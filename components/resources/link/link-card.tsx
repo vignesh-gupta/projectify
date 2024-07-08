@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { Edit, LinkIcon, Trash } from "lucide-react";
 import ConfirmModal from "@/components/modals/confirm-modal";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Skeleton } from "../@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 type LinkCardProps = {
   resource: {
@@ -26,7 +26,6 @@ const LinkCard = ({
   const { mutate: deleteLink, isPending } = useApiMutation(
     api.resources.link.remove
   );
-
 
   return (
     <div className="flex items-center justify-between">

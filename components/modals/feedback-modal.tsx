@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { FEEDBACK_STATUS, FEEDBACK_TYPES } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";

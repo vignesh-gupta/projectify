@@ -1,7 +1,7 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { useMessages } from "@/lib/hooks/use-messages";
 import { useScroll } from "@/lib/hooks/use-scroll";
 import { Loader2 } from "lucide-react";

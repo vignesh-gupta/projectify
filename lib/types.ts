@@ -1,5 +1,5 @@
 import { PROJECTS_STAGES } from "./constants";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 
 export type PagePropsWithProjectId = {
   params: {
