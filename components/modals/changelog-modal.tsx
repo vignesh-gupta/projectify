@@ -33,7 +33,7 @@ const changelogFormSchema = z.object({
     .string()
     .min(5, "Version must be at least 6 characters")
     .regex(new RegExp(/^\d+\.\d+\.\d+$/), "Invalid version format"),
-  changes: z.string().min(10).max(500),
+  changes: z.string().min(10),
   date: z.date(),
   isPublished: z.boolean(),
 });

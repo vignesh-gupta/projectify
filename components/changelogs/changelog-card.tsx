@@ -21,9 +21,9 @@ const ChangelogCard = ({
   return (
     <Card>
       <CardHeader className="md:flex-row md:items-center md:justify-between gap-2 pb-3">
-        <div className="flex gap-2 flex-col sm:flex-row">
+        <div className="flex gap-2 flex-col sm:flex-row items-center">
           <Badge className="w-fit">v{version}</Badge>
-          <h4 className="font-semibold pb-1">{title}</h4>
+          <h4 className="font-semibold">{title}</h4>
         </div>
         <div className="flex items-center gap-2 ite">
           <CalendarDays className="h-4 w-4 text-muted-foreground" />

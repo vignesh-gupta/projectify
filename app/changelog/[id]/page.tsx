@@ -12,14 +12,14 @@ const ChangeLogPreviewPage = ({ params: { id } }: PagePropsWithProjectId) => {
     showPublished: true,
   });
 
-  console.log("changelogs", changelogs);
+  if (!changelogs) return <div>Loading...</div>;
 
   return (
     <section>
       <div className="mx-auto max-w-5xl px-8 py-24 md:px-12 lg:px-16 divide-y prose  dark:text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl space-y-12">
         <div>
           <h1 className="text-3xl font-bold text-primary">
-            Projectify Changelog
+            Projectify Changelogs
           </h1>
           <p className="text-balance">
             Explore the latest update featuring essential performance
@@ -28,15 +28,13 @@ const ChangeLogPreviewPage = ({ params: { id } }: PagePropsWithProjectId) => {
           </p>
         </div>
 
-        {!changelogs ? (
-          <div>Loading...</div>
-        ) : !changelogs.length ? (
+        {!changelogs.length ? (
           <div>No changelogs available</div>
         ) : (
           changelogs.map((entry) => (
             <div key={entry.date} className="grid grid-cols-1 lg:grid-cols-4">
               <div>
-                <div className="lg:sticky lg:pb-16 top-24">
+                <div className="lg:sticky lg:pb-16 top-6">
                   <div className="pt-8">
                     <time dateTime={entry.date} className="font-semibold">
                       {format(new Date(entry.date), "MMM dd, yyyy")}
@@ -48,9 +46,9 @@ const ChangeLogPreviewPage = ({ params: { id } }: PagePropsWithProjectId) => {
               <div className="lg:col-span-3 pt-8">
                 <div className="flex-shrink-0">
                   <div className="mx-auto ">
-                    <h1 className="font-semibold text-lg text-primary">
+                    <h3 className="text-lg text-primary font-bold my-0">
                       {entry.title}
-                    </h1>
+                    </h3>
                     <MDXEditor content={entry.changes} readonly />
                   </div>
                 </div>

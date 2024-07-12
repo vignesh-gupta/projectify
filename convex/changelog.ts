@@ -34,6 +34,7 @@ export const create = mutation({
     changes: v.string(),
     date: v.string(),
     projectId: v.id("projects"),
+    isPublished: v.boolean(),
   },
   handler: async (ctx, args) => {
     const project = await ctx.db.get(args.projectId);
@@ -42,6 +43,6 @@ export const create = mutation({
       throw new Error("Project not found");
     }
 
-    return await ctx.db.insert("changeLogs", { ...args, isPublished: false });
+    return await ctx.db.insert("changeLogs", args);
   },
 });
