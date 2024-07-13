@@ -46,3 +46,15 @@ export const create = mutation({
     return await ctx.db.insert("changeLogs", args);
   },
 });
+
+export const update = mutation({
+  args: {
+    _id: v.id("changeLogs"),
+    title: v.optional(v.string()),
+    version: v.optional(v.string()),
+    changes: v.optional(v.string()),
+    date: v.optional(v.string()),
+    isPublished: v.optional(v.boolean()),
+  },
+  handler: async (ctx, args) => await ctx.db.patch(args._id, args),
+});

@@ -15,6 +15,7 @@ import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { Eye, FileText, MoreHorizontal, Plus } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
@@ -63,9 +64,11 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
             <Plus className="h-4 w-4 mr-2" />
             Add Changelog
           </Button>
-          <Button variant="outline" onClick={redirectToPreview}>
-            <Eye className="h-4 w-4 mr-2" />
-            Preview
+          <Button variant="outline" asChild>
+            <Link target="_blank" href={`/changelog/${id}`}>
+              <Eye className="h-4 w-4 mr-2" />
+              Preview
+            </Link>
           </Button>
           <Button variant="outline">
             <FileText className="h-4 w-4 mr-2" />
@@ -83,6 +86,8 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
               date={log.date}
               version={log.version}
               key={log._id}
+              id={log._id}
+              isPublished={log.isPublished}
             />
           ))}
         </div>

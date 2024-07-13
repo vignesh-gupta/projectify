@@ -53,6 +53,7 @@ const AddProject = () => {
   return (
     <InputModal
       onConfirm={handleCreateProject}
+      disabled={isPending}
       header="Create a new project"
       description="Provide Project details to create a new project."
       toastMessage="Project created successfully"

@@ -22,7 +22,7 @@ module.exports = {
   rewrites: async () => [
     {
       source: "/changelog",
-      destination: "/changelog/j5751yv98q3gahnprrwbxzd9th6ssfvm"
+      destination: "/changelog/j5775aqxkjg4avhhdjgwn05jqh6rkcyp"
     }
   ]
 };

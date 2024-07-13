@@ -23,12 +23,7 @@ type MDXEditorProps = {
   onChange?: (...event: any[]) => void;
 };
 
-const MDXEditor = ({
-  content,
-  readonly,
-  onChange,
-  rows,
-}: MDXEditorProps) => {
+const MDXEditor = ({ content, readonly, onChange, rows }: MDXEditorProps) => {
   const editor = useEditor({
     extensions: [
       Document,

@@ -7,24 +7,27 @@ import { useQuery } from "convex/react";
 import { format } from "date-fns";
 
 const ChangeLogPreviewPage = ({ params: { id } }: PagePropsWithProjectId) => {
+  const projectDetails = useQuery(api.project.get, { id });
+
   const changelogs = useQuery(api.changelog.list, {
     projectId: id,
     showPublished: true,
   });
 
-  if (!changelogs) return <div>Loading...</div>;
+  if (!changelogs || !projectDetails) return <div>Loading...</div>;
 
   return (
     <section>
       <div className="mx-auto max-w-5xl px-8 py-24 md:px-12 lg:px-16 divide-y prose  dark:text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl space-y-12">
         <div>
           <h1 className="text-3xl font-bold text-primary">
-            Projectify Changelogs
+            {projectDetails.title} Changelogs
           </h1>
           <p className="text-balance">
-            Explore the latest update featuring essential performance
+            {projectDetails.description ??
+              `Explore the latest update featuring essential performance
             enhancements, new customization options, and critical bug fixes
-            across our application.
+            across our application.`}
           </p>
         </div>
 
