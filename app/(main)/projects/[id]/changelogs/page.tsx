@@ -80,15 +80,7 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
       <ScrollArea className="h-[calc(100dvh-150px)] pr-3 pt-2">
         <div className="space-y-5">
           {changelogs?.map((log) => (
-            <ChangelogCard
-              content={log.changes}
-              title={log.title}
-              date={log.date}
-              version={log.version}
-              key={log._id}
-              id={log._id}
-              isPublished={log.isPublished}
-            />
+            <ChangelogCard changelog={log} key={log._id} />
           ))}
         </div>
       </ScrollArea>

@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { DatePicker } from "@/components/ui/date-picker";
 import {
   Dialog,
   DialogContent,
@@ -15,17 +16,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { api } from "@/convex/_generated/api";
+import type { Id } from "@/convex/_generated/dataModel";
+import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import MDXEditor from "../md/mdx-editor";
-import { DatePicker } from "@/components/ui/date-picker";
-import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { api } from "@/convex/_generated/api";
-import type { Id } from "@/convex/_generated/dataModel";
-import { Switch } from "@/components/ui/switch";
 
 const changelogFormSchema = z.object({
   title: z.string().min(5),
@@ -61,11 +61,17 @@ const ChangelogModal = () => {
   async function onSubmit(data: z.infer<typeof changelogFormSchema>) {
     console.log("Submitted:", data);
 
-    createChangeLog({
-      ...data,
-      projectId: param.id as Id<"projects">,
-      date: data.date.toISOString(),
-    });
+    try {
+      createChangeLog({
+        ...data,
+        projectId: param.id as Id<"projects">,
+        date: data.date.toISOString(),
+      });
+    } catch (error) {
+      console.error("Error creating changelog", error);
+    } finally {
+      onClose();
+    }
   }
 
   return (
@@ -143,7 +149,7 @@ const ChangelogModal = () => {
                   <div>
                     <FormLabel className="text-base">Keep it public</FormLabel>
                     <FormDescription>
-                      Enable this  option to make the changelog public
+                      Enable this option to make the changelog public
                     </FormDescription>
                   </div>
                   <FormControl>

@@ -18,6 +18,11 @@ module.exports = {
       destination: "/dashboard",
       permanent: true,
     },
+    {
+      source: "/projects/:id",
+      destination: "/projects/:id/dashboard",
+      permanent: true,
+    },
   ],
   rewrites: async () => [
     {
