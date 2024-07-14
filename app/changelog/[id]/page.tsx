@@ -18,7 +18,7 @@ const ChangeLogPreviewPage = ({ params: { id } }: PagePropsWithProjectId) => {
 
   return (
     <section>
-      <div className="mx-auto max-w-5xl px-8 py-24 md:px-12 lg:px-16 divide-y prose  dark:text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl space-y-12">
+      <div className="mx-auto max-w-5xl px-8 py-16 md:px-12 lg:px-16 divide-y prose  dark:text-gray-500 prose-sm prose-headings:font-normal prose-headings:text-xl space-y-12">
         <div>
           <h1 className="text-3xl font-bold text-primary">
             {projectDetails.title} Changelogs

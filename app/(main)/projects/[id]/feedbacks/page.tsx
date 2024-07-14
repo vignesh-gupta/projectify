@@ -14,21 +14,6 @@ const FeedbacksPage = ({ params }: PagePropsWithProjectId) => {
 
   const { onOpen } = useFeedbackModal();
 
-  // const { mutate: addFeedback, isPending } = useApiMutation(
-  //   api.feedback.create
-  // );
-
-  // const handleAddFeedback = () => {
-  //   addFeedback({
-  //     content: "This is a feedback",
-  //     projectId: params.id,
-  //     type: "issue",
-  //     senderEmail: "abc@xyz.com",
-  //     senderName: "John Doe",
-  //     status: "open",
-  //   });
-  // };
-
   return (
     <>
       <div className="flex justify-between gap-2 border-b pb-2">
@@ -56,9 +41,13 @@ const FeedbacksPage = ({ params }: PagePropsWithProjectId) => {
 
 export default FeedbacksPage;
 
-const NoFeedbacks = () => (
-  <div className="flex justify-center items-center flex-col gap-4 bg-secondary py-12 rounded-xl">
-    <h2 className="font-bold text-lg">There are no feedbacks yet!</h2>
-    <Button>Add a feedback</Button>
-  </div>
-);
+const NoFeedbacks = () => {
+  const { onOpen } = useFeedbackModal();
+
+  return (
+    <div className="flex justify-center items-center flex-col gap-4 bg-secondary py-12 rounded-xl">
+      <h2 className="font-bold text-lg">There are no feedbacks yet!</h2>
+      <Button onClick={() => onOpen()}>Add a feedback</Button>
+    </div>
+  );
+};

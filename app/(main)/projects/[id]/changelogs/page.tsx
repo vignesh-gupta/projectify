@@ -1,6 +1,6 @@
 "use client";
 
-import ChangelogCard from "@/components/changelogs/changelog-card";
+import ChangelogList from "@/components/changelogs/changelog-list";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,26 +9,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { api } from "@/convex/_generated/api";
 import { useConstructions } from "@/lib/hooks/use-constructions";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import type { PagePropsWithProjectId } from "@/lib/types";
-import { useQuery } from "convex/react";
 import { Eye, FileText, MoreHorizontal, Plus } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
-  useConstructions("page"); // TODO: Remove this line when the page is ready
+  useConstructions("feature"); // TODO: Remove this line when the page is ready
 
-  const router = useRouter();
   const { onOpen } = useChangelogModal();
-
-  const changelogs = useQuery(api.changelog.list, { projectId: id });
-
-  const redirectToPreview = () => {
-    router.push(`/changelog/${id}`);
-  };
 
   return (
     <>
@@ -49,8 +39,10 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
               <Plus className="h-4 w-4 mr-2" /> Add Changelog
             </DropdownMenuItem>
 
-            <DropdownMenuItem onClick={redirectToPreview}>
-              <Eye className="h-4 w-4 mr-2" /> Preview
+            <DropdownMenuItem asChild>
+              <Link target="_blank" href={`/changelog/${id}`}>
+                <Eye className="h-4 w-4 mr-2" /> Preview
+              </Link>
             </DropdownMenuItem>
 
             <DropdownMenuItem>
@@ -78,11 +70,7 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
       </div>
 
       <ScrollArea className="h-[calc(100dvh-150px)] pr-3 pt-2">
-        <div className="space-y-5">
-          {changelogs?.map((log) => (
-            <ChangelogCard changelog={log} key={log._id} />
-          ))}
-        </div>
+        <ChangelogList projectId={id} />{" "}
       </ScrollArea>
     </>
   );

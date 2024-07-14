@@ -34,7 +34,7 @@ export default FileList;
 
 const NoFiles = () => (
   <div className="flex flex-col items-center justify-center h-48 gap-3 border border-dashed rounded-md bg-foreground/5">
-    <h3>There are no resources</h3>
+    <h3>There are no files</h3>
     <FileUpload />
   </div>
 );
