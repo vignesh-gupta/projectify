@@ -1,6 +1,7 @@
 "use client";
 
 import ChangelogList from "@/components/changelogs/changelog-list";
+import ChangelogIntegration from "@/components/changelogs/changelog-integration";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -45,8 +46,10 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
               </Link>
             </DropdownMenuItem>
 
-            <DropdownMenuItem>
-              <FileText className="h-4 w-4 mr-2" /> View Integration Docs
+            <DropdownMenuItem asChild>
+              <ChangelogIntegration>
+                <FileText className="h-4 w-4 mr-2" /> View Integration Docs
+              </ChangelogIntegration>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
@@ -62,10 +65,12 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
               Preview
             </Link>
           </Button>
-          <Button variant="outline">
-            <FileText className="h-4 w-4 mr-2" />
-            View Integration Docs
-          </Button>
+          <ChangelogIntegration>
+            <Button variant="outline">
+              <FileText className="h-4 w-4 mr-2" />
+              View Integration Docs
+            </Button>
+          </ChangelogIntegration>
         </div>
       </div>
 

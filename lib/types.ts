@@ -1,10 +1,12 @@
-import { PROJECTS_STAGES } from "./constants";
 import type { Id } from "@/convex/_generated/dataModel";
+import { PROJECTS_STAGES } from "./constants";
+
+export type ProjectId = {
+  id: Id<"projects">;
+};
 
 export type PagePropsWithProjectId = {
-  params: {
-    id: Id<"projects">;
-  };
+  params: ProjectId;
 };
 
 export type OptionalProperty<T, K extends keyof T> = Omit<T, K> & {

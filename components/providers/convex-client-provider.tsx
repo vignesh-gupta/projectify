@@ -5,16 +5,13 @@ import { dark } from "@clerk/themes";
 import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { useTheme } from "next-themes";
-
-type ConvexClientProviderProps = {
-  children: React.ReactNode;
-};
+import type { PropsWithChildren } from "react";
 
 const convexURL = process.env.NEXT_PUBLIC_CONVEX_URL!;
 
 const convex = new ConvexReactClient(convexURL);
 
-const ConvexClientProvider = ({ children }: ConvexClientProviderProps) => {
+const ConvexClientProvider = ({ children }: PropsWithChildren) => {
   const { theme } = useTheme();
 
   return (

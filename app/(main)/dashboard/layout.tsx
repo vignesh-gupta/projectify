@@ -1,9 +1,9 @@
-import React from "react";
-import OrganizationsSideBar from "./_component/sidebar/orgs-sidebar";
-import DashboardSidebar from "./_component/sidebar";
+import type { PropsWithChildren } from "react";
 import DashboardTopBar from "./_component/dashboard-top-bar";
+import DashboardSidebar from "./_component/sidebar";
+import OrganizationsSideBar from "./_component/sidebar/orgs-sidebar";
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = ({ children }: PropsWithChildren) => {
   return (
     <div className="h-[100dvh]">
       <OrganizationsSideBar />

@@ -4,13 +4,9 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import type { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 
-type AccountSettingsLayoutProps = {
-  children: ReactNode;
-};
-
-const AccountSettingsLayout = ({ children }: AccountSettingsLayoutProps) => {
+const AccountSettingsLayout = ({ children }: PropsWithChildren) => {
   const url = usePathname();
   const isOrgSettings = url.includes("/settings/organization-settings");
 

@@ -2,13 +2,9 @@
 
 import Loading from "@/components/loading";
 import { AuthLoading, Authenticated } from "convex/react";
-import type { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 
-type AuthLoadProviderProps = {
-  children: ReactNode;
-};
-
-const AuthLoadProvider = ({ children }: AuthLoadProviderProps) => {
+const AuthLoadProvider = ({ children }: PropsWithChildren) => {
   return (
     <div className="h-[100dvh]">
       <AuthLoading>
