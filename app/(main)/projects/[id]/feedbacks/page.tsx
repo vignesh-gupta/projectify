@@ -1,13 +1,14 @@
 "use client";
 
 import FeedbackCard from "@/components/feedback/feedback-card";
+import FeedbackIntegration from "@/components/feedback/feedback-integration";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { api } from "@/convex/_generated/api";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
 import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
-import { Plus } from "lucide-react";
+import { FileText, Plus } from "lucide-react";
 
 const FeedbacksPage = ({ params }: PagePropsWithProjectId) => {
   const feedbacks = useQuery(api.feedback.list, { projectId: params.id });
@@ -19,9 +20,17 @@ const FeedbacksPage = ({ params }: PagePropsWithProjectId) => {
       <div className="flex justify-between gap-2 border-b pb-2">
         <h3 className="text-xl font-bold md:text-2xl lg:text-3xl">Feedbacks</h3>
 
-        <Button onClick={() => onOpen()}>
-          <Plus className="mr-2" /> Add Feedback
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button onClick={() => onOpen()}>
+            <Plus className="mr-2" /> Add Feedback
+          </Button>
+
+          <FeedbackIntegration>
+            <Button variant="outline" className="hidden sm:flex">
+              <FileText className="w-4 h-4 mr-2" /> Feedback Integration
+            </Button>
+          </FeedbackIntegration>
+        </div>
       </div>
 
       <ScrollArea className="h-[calc(100dvh-150px)] pr-3 pt-2">

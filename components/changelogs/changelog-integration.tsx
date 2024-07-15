@@ -14,7 +14,7 @@ import { useParams } from "next/navigation";
 
 import Link from "next/link";
 import type { PropsWithChildren } from "react";
-import CodeWithCopy from "./code-with-copy";
+import CodeWithCopy from "../code-with-copy";
 
 const ChangelogIntegration = ({ children }: PropsWithChildren) => {
   const { id } = useParams<ProjectId>();
@@ -29,7 +29,7 @@ const ChangelogIntegration = ({ children }: PropsWithChildren) => {
   return (
     <Sheet>
       <SheetTrigger asChild>{children}</SheetTrigger>
-      <SheetContent className="md:min-w-fit">
+      <SheetContent className="md:max-w-xl">
         <SheetHeader>
           <SheetTitle>Changelog Integration</SheetTitle>
           <SheetDescription>
@@ -61,9 +61,7 @@ const ChangelogIntegration = ({ children }: PropsWithChildren) => {
 
               <CodeWithCopy code={nextJSCode} />
 
-              <p>
-                Now, replace the source with your custom path and destination
-              </p>
+              <p>Now, replace the source with your custom path</p>
             </TabsContent>
             <TabsContent value="api" className="space-y-5">
               <h3 className="text-lg font-semibold">API call Integration</h3>
@@ -73,7 +71,9 @@ const ChangelogIntegration = ({ children }: PropsWithChildren) => {
 
               <p>Send a GET request to</p>
 
-              <CodeWithCopy code={`https://projectify.vigneshgupta.tech/api/changelog/${id}`} />
+              <CodeWithCopy
+                code={`https://projectify.vigneshgupta.tech/api/changelog/${id}`}
+              />
             </TabsContent>
           </Tabs>
         </SheetHeader>
