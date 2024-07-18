@@ -46,13 +46,15 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <Image
-              alt="Image"
-              className="object-contain object-center h-full mx-auto overflow-hidden -z-10 aspect-video rounded-xl sm:w-full"
-              height={800}
-              src="/hero.png"
-              width={800}
-            />
+            <div className="relative hidden md:block flex-1 h-full">
+              <Image
+                alt="Image"
+                loading="eager"
+                className="object-contain object-center h-full mx-auto overflow-hidden -z-10 aspect-video rounded-xl sm:w-full"
+                src="/hero.png"
+                fill
+              />
+            </div>
           </div>
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32">

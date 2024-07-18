@@ -1,7 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import Link from "next/link";
 import { navLinks } from "./navbar";
 
 const MobileNav = () => {
@@ -12,9 +10,14 @@ const MobileNav = () => {
       </SheetHeader>
       <div className="flex flex-col gap-4 py-4">
         {navLinks.map((link) => (
-          <a href={link.href} className="text-sm font-medium hover:underline underline-offset-4" key={link.href.toLocaleLowerCase()}>
+          <Link
+            prefetch={false}
+            href={link.href}
+            className="text-sm font-medium hover:underline underline-offset-4"
+            key={link.href.toLocaleLowerCase()}
+          >
             {link.title}
-          </a>
+          </Link>
         ))}
       </div>
     </SheetContent>

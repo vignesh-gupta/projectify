@@ -16,7 +16,8 @@ const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 
 export const navLinks = [
   { title: "Features", href: "#features" },
-  { title: "Contact", href: "#" },
+  { title: "Changelogs", href: "/changelog" },
+  { title: "Contact", href: "/contact" },
 ];
 
 const Navbar = () => {
@@ -37,7 +38,7 @@ const Navbar = () => {
         )}
         href="/"
       >
-        <Image src="/logo.png" alt="Projectify" width={50} height={40} />
+        <Image src="/logo.png" alt="Projectify Logo" width={50} height={40} />
         <h1 className="hidden sm:block">Projectify</h1>
       </Link>
       <div className="ml-auto flex items-center gap-4">
@@ -47,6 +48,7 @@ const Navbar = () => {
               key={link.title}
               className="text-sm font-medium hover:underline underline-offset-4"
               href={link.href}
+              prefetch={false}
             >
               {link.title}
             </Link>
