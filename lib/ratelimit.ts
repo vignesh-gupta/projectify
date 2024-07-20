@@ -2,13 +2,8 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { NextRequest, NextResponse } from "next/server";
 
-const redis = new Redis({
-  url: process.env.REDIS_URL,
-  token: process.env.REDIS_TOKEN,
-});
-
 const ratelimit = new Ratelimit({
-  redis: redis,
+  redis: Redis.fromEnv(),
   limiter: Ratelimit.slidingWindow(
     Number(process.env.MAX_REQUESTS) ?? 5,
     "30 s"
