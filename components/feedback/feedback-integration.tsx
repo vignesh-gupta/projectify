@@ -24,10 +24,11 @@ const FeedbackIntegration = ({ children }: PropsWithChildren) => {
   },
   body: JSON.stringify({
     projectId: "${id}", // required
-    feedback: "I really enjoy your application", // required
-    name: "John Deo", // optional - if you want to ask users for their name,
-    email: "test@example.com", // optional - if you want to ask users for their email,
-    label: "featureRequest" // optional - "documentation" | "feature" | "issue" | "question" | "idea" | "other" - default is "feature"
+    content: "I really enjoy your application", // required
+    senderName: "John Deo", // required,
+    senderEmail: "test@example.com", // required,
+    type: "feature" // optional - "documentation" | "feature" | "issue" | "question" | "idea" | "other" - default is "feature"
+    status: "open" // optional - "open" | "reviewed" | "closed" - default is "open"
   }),
 });`;
 

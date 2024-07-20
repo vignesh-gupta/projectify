@@ -58,6 +58,7 @@ const ProjectSwitcher = ({ orgId }: ProjectSwitcherProps) => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          aria-label="Select Project"
           className="justify-between"
         >
           {value

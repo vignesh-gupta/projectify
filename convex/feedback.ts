@@ -1,9 +1,6 @@
 import { v } from "convex/values";
-import { action, mutation, query } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { FeedbackStatus, FeedbackType } from "./types";
-import { TaskType } from "@/lib/types";
-import { api } from "./_generated/api";
-import { PRIORITIES, STATUSES, UNASSIGNED_USER } from "@/lib/constants";
 
 export const list = query({
   args: {
@@ -34,6 +31,7 @@ export const create = mutation({
     type: FeedbackType,
   },
   handler: async (ctx, args) => {
+    console.log("Project not found", args.projectId);
     const project = await ctx.db.get(args.projectId);
 
     if (!project) {

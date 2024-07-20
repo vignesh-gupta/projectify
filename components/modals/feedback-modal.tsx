@@ -25,6 +25,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 import { FEEDBACK_STATUS, FEEDBACK_TYPES } from "@/lib/constants";
+import { feedbackFormSchema } from "@/lib/form-schemas";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -33,22 +34,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-const feedbackFormSchema = z.object({
-  id: z.string().optional(),
-  content: z.string().min(10).max(500),
-  projectId: z.string().min(10),
-  senderName: z.string(),
-  senderEmail: z.string().email(),
-  status: z.enum(["open", "reviewed", "closed"]),
-  type: z.enum([
-    "documentation",
-    "feature",
-    "issue",
-    "question",
-    "idea",
-    "other",
-  ]),
-});
 
 const FeedbackModal = () => {
   const param = useParams();
@@ -222,7 +207,7 @@ const FeedbackModal = () => {
               )}
             />
 
-            <Button type="submit" disabled={false}>
+            <Button type="submit" disabled={isCreating || isUpdating}>
               Submit
             </Button>
           </form>
