@@ -71,6 +71,11 @@ Welcome to Projectify, the ultimate project management tool designed specificall
 ## Contributing
 We welcome contributions to Projectify! If you'd like to contribute, you can follow [contribution guide](CONTRIBUTION.md). Be sure to follow our [code of conduct](CODE_OF_CONDUCT.md).
 
+## Lighthouse report
+![lighthouse-report](https://github.com/user-attachments/assets/9ccd2340-09a2-4deb-8f4b-c1164c8f66c1)
+
+
+
 ## License
 Projectify is licensed under the [MIT License](LICENSE).
 
