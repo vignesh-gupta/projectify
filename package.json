@@ -2,11 +2,13 @@
   "name": "projectify",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.3.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@clerk/nextjs": "^5.1.4",
