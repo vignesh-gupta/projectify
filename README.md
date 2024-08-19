@@ -1,81 +1,89 @@
-# Turborepo starter
+# Projectify - Your Project Management, simplified!
 
-This is an official starter Turborepo.
+![thumbnail](https://raw.githubusercontent.com/vignesh-gupta/projectify/master/public/thumbnail.png)
 
-## Using this example
+## Intro
+Welcome to Projectify, the ultimate project management tool designed specifically for small teams. With Projectify, you can manage your projects with ease, without the complexity of traditional project management software. Whether you're handling work items, managing resources, collecting feedback, or keeping track of changes, Projectify has got you covered.
 
-Run the following command:
+## Features
 
-```sh
-npx create-turbo@latest
-```
+[x] 👥**Multiple Teams with Multiple Projects** : Manage multiple teams, each with their own set of projects, efficiently and effectively.
+[x] 🤹‍♂️**Manage Multiple Projects** : Handle multiple projects simultaneously with our intuitive project management interface.
+[x] 💼**Work Items** : Easily create and manage work items to keep track of tasks and deliverables.
+[x] 📁**Resource Management (Links & Files)** : Organize and manage your project resources, including links and files, all in one place
+[x] ⭐**Improve with Feedbacks** : Gather feedback from your team or stakeholders and convert them directly into actionable work items.
+[x] 📃**Changelog Management and Integration** : Maintain a changelog for your projects and integrate it seamlessly with your website to keep everyone updated on the latest changes.
+[x] 💬**Simple Group Messaging** : Communicate with your team effortlessly using our built-in group messaging feature.
+[x] 🎁 many more...
 
-## What's inside?
 
-This Turborepo includes the following packages/apps:
+## Tech Stack
 
-### Apps and Packages
+### Frontend
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- [Next.js](https://nextjs.org/) [v14](https://nextjs.org/blog/next-14) – React framework for building performant apps with the best developer experience
+- [Clerk](https://clerk.dev/) – The complete user authentication system for modern applications built on top of Next.js and React.
+- [Zustand](https://zustand-demo.pmnd.rs/) – A small, fast and scalable bear bones state-management solution.
+- [Tailwind](https://tailwindcss.com/) – Utility-first CSS framework for rapid UI development
+- [Shadcn UI](https://ui.shadcn.com/) - A Component library to copy and paste component built on top of Tailwind + [Radix](https://www.radix-ui.com/).
+- [Lucide](https://lucide.dev/) – Beautifully simple, pixel-perfect icons
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+### Backend + Database
 
-### Utilities
+- [Convex](https://www.convex.dev/) – A real-time database and backend for modern applications
 
-This Turborepo has some additional tools already setup for you:
+### Platform
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- [Vercel](https://vercel.com/) – The best platform for deploying Next.js apps with zero configuration
 
-### Build
+### Code Quality
 
-To build all apps and packages, run the following command:
+- [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end type-safety
+- [Prettier](https://prettier.io/) – Opinionated code formatter for consistent code style
+- [ESLint](https://eslint.org/) – Pluggable linter for Next.js & TypeScript
 
-```
-cd my-turborepo
-pnpm build
-```
+## Tech Stack
 
-### Develop
+### Frontend
 
-To develop all apps and packages, run the following command:
+- [Next.js](https://nextjs.org/) [v14](https://nextjs.org/blog/next-14) – React framework for building performant apps with the best developer experience
+- [Clerk](https://clerk.dev/) – The complete user authentication system for modern applications built on top of Next.js and React.
+- [Zustand](https://zustand-demo.pmnd.rs/) – A small, fast and scalable bear bones state-management solution.
+- [Tailwind](https://tailwindcss.com/) – Utility-first CSS framework for rapid UI development
+- [Shadcn UI](https://ui.shadcn.com/) - A Component library to copy and paste component built on top of Tailwind + [Radix](https://www.radix-ui.com/).
+- [Lucide](https://lucide.dev/) – Beautifully simple, pixel-perfect icons
 
-```
-cd my-turborepo
-pnpm dev
-```
+### Backend + Database
 
-### Remote Caching
+- [Convex](https://www.convex.dev/) – A real-time database and backend for modern applications
 
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+### Platform
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
+- [Vercel](https://vercel.com/) – The best platform for deploying Next.js apps with zero configuration
 
-```
-cd my-turborepo
-npx turbo login
-```
+### Code Quality
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+- [TypeScript](https://www.typescriptlang.org/) – Static type checker for end-to-end type-safety
+- [Prettier](https://prettier.io/) – Opinionated code formatter for consistent code style
+- [ESLint](https://eslint.org/) – Pluggable linter for Next.js & TypeScript
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
-```
-npx turbo link
-```
+## Contributing
+We welcome contributions to Projectify! If you'd like to contribute, you can follow [contribution guide](CONTRIBUTION.md). Be sure to follow our [code of conduct](CODE_OF_CONDUCT.md).
 
-## Useful Links
+## Lighthouse report
+![lighthouse-report](https://github.com/user-attachments/assets/9ccd2340-09a2-4deb-8f4b-c1164c8f66c1)
 
-Learn more about the power of Turborepo:
 
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+
+## License
+Projectify is licensed under the [MIT License](LICENSE).
+
+## Author
+
+- [![@vigneshfixes](https://img.shields.io/badge/vigneshfixes-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/intent/follow?screen_name=vigneshfixes)
+- [![Vignesh Gupta](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=About.me&logoColor=white)](https://vigneshgupta.vercel.app/)
+
+## Thank you!
+
+Hope you like it. Please do ⭐ the repo. Happy coding!
