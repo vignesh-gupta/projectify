@@ -6,6 +6,7 @@ import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { Loader2 } from "lucide-react";
 import OwnedTaskTable from "../_components/owned-task-table";
+import { Doc } from "@repo/backend/convex/_generated/dataModel";
 
 
 const ProjectDashboardPage = ({
@@ -14,7 +15,7 @@ const ProjectDashboardPage = ({
   const currentUser = useCurrentUser();
 
   const myTasks = useQuery(api.work_item.list, { projectId: id })?.filter(
-    (task) => task.assigneeId === currentUser?._id
+    (task: Doc<"workItems">) => task.assigneeId === currentUser?._id
   );
 
   return (
