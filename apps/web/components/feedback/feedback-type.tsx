@@ -1,8 +1,8 @@
-import type { FeedbackType } from "@/lib/types";
+import type { FeedbackType as TFeedbackType } from "@/lib/types";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const FeedbackType = ({ type }: { type: FeedbackType | undefined }) => {
+const FeedbackType = ({ type }: { type: TFeedbackType | undefined }) => {
   if (!type) return null;
 
   return (

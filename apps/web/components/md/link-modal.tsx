@@ -21,8 +21,8 @@ type LinkModalProps = {
 const LinkModal = ({ value, children, onSave }: LinkModalProps) => {
   const [link, setLink] = useState(value || "");
 
-  const onLinkSave = (link: string) => {
-    onSave(link);
+  const onLinkSave = (newLink: string) => {
+    onSave(newLink);
     setLink("");
   };
 

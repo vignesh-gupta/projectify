@@ -1,6 +1,5 @@
-import { Star, StarOffIcon } from "lucide-react";
+import { Star } from "lucide-react";
 import Link from "next/link";
-import React from "react";
 
 const Footer = () => {
   return (
@@ -25,14 +24,6 @@ const Footer = () => {
           </Link>
         </p>
       </nav>
-      {/* 
-        <Link className="text-xs hover:underline underline-offset-4" href="#">
-          Terms of Service
-        </Link>
-        <Link className="text-xs hover:underline underline-offset-4" href="#">
-          Privacy
-        </Link>
-      */}
     </footer>
   );
 };

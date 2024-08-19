@@ -1,8 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { api } from "@repo/backend/convex/_generated/api";
-import { Doc, Id } from "@repo/backend/convex/_generated/dataModel";
-import useApiMutation from "@/lib/hooks/use-api-mutation";
+import { Doc } from "@repo/backend/convex/_generated/dataModel";
 import { format } from "date-fns";
 import { CalendarDays } from "lucide-react";
 import MDXEditor from "../md/mdx-editor";

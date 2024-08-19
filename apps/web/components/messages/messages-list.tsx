@@ -1,14 +1,13 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import type { Id } from "@repo/backend/convex/_generated/dataModel";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useMessages } from "@/lib/hooks/use-messages";
 import { useScroll } from "@/lib/hooks/use-scroll";
-import { Loader2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import MessageChat from "./message-chat";
-import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
+import type { Id } from "@repo/backend/convex/_generated/dataModel";
+import MessageChat from "./message-chat";
 
 type MessagesListProps = {
   projectId: Id<"projects">;
