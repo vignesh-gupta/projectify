@@ -1,5 +1,5 @@
-import { api } from "@repo/backend/convex/_generated/api";
-import { Id } from "@repo/backend/convex/_generated/dataModel";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import { useQuery } from "convex/react";
 import { Button } from "../ui/button";

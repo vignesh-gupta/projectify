@@ -1,3 +1,4 @@
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogClose,
@@ -7,10 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState, type ReactNode } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState, type ReactNode } from "react";
 
 type LinkModalProps = {
   value?: string;
@@ -21,8 +21,8 @@ type LinkModalProps = {
 const LinkModal = ({ value, children, onSave }: LinkModalProps) => {
   const [link, setLink] = useState(value || "");
 
-  const onLinkSave = (newLink: string) => {
-    onSave(newLink);
+  const onLinkSave = (link: string) => {
+    onSave(link);
     setLink("");
   };
 

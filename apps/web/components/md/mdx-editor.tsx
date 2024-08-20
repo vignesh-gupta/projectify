@@ -20,7 +20,7 @@ type MDXEditorProps = {
   content: string;
   readonly?: boolean;
   rows?: number;
-  onChange?: (...event: any[]) => void;
+  onChange?: (...event: unknown[]) => void;
 };
 
 const MDXEditor = ({ content, readonly, onChange, rows }: MDXEditorProps) => {

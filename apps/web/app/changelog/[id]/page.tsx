@@ -1,7 +1,7 @@
 "use client";
 
 import MDXEditor from "@/components/md/mdx-editor";
-import { api } from "@repo/backend/convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { format } from "date-fns";

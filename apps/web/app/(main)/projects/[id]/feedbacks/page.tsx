@@ -4,7 +4,7 @@ import FeedbackCard from "@/components/feedback/feedback-card";
 import FeedbackIntegration from "@/components/feedback/feedback-integration";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { api } from "@repo/backend/convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
 import type { PagePropsWithProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";

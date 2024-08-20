@@ -1,8 +1,10 @@
 import FeatureSection from "@/components/landing-page/features-section";
 import Footer from "@/components/landing-page/footer";
 import Navbar from "@/components/landing-page/navbar";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
+import { SignUpButton } from "@clerk/nextjs";
 import { Github } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

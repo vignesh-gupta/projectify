@@ -1,8 +1,8 @@
-import { Copy, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { Id } from "@repo/backend/convex/_generated/dataModel";
+import { api } from "@/convex/_generated/api";
+import type { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { api } from "@repo/backend/convex/_generated/api";
+import { Copy, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import ConfirmModal from "../modals/confirm-modal";
 

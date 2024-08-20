@@ -1,4 +1,4 @@
-import { api } from "@repo/backend/convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { DeletedObjectJSON, UserJSON } from "@clerk/nextjs/server";
 import { fetchMutation } from "convex/nextjs";
 

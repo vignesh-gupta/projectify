@@ -4,9 +4,9 @@
   "private": true,
   "scripts": {
     "dev-na": "next dev --turbo --port 3001",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build-na": "next build",
+    "start-na": "next start",
+    "lint-na": "next lint"
   },
   "dependencies": {
     "@repo/ui": "workspace:*",

@@ -1,5 +1,5 @@
-import { api } from "@repo/backend/convex/_generated/api";
-import type { Id } from "@repo/backend/convex/_generated/dataModel";
+import { api } from "@/convex/_generated/api";
+import type { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useUploadFiles } from "@xixixao/uploadstuff/react";
 import { Upload } from "lucide-react";
@@ -44,6 +44,12 @@ const FileUpload = ({ fileCount = 0 }: FileUploadProps) => {
 
       try {
         const [res] = await startUpload([file]);
+
+        if (!res) {
+          toast.error("Failed to upload file. Please try again.");
+          return;
+        }
+
         createFileResource({
           title: res.name,
           storageId: (res.response as { storageId: Id<"_storage"> }).storageId,

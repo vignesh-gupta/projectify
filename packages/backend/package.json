@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "convex dev",
-    "setup": "convex dev --until-success"
+    "convex:dev": "convex dev",
+    "convex:setup": "convex dev --until-success"
   },
   "keywords": [],
   "author": "",

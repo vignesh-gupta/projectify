@@ -3,14 +3,14 @@
 import FileModal from "@/components/modals/file-model";
 import LinkModal from "@/components/modals/link-modal";
 import TaskModal from "@/components/modals/task-modal";
+import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
 import { useFileModal } from "@/lib/store/use-file-modal";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import { useEffect, useState } from "react";
-import FeedbackModal from "../modals/feedback-modal";
-import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import ChangelogModal from "../modals/changelog-modal";
+import FeedbackModal from "../modals/feedback-modal";
 
 const ModelProvider = () => {
   const [isMounted, setIsMounted] = useState(false);

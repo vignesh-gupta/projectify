@@ -5,8 +5,8 @@ import Image from "next/image";
 
 import InputModal from "@/components/modals/input-modal";
 import { Button } from "@/components/ui/button";
+import { api } from "@/convex/_generated/api";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { api } from "@repo/backend/convex/_generated/api";
 
 const NoProject = () => {
   const { organization } = useOrganization();
@@ -40,9 +40,8 @@ const NoProject = () => {
           header="Create a new project"
           description="Provide Project details to create a new project."
           toastMessage="Project created successfully"
-          disabled={isPending}
         >
-          <Button disabled={isPending}>Create Project</Button>
+          <Button>Create Project</Button>
         </InputModal>
       </div>
     </div>

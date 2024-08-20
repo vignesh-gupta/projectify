@@ -12,7 +12,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { Id } from "@repo/backend/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { MoreHorizontalIcon, NotebookPen } from "lucide-react";
 import Link from "next/link";
 import ProjectStatus from "./project-status";

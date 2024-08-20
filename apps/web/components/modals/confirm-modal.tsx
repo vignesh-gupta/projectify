@@ -8,13 +8,14 @@ import {
   AlertDialogHeader,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import type { ReactNode } from "react";
 import { buttonVariants } from "@/components/ui/button";
+import type { ReactNode } from "react";
 import { toast } from "sonner";
 
 type ConfirmModalProps = {
   children: ReactNode;
   disabled?: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onConfirm: () => Promise<any>;
   header: string;
   description?: string;

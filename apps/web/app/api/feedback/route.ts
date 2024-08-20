@@ -1,5 +1,5 @@
-import { api } from "@repo/backend/convex/_generated/api";
-import { Id } from "@repo/backend/convex/_generated/dataModel";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 import { feedbackFormSchema } from "@/lib/form-schemas";
 import { fetchMutation } from "convex/nextjs";
 

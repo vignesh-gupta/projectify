@@ -1,3 +1,4 @@
+import { Doc } from "@/convex/_generated/dataModel";
 import { create } from "zustand";
 import { OptionalProperty } from "../types";
 

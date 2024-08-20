@@ -1,4 +1,4 @@
-import { generateAPIKey } from "@/lib/utils";
+import { generateAPIKey } from "../lib/utils";
 import { mutation, query } from "./_generated/server";
 
 export const create = mutation({
