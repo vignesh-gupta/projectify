@@ -4,7 +4,7 @@ import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFileModal } from "@/lib/store/use-file-modal";
-import { Edit, SquareArrowOutUpRight, Trash } from "lucide-react";
+import { Edit, Trash } from "lucide-react";
 import Link from "next/link";
 import FileIcon from "./file-icon";
 
@@ -19,7 +19,7 @@ type FileCardProps = {
 };
 
 const FileCard = ({
-  resource: { _id, title, storageId, projectId, type },
+  resource: { _id, title, storageId, type },
 }: FileCardProps) => {
   const { onOpen } = useFileModal();
 

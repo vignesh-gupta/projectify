@@ -13,8 +13,7 @@ import {
 } from "@tanstack/react-table";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
-import { useCallback, useEffect, useState } from "react";
-import { DASHBOARD_ROUTE } from "../constants";
+import { useEffect, useState } from "react";
 
 export const useWorkItemTable = <TData, TValue>(
   columns: ColumnDef<TData, TValue>[],
@@ -55,10 +54,7 @@ export const useWorkItemTable = <TData, TValue>(
       })
     );
 
-
     setColumnFilters(newColumnFilters);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const table = useReactTable({

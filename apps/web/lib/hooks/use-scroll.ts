@@ -14,7 +14,6 @@ export const useScroll = (
       block,
       behavior,
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [behavior, block, ...dependencies]);
 
   return scrollRef;

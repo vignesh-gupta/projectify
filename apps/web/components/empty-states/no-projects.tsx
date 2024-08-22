@@ -40,8 +40,9 @@ const NoProject = () => {
           header="Create a new project"
           description="Provide Project details to create a new project."
           toastMessage="Project created successfully"
+          disabled={isPending}
         >
-          <Button>Create Project</Button>
+          <Button disabled={isPending}>Create Project</Button>
         </InputModal>
       </div>
     </div>

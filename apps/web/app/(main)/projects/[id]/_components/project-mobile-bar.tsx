@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/sheet";
 import { getNavLinks } from "@/lib/utils";
 import { UserButton } from "@clerk/nextjs";
-import { Layout, ListTodo, Menu, Settings } from "lucide-react";
+import { Menu } from "lucide-react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 

@@ -6,6 +6,7 @@ type TValue = Pick<Doc<"links">, "_id" | "title" | "url">;
 type TModal = {
   isOpen: boolean;
   values?: TValue;
+ // eslint-disable-next-line no-unused-vars
   onOpen: (values?: TValue) => void;
   onClose: () => void;
 };

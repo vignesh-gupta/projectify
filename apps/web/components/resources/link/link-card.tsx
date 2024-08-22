@@ -1,12 +1,11 @@
+import ConfirmModal from "@/components/modals/confirm-modal";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { Edit, LinkIcon, Trash } from "lucide-react";
-import ConfirmModal from "@/components/modals/confirm-modal";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Skeleton } from "@/components/ui/skeleton";
 
 type LinkCardProps = {
   resource: {
@@ -19,7 +18,7 @@ type LinkCardProps = {
 };
 
 const LinkCard = ({
-  resource: { _id, title, url, projectId, icon },
+  resource: { _id, title, url, icon },
 }: LinkCardProps) => {
   const { onOpen } = useLinkModal();
 

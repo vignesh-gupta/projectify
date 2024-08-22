@@ -1,5 +1,6 @@
 import { ChangeEvent, ReactNode, useState } from "react";
 
+import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -8,14 +9,14 @@ import {
   DialogHeader,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { toast } from "sonner";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
 
 type InputModalProps = {
   children: ReactNode;
   disabled?: boolean;
+  // eslint-disable-next-line no-unused-vars
   onConfirm: (title?: string, description?: string) => Promise<any>;
   header: string;
   description?: string;

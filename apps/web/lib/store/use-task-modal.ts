@@ -7,6 +7,7 @@ type TValue = Omit<OptionalProperty<Doc<"workItems">, "_id">, "_creationTime">;
 type TModalProvider = {
   isOpen: boolean;
   values?: TValue;
+ // eslint-disable-next-line no-unused-vars
   onOpen: (values?: TValue) => void;
   onClose: () => void;
 };

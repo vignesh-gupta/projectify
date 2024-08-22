@@ -20,6 +20,7 @@ type MDXEditorProps = {
   content: string;
   readonly?: boolean;
   rows?: number;
+  // eslint-disable-next-line no-unused-vars
   onChange?: (...event: any[]) => void;
 };
 
