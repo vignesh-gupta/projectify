@@ -1,7 +1,14 @@
 import { generateAPIKey } from "@/lib/utils";
+import { RegisteredMutation, RegisteredQuery } from "convex/server";
+import { EmptyObject } from "react-hook-form";
+import { Id } from "./_generated/dataModel";
 import { mutation, query } from "./_generated/server";
 
-export const create = mutation({
+export const create: RegisteredMutation<
+  "public",
+  EmptyObject,
+  Promise<Id<"api_keys">>
+> = mutation({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
@@ -33,7 +40,11 @@ export const create = mutation({
   },
 });
 
-export const revoke = mutation({
+export const revoke: RegisteredMutation<
+  "public",
+  EmptyObject,
+  Promise<Id<"api_keys">>
+> = mutation({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {
@@ -58,11 +69,22 @@ export const revoke = mutation({
       throw new Error("API key not found");
     }
 
-    return ctx.db.delete(key._id);
+    await ctx.db.delete(key._id);
+
+    return key._id;
   },
 });
 
-export const get = query({
+export const get: RegisteredQuery<
+  "public",
+  EmptyObject,
+  Promise<{
+    _id: Id<"api_keys">;
+    _creationTime: number;
+    userId: Id<"users">;
+    key: string;
+  } | null>
+> = query({
   handler: async (ctx) => {
     const identity = await ctx.auth.getUserIdentity();
     if (!identity) {

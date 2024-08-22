@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "npx convex deploy --cmd 'next build'",
+    "app:build": "npx convex deploy --cmd 'npm run build' -y",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "build": "next build"
   },
   "dependencies": {
     "@repo/ui": "*",

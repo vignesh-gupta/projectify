@@ -1,8 +1,11 @@
 import { api } from "@/convex/_generated//api";
 import { action, mutation } from "@/convex/_generated//server";
+import { RegisteredMutation } from "convex/server";
 import { v } from "convex/values";
+import { EmptyObject } from "react-hook-form";
 
-export const generateUploadUrl = mutation((ctx) => {
+export const generateUploadUrl: RegisteredMutation<"public", EmptyObject, Promise<string>>
+= mutation((ctx) => {
   return ctx.storage.generateUploadUrl();
 });
 
