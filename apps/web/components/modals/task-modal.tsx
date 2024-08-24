@@ -14,8 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { api } from "@/convex/_generated/api";
-import type { Id } from "@/convex/_generated/dataModel";
+import { api } from "@repo/backend/convex/_generated/api";
+import type { Id } from "@repo/backend/convex/_generated/dataModel";
 import { LABELS, PRIORITIES, STATUSES, UNASSIGNED_USER } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useTaskModal } from "@/lib/store/use-task-modal";

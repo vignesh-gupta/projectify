@@ -1,4 +1,4 @@
-import { Doc } from "@/convex/_generated/dataModel";
+import { Doc } from "@repo/backend/convex/_generated/dataModel";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import FeedbackActions from "./feedback-actions";
 import FeedbackStatus from "./feedback-status";

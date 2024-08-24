@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import type { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@repo/backend/convex/_generated/dataModel";
 import { useWorkItemTable } from "@/lib/hooks/use-workItem-table";
 import type { TaskPriority, TaskStatus, TaskType } from "@/lib/types";
 import { DataTablePagination } from "./data-table-pagination";

@@ -1,0 +1,13 @@
+{
+  "name": "@repo/backend",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "convex dev",
+    "setup": "convex dev --until-success"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "convex": "^1.14.4"
+  }
+}

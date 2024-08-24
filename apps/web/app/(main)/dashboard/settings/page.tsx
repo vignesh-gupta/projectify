@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { api } from "@/convex/_generated/api";
+import { api } from "@repo/backend/convex/_generated/api";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useQuery } from "convex/react";
 import { Copy, RefreshCcw, Trash } from "lucide-react";

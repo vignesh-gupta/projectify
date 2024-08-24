@@ -2,7 +2,7 @@
 
 import ConfirmModal from "@/components/modals/confirm-modal";
 import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
+import { api } from "@repo/backend/convex/_generated/api";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import type { PagePropsWithProjectId } from "@/lib/types";

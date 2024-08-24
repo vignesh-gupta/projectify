@@ -2,7 +2,7 @@
 
 import NoProject from "@/components/empty-states/no-projects";
 import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
+import { api } from "@repo/backend/convex/_generated/api";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useOrganization } from "@clerk/nextjs";
 import { useQuery } from "convex/react";

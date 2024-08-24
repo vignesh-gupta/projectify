@@ -5,8 +5,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
+import { api } from "@repo/backend/convex/_generated/api";
+import { Doc } from "@repo/backend/convex/_generated/dataModel";
 import { UNASSIGNED_USER } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";

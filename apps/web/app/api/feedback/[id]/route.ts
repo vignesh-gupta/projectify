@@ -1,4 +1,4 @@
-import { api } from "@/convex/_generated/api";
+import { api } from "@repo/backend/convex/_generated/api";
 import { ProjectId } from "@/lib/types";
 import { fetchQuery } from "convex/nextjs";
 

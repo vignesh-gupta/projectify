@@ -5,7 +5,7 @@ import Image from "next/image";
 
 import InputModal from "@/components/modals/input-modal";
 import { Button } from "@/components/ui/button";
-import { api } from "@/convex/_generated/api";
+import { api } from "@repo/backend/convex/_generated/api";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 
 const NoProject = () => {

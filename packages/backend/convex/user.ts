@@ -1,6 +1,6 @@
-import { UNASSIGNED_USER } from "@/lib/constants";
+import { UNASSIGNED_USER } from "../lib/utils";
 import { v } from "convex/values";
-import { mutation, query } from "@/convex/_generated//server";
+import { mutation, query } from "./_generated/server";
 
 export const create = mutation({
   args: {

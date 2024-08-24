@@ -22,8 +22,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { api } from "@/convex/_generated/api";
-import type { Id } from "@/convex/_generated/dataModel";
+import { api } from "@repo/backend/convex/_generated/api";
+import type { Id } from "@repo/backend/convex/_generated/dataModel";
 import { FEEDBACK_STATUS, FEEDBACK_TYPES } from "@/lib/constants";
 import { feedbackFormSchema } from "@/lib/form-schemas";
 import useApiMutation from "@/lib/hooks/use-api-mutation";

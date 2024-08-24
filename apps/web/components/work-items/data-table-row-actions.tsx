@@ -10,7 +10,7 @@ import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Task } from "./data-table";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
-import { api } from "@/convex/_generated/api";
+import { api } from "@repo/backend/convex/_generated/api";
 import { toast } from "sonner";
 
 type DataTableRowActionsProps = {

@@ -1,4 +1,4 @@
-import { generateAPIKey } from "@/lib/utils";
+import { generateAPIKey } from "../lib/utils";
 import { RegisteredMutation, RegisteredQuery } from "convex/server";
 import { EmptyObject } from "react-hook-form";
 import { Id } from "./_generated/dataModel";

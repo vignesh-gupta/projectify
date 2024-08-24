@@ -1,5 +1,5 @@
-import { api } from "@/convex/_generated/api";
-import { Doc } from "@/convex/_generated/dataModel";
+import { api } from "@repo/backend/convex/_generated/api";
+import { Doc } from "@repo/backend/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import { Edit, Trash } from "lucide-react";

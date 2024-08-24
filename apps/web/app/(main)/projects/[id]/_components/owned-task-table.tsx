@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Doc } from "@/convex/_generated/dataModel";
+import { Doc } from "@repo/backend/convex/_generated/dataModel";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 
 type OwnedTaskTableProps = {
