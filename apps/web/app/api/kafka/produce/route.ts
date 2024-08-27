@@ -1,19 +1,10 @@
-import { Kafka } from "@upstash/kafka";
+import { produceMessage } from "@/lib/kafka";
 
-const kafka = new Kafka({
-  url: "https://close-lemming-8719-us1-rest-kafka.upstash.io",
-  username: "Y2xvc2UtbGVtbWluZy04NzE5JORTVVCpRJBDTSgTyjtvck4AudXIBbq3psRzqt0",
-  password: "NDgyOTRhNmItMWFlZS00NGRkLWI3MzItZjc4ZDlhM2U0ZDc2",
-});
 
-export const GET = async () => {
-  const p = kafka.producer();
+export const POST = async (req: Request) => {
+  const { resource, id, action } = await req.json();
 
-  // Objects will get serialized using "JSON.stringify"
-  const message = { hello: "world" };
-  const res = await p.produce("delete-childs", message);
-
-  console.log(res);
+  const res = await produceMessage({ resource, id, action });
 
   return Response.json({ message: "Message sent", res });
 };

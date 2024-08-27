@@ -1,21 +1,25 @@
-import { Kafka, logLevel } from 'kafkajs';
+import { Kafka, logLevel } from "kafkajs";
 
 const kafka = new Kafka({
-  brokers: ['close-lemming-8719-us1-kafka.upstash.io:9092'],
+  brokers: [process.env.UPSTASH_KAFKA_BROKER!],
+  connectionTimeout: 10000,
   ssl: true,
   sasl: {
-      mechanism: 'scram-sha-256',
-      username: 'Y2xvc2UtbGVtbWluZy04NzE5JORTVVCpRJBDTSgTyjtvck4AudXIBbq3psRzqt0',
-      password: 'NDgyOTRhNmItMWFlZS00NGRkLWI3MzItZjc4ZDlhM2U0ZDc2'
+    mechanism: "scram-sha-256",
+    username: process.env.UPSTASH_KAFKA_USERNAME!,
+    password: process.env.UPSTASH_KAFKA_PASSWORD!,
   },
   logLevel: logLevel.ERROR,
 });
 
-const consumer = kafka.consumer({ groupId: 'YOUR_CONSUMER_GROUP' });
+const consumer = kafka.consumer({ groupId: "group-1" });
 
 const run = async () => {
-  await consumer.connect();
-  await consumer.subscribe({ topic: 'delete-childs', fromBeginning: true });
+  await consumer.connect().then(() => console.log("Connected"));
+
+  await consumer
+    .subscribe({ topic: "delete-child", fromBeginning: true })
+    .then(() => console.log("Subscribed to topic"));
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
@@ -29,4 +33,4 @@ const run = async () => {
   });
 };
 
-run().catch(e => console.error('[example/consumer] e.message', e));
+run().catch((e) => console.error("[example/consumer] e.message", e));
