@@ -1,4 +1,6 @@
 import { Kafka, logLevel } from "kafkajs";
+import { postDeleteProject } from "./service/delete-child";
+import { Message } from "./types";
 
 const kafka = new Kafka({
   brokers: [process.env.UPSTASH_KAFKA_BROKER!],
@@ -29,6 +31,22 @@ const run = async () => {
         topic,
         value: message?.value?.toString() || "Missing value",
       });
+
+      if(!message.value?.keys) return
+
+      const messageValue: Message = JSON.parse(message.value.toString());
+
+      console.log(messageValue.id);
+      
+
+      switch (messageValue.resource) {
+        case "project":
+          postDeleteProject(messageValue.id)
+          break;
+      
+        default:
+          break;
+      }
     },
   });
 };

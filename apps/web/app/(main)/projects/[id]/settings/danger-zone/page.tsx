@@ -23,7 +23,7 @@ const ProjectSettingsDangerZonePage = ({
         method: "POST",
         body: JSON.stringify({ resource: "project", id, action: "delete" }),
       });
-      await deleteProject({ id });
+      // await deleteProject({ id });
       router.push(DASHBOARD_ROUTE);
     } catch (e) {
       toast.error("Something went wrong, try again later!");

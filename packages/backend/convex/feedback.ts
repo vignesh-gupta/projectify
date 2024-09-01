@@ -61,7 +61,5 @@ export const remove = mutation({
   args: {
     id: v.id("feedbacks"),
   },
-  handler: async (ctx, args) => {
-    return await ctx.db.delete(args.id);
-  },
+  handler: async (ctx, args) => await ctx.db.delete(args.id),
 });

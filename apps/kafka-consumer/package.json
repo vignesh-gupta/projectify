@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@repo/backend": "*",
+    "convex": "^1.15.0",
     "cors": "^2.8.5",
     "esbuild": "^0.23.1",
     "express": "^4.19.2",
@@ -19,5 +20,6 @@
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21"
-  }
+  },
+  "type": "module"
 }

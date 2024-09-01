@@ -10,15 +10,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useConstructions } from "@/lib/hooks/use-constructions";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import type { PagePropsWithProjectId } from "@/lib/types";
 import { Eye, FileText, MoreHorizontal, Plus } from "lucide-react";
 import Link from "next/link";
 
 const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
-  useConstructions("feature"); // TODO: Remove this line when the page is ready
-
   const { onOpen } = useChangelogModal();
 
   return (

@@ -21,18 +21,18 @@ const MessageChatAction = ({ content, messageId }: MessageChatActionProps) => {
     toast.success("Message copied to clipboard");
   };
 
-  const handleDelete = async () => {
-    return deleteMessage({ messageId })
-      .then(() => toast.success("Message deleted"))
-      .catch(() => toast.error("Failed to delete message"));
-  };
+  const handleDelete = async () => deleteMessage({ messageId });
 
   return (
     <>
       <Button size="icon" variant="ghost" onClick={handleCopy}>
         <Copy className="w-4 h-4" />
       </Button>
-      <ConfirmModal header="Delete this message" onConfirm={handleDelete} toastMessage="Message deleted successfully">
+      <ConfirmModal
+        header="Delete this message"
+        onConfirm={handleDelete}
+        toastMessage="Message deleted"
+      >
         <Button size="icon" variant="ghost" disabled={isPending}>
           <Trash2 className="w-4 h-4" />
         </Button>

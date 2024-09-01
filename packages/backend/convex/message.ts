@@ -43,10 +43,6 @@ export const remove = mutation({
     messageId: v.id("messages"),
   },
   handler: async (ctx, args) => {
-    const identity = ctx.auth.getUserIdentity();
-    if (!identity)
-      throw new Error("Unauthenticated user cannot delete messages");
-
     const message = await ctx.db.get(args.messageId);
     if (!message) throw new Error("Message not found");
 
@@ -65,5 +61,18 @@ export const list = query({
       .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
       .order("desc")
       .paginate(args.paginationOpts);
+  },
+});
+
+export const listAll = query({
+  args: {
+    projectId: v.id("projects"),
+  },
+  handler: async (ctx, args) => {
+    return ctx.db
+      .query("messages")
+      .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
+      .order("desc")
+      .collect();
   },
 });

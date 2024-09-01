@@ -49,7 +49,7 @@ const MessagesList = ({ projectId }: MessagesListProps) => {
           </div>
         )}
 
-        {!isLoading && status == "Exhausted" && (
+        {!isLoading && status == "Exhausted" && messages.length != 0 && (
           <div className="flex items-center justify-center p-2 gap-x-2 text-muted-foreground">
             <p>No more messages</p>
           </div>

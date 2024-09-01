@@ -52,28 +52,6 @@ export const remove = mutation({
     if (!project) {
       throw new Error("Project not found");
     }
-
-    // const workItems = await ctx.db
-    //   .query("workItems")
-    //   .withIndex("by_project", (q) => q.eq("projectId", args.id))
-    //   .collect();
-
-    // workItems.map((wi) => ctx.db.delete(wi._id));
-
-    // const files = await ctx.db
-    //   .query("files")
-    //   .withIndex("by_project", (q) => q.eq("projectId", args.id))
-    //   .collect();
-
-    // files.map((file) => ctx.db.delete(file._id));
-
-    // const links = await ctx.db
-    //   .query("links")
-    //   .withIndex("by_project", (q) => q.eq("projectId", args.id))
-    //   .collect();
-
-    // links.map((link) => ctx.db.delete(link._id));
-
     await ctx.db.delete(args.id);
   },
 });

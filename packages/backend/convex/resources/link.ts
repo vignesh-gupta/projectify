@@ -52,11 +52,6 @@ export const remove = mutation({
     _id: v.id("links"),
   },
   handler: async (ctx, args) => {
-    const identity = ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Unauthenticated user cannot delete resources");
-    }
-
     const link = await ctx.db.get(args._id);
 
     if (!link) {
@@ -74,11 +69,6 @@ export const list = query({
     projectId: v.id("projects"),
   },
   handler: async (ctx, args) => {
-    const identity = ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Unauthenticated user cannot list resources");
-    }
-
     const project = await ctx.db.get(args.projectId);
     if (!project) {
       throw new Error("Project not found");

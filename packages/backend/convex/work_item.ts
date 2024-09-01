@@ -51,16 +51,7 @@ export const remove = mutation({
   args: {
     _id: v.id("workItems"),
   },
-  handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Unauthorized");
-    }
-
-    await ctx.db.delete(args._id);
-
-    return;
-  },
+  handler: async (ctx, args) => await ctx.db.delete(args._id),
 });
 
 export const list = query({
@@ -68,11 +59,6 @@ export const list = query({
     projectId: v.id("projects"),
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Unauthorized");
-    }
-
     if (!args.projectId) throw new Error("projectId is required");
 
     const workItems = await ctx.db
