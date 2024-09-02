@@ -4884,7 +4884,7 @@ jwt-decode@^3.1.2:
 
 kafkajs@^2.2.4:
   version "2.2.4"
-  resolved "https://registry.npmjs.org/kafkajs/-/kafkajs-2.2.4.tgz"
+  resolved "https://registry.yarnpkg.com/kafkajs/-/kafkajs-2.2.4.tgz#59e6e16459d87fdf8b64be73970ed5aa42370a5b"
   integrity sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==
 
 keyv@^4.5.3:

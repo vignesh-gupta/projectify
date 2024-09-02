@@ -1,13 +1,29 @@
 /* eslint-disable turbo/no-undeclared-env-vars */
 import { KafkaMessage } from "@repo/backend/lib/types";
-import { Kafka } from "@upstash/kafka";
+import { Kafka, logLevel } from "kafkajs";
 
 const kafka = new Kafka({
-  url: process.env.UPSTASH_KAFKA_REST_URL!,
-  username: process.env.UPSTASH_KAFKA_REST_USERNAME!,
-  password: process.env.UPSTASH_KAFKA_REST_PASSWORD!,
+  brokers: [process.env.UPSTASH_KAFKA_BROKER!],
+  connectionTimeout: 10000,
+  ssl: true,
+  sasl: {
+    mechanism: "scram-sha-256",
+    username: process.env.KAFKA_USERNAME!,
+    password: process.env.KAFKA_PASSWORD!,
+  },
+  logLevel: logLevel.ERROR,
 }).producer();
 
 export const produceMessage = async (message: KafkaMessage) => {
-  return await kafka.produce("delete-child", message);
+  try {
+    await kafka.connect();
+    await kafka.send({
+      topic: "delete-child",
+      messages: [{ value: JSON.stringify(message) }],
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    await kafka.disconnect();
+  }
 };
