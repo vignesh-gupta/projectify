@@ -42,12 +42,7 @@ export const remove = mutation({
   args: {
     messageId: v.id("messages"),
   },
-  handler: async (ctx, args) => {
-    const message = await ctx.db.get(args.messageId);
-    if (!message) throw new Error("Message not found");
-
-    return ctx.db.delete(message._id);
-  },
+  handler: async (ctx, args) => ctx.db.delete(args.messageId),
 });
 
 export const list = query({
@@ -74,5 +69,11 @@ export const listAll = query({
       .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
       .order("desc")
       .collect();
+  },
+});
+
+export const test = query({
+  handler: async (ctx) => {
+    return { message: "Hello, world!" };
   },
 });
