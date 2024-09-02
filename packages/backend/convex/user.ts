@@ -10,6 +10,8 @@ export const create = mutation({
     imageUrl: v.string(),
   },
   handler: async (ctx, args) => {
+    console.log("[USER_CREATE_OPS] : Creating user", args);
+
     const userId = await ctx.db.insert("users", args);
 
     console.log("[USER_CREATE_OPS] : Created user", userId);
@@ -45,6 +47,9 @@ export const remove = mutation({
     clerkId: v.string(),
   },
   handler: async (ctx, args) => {
+    console.log("[USER_DELETE_OPS] : Deleting user", args);
+
+
     const existingUser = await ctx.db
       .query("users")
       .withIndex("by_clerk", (q) => q.eq("clerkId", args.clerkId))
