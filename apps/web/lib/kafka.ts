@@ -3,7 +3,7 @@ import { KafkaMessage } from "@repo/backend/lib/types";
 import { Kafka, logLevel } from "kafkajs";
 
 const kafka = new Kafka({
-  brokers: [process.env.UPSTASH_KAFKA_BROKER!],
+  brokers: [process.env.KAFKA_BROKER!],
   connectionTimeout: 10000,
   ssl: true,
   sasl: {
@@ -18,7 +18,7 @@ export const produceMessage = async (message: KafkaMessage) => {
   try {
     await kafka.connect();
     await kafka.send({
-      topic: "delete-child",
+      topic:process.env.KAFKA_TOPIC || "delete-child",
       messages: [{ value: JSON.stringify(message) }],
     });
   } catch (error) {

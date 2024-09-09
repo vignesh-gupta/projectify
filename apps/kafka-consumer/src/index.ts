@@ -6,13 +6,13 @@ const actuator = require('express-actuator');
 const express = require("express");
 
 const kafka = new Kafka({
-  brokers: [process.env.UPSTASH_KAFKA_BROKER!],
+  brokers: [process.env.KAFKA_BROKER!],
   connectionTimeout: 10000,
   ssl: true,
   sasl: {
     mechanism: "scram-sha-256",
-    username: process.env.UPSTASH_KAFKA_USERNAME!,
-    password: process.env.UPSTASH_KAFKA_PASSWORD!,
+    username: process.env.KAFKA_USERNAME!,
+    password: process.env.KAFKA_PASSWORD!,
   },
   logLevel: logLevel.ERROR,
 });
@@ -23,7 +23,7 @@ const run = async () => {
   await consumer.connect().then(() => console.log("Connected"));
 
   await consumer
-    .subscribe({ topic: "delete-child", fromBeginning: true })
+    .subscribe({ topic: process.env.KAFKA_TOPIC || "delete-child", fromBeginning: true })
     .then(() => console.log("Subscribed to topic"));
 
   await consumer.run({
