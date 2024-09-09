@@ -72,8 +72,3 @@ export const listAll = query({
   },
 });
 
-export const test = query({
-  handler: async (ctx) => {
-    return { message: "Hello, world!" };
-  },
-});
