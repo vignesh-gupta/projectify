@@ -1,6 +1,9 @@
-var { Kafka, logLevel } = require("kafkajs");
-var { postDeleteProject } = require("./service/delete-child");
+const { Kafka, logLevel } = require("kafkajs");
+const { postDeleteProject } = require("./service/delete-child");
 import { KafkaMessage } from "@repo/backend/lib/types";
+import { Response } from "express";
+const actuator = require('express-actuator');
+const express = require("express");
 
 const kafka = new Kafka({
   brokers: [process.env.UPSTASH_KAFKA_BROKER!],
@@ -50,4 +53,17 @@ const run = async () => {
   });
 };
 
-run().catch((e) => console.error("[example/consumer] e.message", e));
+run().catch((e) => console.error("[consumer] e.message", e));
+
+const app = express();
+const port = process.env.PORT || 8080;
+
+app.use(actuator());
+
+app.get("/", (_, res:Response) => {
+  res.send("Welcome to the Projectify Kaka consumer!");
+});
+
+app.listen(port, () => {
+  console.log(`App listening on port ${port}`);
+});
