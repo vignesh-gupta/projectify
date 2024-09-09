@@ -1,5 +1,5 @@
-import { Kafka, logLevel } from "kafkajs";
-import { postDeleteProject } from "./service/delete-child";
+var { Kafka, logLevel } = require("kafkajs");
+var { postDeleteProject } = require("./service/delete-child");
 import { KafkaMessage } from "@repo/backend/lib/types";
 
 const kafka = new Kafka({

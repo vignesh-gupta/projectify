@@ -1,6 +1,6 @@
-import { api } from "@repo/backend/convex/_generated/api";
+var { api } = require("@repo/backend/convex/_generated/api");
+var { convexClient } = require("../utils");
 import { Id } from "@repo/backend/convex/_generated/dataModel";
-import { convexClient } from "../utils";
 
 export const postDeleteProject = async (projectId: Id<"projects">) => {
   await Promise.all([
