@@ -12,4 +12,4 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Consumer health check
-        run: bash ./.github/health-check-cron.sh
+        run: curl --location --request GET 'https://projectify-im8j.onrender.com/health'
