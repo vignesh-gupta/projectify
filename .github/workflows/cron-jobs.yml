@@ -1,0 +1,14 @@
+name: "Cron jobs"
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+
+jobs:
+  health_check:
+    name: Health check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Consumer health check
+        run: bash ./.github/health-check-cron.sh
