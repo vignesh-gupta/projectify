@@ -1,5 +1,6 @@
 name: "Cron jobs"
 on:
+  workflow_dispatch:
   schedule:
     - cron: "*/10 * * * *"
 
