@@ -1,9 +1,10 @@
 const { Kafka, logLevel } = require("kafkajs");
 const { postDeleteProject } = require("./service/delete-child");
+const actuator = require("express-actuator");
+const express = require("express");
+
 import { KafkaMessage } from "@repo/backend/lib/types";
 import { Response } from "express";
-const actuator = require('express-actuator');
-const express = require("express");
 
 const kafka = new Kafka({
   brokers: [process.env.KAFKA_BROKER!],
@@ -23,7 +24,10 @@ const run = async () => {
   await consumer.connect().then(() => console.log("Connected"));
 
   await consumer
-    .subscribe({ topic: process.env.KAFKA_TOPIC || "delete-child", fromBeginning: true })
+    .subscribe({
+      topic: process.env.KAFKA_TOPIC || "delete-child",
+      fromBeginning: true,
+    })
     .then(() => console.log("Subscribed to topic"));
 
   await consumer.run({
@@ -38,12 +42,13 @@ const run = async () => {
       if (!message.value?.keys) return;
 
       const messageValue: KafkaMessage = JSON.parse(message.value.toString());
+      const { id, resource } = messageValue;
 
-      console.log(messageValue.id);
+      if (!id || !resource) return;
 
-      switch (messageValue.resource) {
+      switch (resource) {
         case "project":
-          postDeleteProject(messageValue.id);
+          postDeleteProject(id);
           break;
 
         default:
@@ -60,7 +65,7 @@ const port = process.env.PORT || 8080;
 
 app.use(actuator());
 
-app.get("/", (_, res:Response) => {
+app.get("/", (_: any, res: Response) => {
   res.send("Welcome to the Projectify Kaka consumer!");
 });
 
