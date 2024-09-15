@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import { KafkaMessage } from "@repo/backend/lib/types";
 import { Kafka, logLevel } from "kafkajs";
 
