@@ -7,14 +7,14 @@ Welcome to Projectify, the ultimate project management tool designed specificall
 
 ## Features
 
-[x] 👥**Multiple Teams with Multiple Projects** : Manage multiple teams, each with their own set of projects, efficiently and effectively.
-[x] 🤹‍♂️**Manage Multiple Projects** : Handle multiple projects simultaneously with our intuitive project management interface.
-[x] 💼**Work Items** : Easily create and manage work items to keep track of tasks and deliverables.
-[x] 📁**Resource Management (Links & Files)** : Organize and manage your project resources, including links and files, all in one place
-[x] ⭐**Improve with Feedbacks** : Gather feedback from your team or stakeholders and convert them directly into actionable work items.
-[x] 📃**Changelog Management and Integration** : Maintain a changelog for your projects and integrate it seamlessly with your website to keep everyone updated on the latest changes.
-[x] 💬**Simple Group Messaging** : Communicate with your team effortlessly using our built-in group messaging feature.
-[x] 🎁 many more...
+- [x] 👥**Multiple Teams with Multiple Projects** : Manage multiple teams, each with their own set of projects, efficiently and effectively.
+- [x] 🤹‍♂️**Manage Multiple Projects** : Handle multiple projects simultaneously with our intuitive project management interface.
+- [x] 💼**Work Items** : Easily create and manage work items to keep track of tasks and deliverables.
+- [x] 📁**Resource Management (Links & Files)** : Organize and manage your project resources, including links and files, all in one place
+- [x] ⭐**Improve with Feedbacks** : Gather feedback from your team or stakeholders and convert them directly into actionable work items.
+- [x] 📃**Changelog** : Maintain a changelog for projects and integrate it seamlessly with your website to keep users updated on changes.
+- [x] 💬**Simple Group Messaging** : Communicate with your team effortlessly using our built-in group messaging feature.
+- [x] 🎁 many more...
 
 ## Tech Stack
 
