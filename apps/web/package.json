@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "app:build": "npx convex deploy --cmd 'npm run build' -y",
     "start": "next start",
     "lint": "next lint",

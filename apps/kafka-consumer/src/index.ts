@@ -22,13 +22,13 @@ const consumer = kafka.consumer({ groupId: "group-1" });
 
 const run = async () => {
   await consumer.connect().then(() => console.log("Connected"));
-
+  const topic = process.env.KAFKA_TOPIC || "delete-child";
   await consumer
     .subscribe({
-      topic: process.env.KAFKA_TOPIC || "delete-child",
+      topic,
       fromBeginning: true,
     })
-    .then(() => console.log("Subscribed to topic"));
+    .then(() => console.log("Subscribed to topic: "+ topic));
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
