@@ -1,4 +1,3 @@
-/* eslint-disable turbo/no-undeclared-env-vars */
 import { KafkaMessage } from "@repo/backend/lib/types";
 import { Kafka, logLevel } from "kafkajs";
 
@@ -15,10 +14,11 @@ const kafka = new Kafka({
 }).producer();
 
 export const produceMessage = async (message: KafkaMessage) => {
+  const topic = process.env.KAFKA_TOPIC || "delete-child";
   try {
     await kafka.connect();
     await kafka.send({
-      topic:process.env.KAFKA_TOPIC || "delete-child",
+      topic,
       messages: [{ value: JSON.stringify(message) }],
     });
   } catch (error) {

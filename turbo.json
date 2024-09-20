@@ -6,7 +6,12 @@
     "NEXT_PUBLIC_CONVEX_URL",
     "NEXT_PUBLIC_CONVEX_DEPLOYMENT_SITE",
     "UNASSIGNED_USER_ID",
-    "MAX_REQUESTS"
+    "MAX_REQUESTS",
+    "NEXT_RUNTIME",
+    "NEXT_PUBLIC_SENTRY_DSN",
+    "KAFKA_BROKER",
+    "KAFKA_USERNAME",
+    "KAFKA_PASSWORD"
   ],
   "tasks": {
     "build": {
@@ -19,7 +24,8 @@
     },
     "dev": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["KAFKA_TOPIC"]
     }
   }
 }
