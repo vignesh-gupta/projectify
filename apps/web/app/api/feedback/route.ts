@@ -27,6 +27,7 @@ export async function POST(request: Request) {
   try {
     const res = await fetchMutation(api.feedback.create, {
       ...feedback.data,
+      senderName: feedback.data.senderName ?? feedback.data.senderEmail,
       projectId: feedback.data.projectId as Id<"projects">,
     });
 

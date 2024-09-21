@@ -8,12 +8,14 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormMessage
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const contactFormSchema = z.object({
@@ -32,12 +34,35 @@ const contactFormSchema = z.object({
 });
 
 const ContactPage = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const form = useForm<z.infer<typeof contactFormSchema>>({
     resolver: zodResolver(contactFormSchema),
   });
 
-  const onSubmit = (data: z.infer<typeof contactFormSchema>) => {
-    console.log(data);
+  const onSubmit = async (data: z.infer<typeof contactFormSchema>) => {
+    setIsSubmitting(true);
+
+    await fetch("https://projectify.vigneshgupta.tech/api/feedback", {
+      method: "POST",
+      mode: "no-cors",
+      body: JSON.stringify({
+        content: data.message,
+        senderName: data.name,
+        senderEmail: data.email,
+        projectId: "j5775aqxkjg4avhhdjgwn05jqh6rkcyp",
+      }),
+    })
+      .then(() => {
+        form.resetField("name");
+        toast.success("Thanks for your feedback!");
+      })
+      .catch(() => {
+        toast.error("Failed to send feedback, please try again later!");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
   };
 
   return (
@@ -90,7 +115,7 @@ const ContactPage = () => {
               />
               <FormField
                 control={form.control}
-                name="name"
+                name="message"
                 render={({ field }) => (
                   <FormItem className="col-span-2">
                     <FormControl>
@@ -105,8 +130,12 @@ const ContactPage = () => {
                   </FormItem>
                 )}
               />
-              <Button type="submit" className="col-span-2">
-                Submit
+              <Button
+                type="submit"
+                className="col-span-2"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Submitting..." : "Submit"}
               </Button>
             </form>
           </Form>
