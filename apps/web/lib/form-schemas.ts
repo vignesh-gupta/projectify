@@ -4,7 +4,7 @@ export const feedbackFormSchema = z.object({
   id: z.string().optional(),
   content: z.string().min(10).max(500),
   projectId: z.string().min(10),
-  senderName: z.string(),
+  senderName: z.string().optional(),
   senderEmail: z.string().email(),
   status: z.enum(["open", "reviewed", "closed"]).optional().default("open"),
   type: z

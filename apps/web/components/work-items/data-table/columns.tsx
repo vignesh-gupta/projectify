@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import TaskPriority from "@/components/task/task-priority";
 import TaskStatus from "@/components/task/task-status";
 import { PRIORITIES, STATUSES } from "@/lib/constants";
-import TaskTitle from "../task/task-title";
+import TaskTitle from "../../task/task-title";
 import { Task } from "./data-table";
 import { DataTableColumnHeader } from "./data-table-column-header";
 import DataTableRowActions from "./data-table-row-actions";

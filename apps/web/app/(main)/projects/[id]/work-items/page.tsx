@@ -1,8 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { columns } from "@/components/work-items/columns";
-import { DataTable } from "@/components/work-items/data-table";
+import { columns } from "@/components/work-items/data-table/columns";
+import { DataTable } from "@/components/work-items/data-table/data-table";
 import { api } from "@repo/backend/convex/_generated/api";
 import { useTaskModal } from "@/lib/store/use-task-modal";
 import type { PagePropsWithProjectId } from "@/lib/types";
