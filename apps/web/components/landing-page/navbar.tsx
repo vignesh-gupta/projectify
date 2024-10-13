@@ -1,16 +1,13 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, XIcon } from "lucide-react";
 import { Poppins } from "next/font/google";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { ThemeSwitch } from "../theme/theme-switch";
-import MobileNav from "./mobile-nav";
 
 const poppins = Poppins({ weight: "600", subsets: ["latin"] });
 
@@ -30,32 +27,28 @@ const Navbar = () => {
   };
 
   return (
-    <header className="container z-50 flex items-center h-[70px] lg:px-6">
-      <Link
-        className={cn(
-          "flex items-center justify-center font-bold text-2xl gap-1",
-          poppins.className
-        )}
-        href="/"
-      >
-        <Image src="/logo.png" alt="Projectify Logo" width={50} height={40} />
-        <h1 className="hidden sm:block">Projectify</h1>
+    <header className="container flex items-center justify-between gap-10 py-4">
+      <Link className="flex items-center gap-3 flex-1 cursor-pointer" href="/">
+        <span
+          className={cn("font-heading text-xl font-bold", poppins.className)}
+        >
+          Projectify
+        </span>
       </Link>
-      <div className="ml-auto flex items-center gap-4">
-        <nav className="md:flex items-center gap-4  sm:gap-6 hidden">
-          {navLinks.map((link) => (
-            <Link
-              key={link.title}
-              className="text-sm font-medium hover:underline underline-offset-4"
-              href={link.href}
-              prefetch={false}
-            >
-              {link.title}
-            </Link>
-          ))}
-        </nav>
+      <nav className="hidden items-center gap-10 md:flex flex-1 justify-center z-50">
+        {navLinks.map(({ title, href }) => (
+          <Link
+            className="flex items-center text-lg font-medium text-muted-foreground transition-colors hover:text-foreground sm:text-sm cursor-pointer"
+            href={href}
+            key={title}
+          >
+            {title}
+          </Link>
+        ))}
+      </nav>
+      <div className="hidden items-center gap-2 md:flex flex-1 justify-end">
         {isSignedIn ? (
-          <UserButton afterSignOutUrl="/" />
+          <UserButton />
         ) : (
           <Button asChild>
             <SignInButton mode="modal">Sign In</SignInButton>
@@ -63,20 +56,32 @@ const Navbar = () => {
         )}
         <ThemeSwitch />
       </div>
-      <Sheet>
-        <SheetTrigger asChild className="-order-1">
-          <Button
-            className="md:hidden mr-3"
-            variant="outline"
-            size="icon"
-            aria-label="Open Menu"
-            onClick={handleMenuClick}
-          >
-            <MenuIcon className="w-6 h-6" />
-          </Button>
-        </SheetTrigger>
-        <MobileNav />
-      </Sheet>
+      <Button variant="ghost" className="md:hidden" onClick={handleMenuClick}>
+        {isMenuOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
+      </Button>
+      {isMenuOpen && (
+        <div className="fixed inset-0 top-[50px] z-40 size-full overflow-auto bg-black/40 animate-in slide-in-from-top-24 md:hidden">
+          <div className="rounded-b-lg bg-background py-4 container text-foreground shadow-xl">
+            <nav className="flex flex-col gap-1 pt-2">
+              {navLinks.map(({ title, href }) => (
+                <Link
+                  className="flex w-full items-center rounded-md p-2 font-medium text-muted-foreground hover:text-foreground cursor-pointer"
+                  href={href}
+                  key={`mobile-${title}`}
+                >
+                  {title}
+                </Link>
+              ))}
+              <a
+                className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-11 rounded-md px-8 mt-2 w-full cursor-pointer"
+                href="#"
+              >
+                Get Started
+              </a>
+            </nav>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

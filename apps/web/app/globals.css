@@ -4,6 +4,8 @@
 
 @layer base {
   :root {
+    --light-width: 30rem;
+
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
 
@@ -73,5 +75,14 @@
   body {
     @apply bg-background text-foreground;
   }
-  
+}
+
+.conic-gradient {
+  background-image: conic-gradient(
+    var(--conic-position),
+    var(--tw-gradient-stops)
+  );
+  width: 30rem;
+  opacity: 1;
+  will-change: auto;
 }

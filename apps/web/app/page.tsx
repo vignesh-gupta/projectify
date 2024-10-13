@@ -3,8 +3,6 @@ import Footer from "@/components/landing-page/footer";
 import Navbar from "@/components/landing-page/navbar";
 import { buttonVariants } from "@/components/ui/button";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
-import { Github } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
@@ -14,44 +12,33 @@ export default function Home() {
         <Navbar />
       </div>
       <main className="flex-1 mt-20">
-        <section className="flex flex-col justify-center items-center border-b min-h-[calc(100dvh-80px)] container space-y-10 px-4 sm:px-6 md:px-10">
-          <div className="grid items-center flex-1 gap-6 mx-auto lg:grid-cols-2 lg:gap-12">
-            <div className="space-y-4">
-              <div className="inline-block px-3 py-1 text-sm bg-gray-100 rounded-lg dark:bg-gray-800">
-                Introducing
-              </div>
-              <h1 className="text-3xl font-bold tracking-tighter lg:leading-tighter sm:text-4xl md:text-5xl">
-                The all-in-one platform for project management and
-                collaboration.
-              </h1>
-              <p className="max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
-                Streamline your workflow, communicate effectively, and keep your
-                team in sync with our intuitive project management app.
-              </p>
-              <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                <Link
-                  className="inline-flex items-center justify-center h-10 px-8 text-sm font-medium transition-colors bg-gray-900 rounded-md shadow text-gray-50 hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-gray-900 dark:hover:bg-gray-50/90 dark:focus-visible:ring-gray-300"
-                  href={DASHBOARD_ROUTE}
+        <section className="relative z-0 flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden rounded-md bg-background">
+
+          <div
+            className="relative z-50 flex container justify-center flex-1 flex-col px-5 md:px-10 gap-4"
+            style={{ opacity: 1, transform: "none", willChange: "auto" }}
+          >
+            <h1 className="bg-gradient-to-br from-slate-300 to-primary bg-clip-text text-center text-5xl font-bold tracking-tight text-transparent md:text-7xl font-heading caret-black">
+              Build visually, export code.
+            </h1>
+            <p className="mt-4 bg-gradient-to-br from-slate-300 to-slate-500 bg-clip-text text-center text-xl tracking-tight text-transparent md:text-2xl caret-black">
+              Build beautiful websites. The right way.
+            </p>
+            <div className="relative mx-auto mt-8">
+              <div className="grid grid-cols-2 gap-3">
+                <a
+                  className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 border bg-background hover:bg-accent hover:text-accent-foreground rounded-md px-8 h-12 border-border text-base sm:h-14 sm:px-10 cursor-pointer"
+                  href="#"
+                >
+                  Learn More
+                </a>
+                <a
+                  className="inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 rounded-md px-8 h-12 text-base sm:h-14 sm:px-10 cursor-pointer"
+                  href="#"
                 >
                   Get Started
-                </Link>
-                <Link
-                  className="inline-flex items-center justify-center h-10 px-8 text-sm font-medium transition-colors bg-white border border-gray-200 rounded-md shadow-sm hover:bg-gray-100 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 dark:border-gray-800 dark:bg-gray-950 dark:hover:bg-gray-800 dark:hover:text-gray-50 dark:focus-visible:ring-gray-300"
-                  href="https://github.com/vignesh-gupta/projectify"
-                >
-                  <Github className="w-5 h-5 mr-2" />
-                  Star on GitHub
-                </Link>
+                </a>
               </div>
-            </div>
-            <div className="relative hidden md:block flex-1 h-full">
-              <Image
-                alt="Image"
-                loading="eager"
-                className="object-contain object-center h-full mx-auto overflow-hidden -z-10 aspect-video rounded-xl sm:w-full"
-                src="/hero.png"
-                fill
-              />
             </div>
           </div>
         </section>
@@ -83,7 +70,7 @@ export default function Home() {
           <div className="container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10">
             <div className="space-y-2">
               <h2 className="text-3xl font-bold tracking-tighter md:text-4xl/tight">
-                Manage your project efficiently for absolute{" "}
+                Manage your project efficiently for absolute
                 <span className="underline">no cost</span> .
               </h2>
               <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">

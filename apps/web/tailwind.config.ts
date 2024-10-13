@@ -67,10 +67,15 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "hero-light": {
+          from: { width: "0" },
+          to: { width: "var(--light-width)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "hero-light": "hero-light 1s ease-out",
       },
     },
   },

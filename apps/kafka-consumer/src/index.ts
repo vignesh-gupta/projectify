@@ -18,6 +18,11 @@ const kafka = new Kafka({
   logLevel: logLevel.ERROR,
 });
 
+console.log({
+  username: process.env.KAFKA_USERNAME,
+  password: process.env.KAFKA_PASSWORD,
+});
+
 const consumer = kafka.consumer({ groupId: "group-1" });
 
 const run = async () => {
@@ -28,7 +33,7 @@ const run = async () => {
       topic,
       fromBeginning: true,
     })
-    .then(() => console.log("Subscribed to topic: "+ topic));
+    .then(() => console.log("Subscribed to topic: " + topic));
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
