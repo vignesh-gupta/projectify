@@ -15,8 +15,7 @@ const InviteButton = () => {
 
       <DialogContent className="p-0 border-none bg-transparent max-w-[880px]">
         <OrganizationProfile />
-      </DialogContent>
-    </Dialog>
+      </ResponsiveModel>
   );
 };
 

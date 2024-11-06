@@ -75,9 +75,7 @@ const ChangelogModal = () => {
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent>
-        <DialogHeader>
+    <ResponsiveModel open={isOpen} onOpenChange={(open) => !open && onClose()}>        <DialogHeader>
           <DialogTitle>{values?._id ? "Edit" : "Create"} Changelog</DialogTitle>
         </DialogHeader>
 
@@ -187,8 +185,7 @@ const ChangelogModal = () => {
             </Button>
           </form>
         </Form>
-      </DialogContent>
-    </Dialog>
+      </ResponsiveModel>
   );
 };
 

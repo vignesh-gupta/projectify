@@ -96,9 +96,7 @@ const FeedbackModal = () => {
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent>
-        <DialogHeader>
+    <ResponsiveModel open={isOpen} onOpenChange={(open) => !open && onClose()}>        <DialogHeader>
           <DialogTitle>{values?._id ? "Edit" : "Create"} Feedback</DialogTitle>
         </DialogHeader>
 
@@ -212,8 +210,7 @@ const FeedbackModal = () => {
             </Button>
           </form>
         </Form>
-      </DialogContent>
-    </Dialog>
+      </ResponsiveModel>
   );
 };
 

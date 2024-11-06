@@ -1,11 +1,5 @@
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
   Form,
   FormControl,
   FormField,
@@ -13,16 +7,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { api } from "@repo/backend/convex/_generated/api";
-import type { Id } from "@repo/backend/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useLinkModal } from "@/lib/store/use-link-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "@repo/backend/convex/_generated/api";
+import type { Id } from "@repo/backend/convex/_generated/dataModel";
 import { useAction } from "convex/react";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import ResponsiveModel, { ResponsiveModelTitle } from "../responsive-model";
 
 const linkFormSchema = z.object({
   id: z.string().optional(),
@@ -91,49 +86,45 @@ const LinkModal = () => {
   }
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>
-            {values?._id ? "Edit" : "Create"} Link Resource
-          </DialogTitle>
-        </DialogHeader>
+    <ResponsiveModel open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <ResponsiveModelTitle>
+        {values?._id ? "Edit" : "Create"} Link Resource
+      </ResponsiveModelTitle>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormControl>
-                    <Input placeholder="Title" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem className="space-y-0">
+                <FormControl>
+                  <Input placeholder="Title" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="url"
-              render={({ field }) => (
-                <FormItem className="space-y-0">
-                  <FormControl>
-                    <Input placeholder="https://example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="url"
+            render={({ field }) => (
+              <FormItem className="space-y-0">
+                <FormControl>
+                  <Input placeholder="https://example.com" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <Button type="submit" disabled={isCreating || isUpdating}>
-              Submit
-            </Button>
-          </form>
-        </Form>
-      </DialogContent>
-    </Dialog>
+          <Button type="submit" disabled={isCreating || isUpdating}>
+            Submit
+          </Button>
+        </form>
+      </Form>
+    </ResponsiveModel>
   );
 };
 
