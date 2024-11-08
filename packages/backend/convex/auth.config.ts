@@ -2,7 +2,7 @@
 export default {
   providers: [
     {
-      domain: process.env.NEXT_PUBLIC_CLERK_ISSUER_BASE_URL,
+      domain: process.env.CONVEX_SITE_URL,
       applicationID: "convex",
     },
   ],

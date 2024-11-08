@@ -8,6 +8,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "convex": "^1.14.4"
+    "@auth/core": "0.36.0",
+    "@convex-dev/auth": "^0.0.74",
+    "convex": "^1.17.0"
   }
 }

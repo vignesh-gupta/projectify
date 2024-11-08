@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { SignInButton, UserButton, useAuth } from "@clerk/nextjs";
+import { useAuthActions } from "@convex-dev/auth/react";
 import { MenuIcon } from "lucide-react";
 import { Poppins } from "next/font/google";
 import Image from "next/image";
@@ -21,7 +21,7 @@ export const navLinks = [
 ];
 
 const Navbar = () => {
-  const { isSignedIn } = useAuth();
+  const { signIn } = useAuthActions();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -54,13 +54,8 @@ const Navbar = () => {
             </Link>
           ))}
         </nav>
-        {isSignedIn ? (
-          <UserButton afterSignOutUrl="/" />
-        ) : (
-          <Button asChild>
-            <SignInButton mode="modal">Sign In</SignInButton>
-          </Button>
-        )}
+
+        <Button onClick={() => signIn("github")}>Sign In</Button>
         <ThemeSwitch />
       </div>
       <Sheet>

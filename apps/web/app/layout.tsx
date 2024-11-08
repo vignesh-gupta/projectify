@@ -1,11 +1,12 @@
 import { Inter } from "next/font/google";
+import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 
 import ConvexClientProvider from "@/components/providers/convex-client-provider";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { cn, constructMetaTags } from "@/lib/utils";
-
 import ModelProvider from "@/components/providers/modal-provider";
 import { Toaster } from "@/components/ui/sonner";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,25 +31,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={cn(
-          "flex flex-col min-h-[100dvh]",
-          inter.className
-        )}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          disableTransitionOnChange
-        >
-          <ConvexClientProvider>
-            {children}
-            <Toaster />
-            <ModelProvider />
-          </ConvexClientProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ConvexAuthNextjsServerProvider>
+      <html lang="en" className="scroll-smooth">
+        <body className={cn("flex flex-col min-h-[100dvh]", inter.className)}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            disableTransitionOnChange
+          >
+            <ConvexClientProvider>
+              {children}
+              <Toaster />
+              <ModelProvider />
+            </ConvexClientProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ConvexAuthNextjsServerProvider>
   );
 }

@@ -8,8 +8,10 @@ import {
   TaskStatus,
   TaskType,
 } from "./types";
+import { authTables } from "@convex-dev/auth/server";
 
 export default defineSchema({
+  ...authTables,
   projects: defineTable({
     title: v.string(),
     description: v.optional(v.string()),
