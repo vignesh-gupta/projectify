@@ -1,12 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { DatePicker } from "@/components/ui/date-picker";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
   Form,
   FormControl,
   FormDescription,
@@ -17,15 +11,16 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
-import { api } from "@repo/backend/convex/_generated/api";
-import type { Id } from "@repo/backend/convex/_generated/dataModel";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { api } from "@repo/backend/convex/_generated/api";
+import type { Id } from "@repo/backend/convex/_generated/dataModel";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import MDXEditor from "../md/mdx-editor";
+import ResponsiveModel, { ResponsiveModelTitle } from "../responsive-model";
 
 const changelogFormSchema = z.object({
   title: z.string().min(5),
@@ -75,117 +70,110 @@ const ChangelogModal = () => {
   }
 
   return (
-    <ResponsiveModel open={isOpen} onOpenChange={(open) => !open && onClose()}>        <DialogHeader>
-          <DialogTitle>{values?._id ? "Edit" : "Create"} Changelog</DialogTitle>
-        </DialogHeader>
+    <ResponsiveModel open={isOpen} onOpenChange={(open) => !open && onClose()}>
+      <ResponsiveModelTitle>
+        {values?._id ? "Edit" : "Create"} Changelog
+      </ResponsiveModelTitle>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            control={form.control}
+            name="title"
+            render={({ field }) => (
+              <FormItem className="space-y-0">
+                <FormLabel>Title</FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="Fixed XYZ bug and improved the performance by 20%"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <div className="grid md:grid-cols-2 gap-2">
             <FormField
               control={form.control}
-              name="title"
+              name="date"
               render={({ field }) => (
                 <FormItem className="space-y-0">
-                  <FormLabel>Title</FormLabel>
+                  <FormLabel>Release Date</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Fixed XYZ bug and improved the performance by 20%"
-                      {...field}
-                    />
+                    <DatePicker value={field.value} onSelect={field.onChange} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
-            <div className="grid md:grid-cols-2 gap-2">
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem className="space-y-0">
-                    <FormLabel>Release Date</FormLabel>
-                    <FormControl>
-                      <DatePicker
-                        value={field.value}
-                        onSelect={field.onChange}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="version"
-                render={({ field }) => (
-                  <FormItem className="space-y-0">
-                    <FormLabel>Version</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <span className="absolute left-1  flex justify-center items-center w-6 h-6 m-2 ml-1 rounded-lg text-muted-foreground bg-muted">
-                          v
-                        </span>
-                        <Input
-                          placeholder="1.0.1"
-                          className="pl-10"
-                          {...field}
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
             <FormField
               control={form.control}
-              name="isPublished"
+              name="version"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div>
-                    <FormLabel className="text-base">Keep it public</FormLabel>
-                    <FormDescription>
-                      Enable this option to make the changelog public
-                    </FormDescription>
-                  </div>
+                <FormItem className="space-y-0">
+                  <FormLabel>Version</FormLabel>
                   <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="changes"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Changes</FormLabel>
-                  <FormControl>
-                    <div>
-                      <MDXEditor
-                        content={field.value}
-                        onChange={field.onChange}
-                        rows={10}
-                      />
+                    <div className="relative">
+                      <span className="absolute left-1  flex justify-center items-center w-6 h-6 m-2 ml-1 rounded-lg text-muted-foreground bg-muted">
+                        v
+                      </span>
+                      <Input placeholder="1.0.1" className="pl-10" {...field} />
                     </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
+          </div>
 
-            <Button type="submit" disabled={isCreating}>
-              Submit
-            </Button>
-          </form>
-        </Form>
-      </ResponsiveModel>
+          <FormField
+            control={form.control}
+            name="isPublished"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div>
+                  <FormLabel className="text-base">Keep it public</FormLabel>
+                  <FormDescription>
+                    Enable this option to make the changelog public
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="changes"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Changes</FormLabel>
+                <FormControl>
+                  <div>
+                    <MDXEditor
+                      content={field.value}
+                      onChange={field.onChange}
+                      rows={10}
+                    />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <Button type="submit" disabled={isCreating}>
+            Submit
+          </Button>
+        </form>
+      </Form>
+    </ResponsiveModel>
   );
 };
 

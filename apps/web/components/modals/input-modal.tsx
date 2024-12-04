@@ -1,17 +1,13 @@
 import { ChangeEvent, ReactNode, useState } from "react";
 
 import { Button, buttonVariants } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
+import ResponsiveModel, {
+  ResponsiveModelDescription,
+  ResponsiveModelTitle,
+} from "../responsive-model";
 
 type InputModalProps = {
   children: ReactNode;
@@ -55,35 +51,33 @@ const InputModal = ({
   };
 
   return (
-    <Dialog open={isOpen}>
-      <DialogTrigger asChild onClick={() => setIsOpen(true)}>
-        {children}
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader className="truncate">{header}</DialogHeader>
-        <DialogDescription>{description}</DialogDescription>
-        <Input
-          value={formValue.title}
-          name="title"
-          onChange={handleInputChange}
-        />
+    <ResponsiveModel
+      trigger={children}
+      asChild
+      open={isOpen}
+      onTriggerClick={() => setIsOpen(true)}
+    >
+      <ResponsiveModelTitle>{header}</ResponsiveModelTitle>
+      <ResponsiveModelDescription>{description}</ResponsiveModelDescription>
+      <Input
+        value={formValue.title}
+        name="title"
+        onChange={handleInputChange}
+      />
 
-        <Textarea
-          value={formValue.description}
-          name="description"
-          onChange={handleInputChange}
-        ></Textarea>
-        <DialogFooter>
-          <Button
-            className={buttonVariants()}
-            disabled={disabled}
-            onClick={handleConfirm}
-          >
-            Confirm
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+      <Textarea
+        value={formValue.description}
+        name="description"
+        onChange={handleInputChange}
+      />
+      <Button
+        className={buttonVariants({ className: "my-3" })}
+        disabled={disabled}
+        onClick={handleConfirm}
+      >
+        Confirm
+      </Button>
+    </ResponsiveModel>
   );
 };
 

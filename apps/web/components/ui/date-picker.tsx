@@ -21,7 +21,7 @@ type DatePickerProps = {
 export function DatePicker({ value, onSelect }: DatePickerProps) {
 
   return (
-    <Popover>
+    <Popover modal>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}

@@ -40,7 +40,7 @@ const ConfirmModal = ({
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader className="truncate">{header}</AlertDialogHeader>
-        <AlertDialogDescription>{description}</AlertDialogDescription>
+        <AlertDialogDescription className="text-center text-pretty sm:text-start">{description}</AlertDialogDescription>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction

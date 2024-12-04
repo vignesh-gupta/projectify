@@ -19,15 +19,15 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
   const { onOpen } = useChangelogModal();
 
   return (
-    <>
+    <div>
       <div className="flex justify-between gap-2 border-b p-2 items-center">
         <h3 className="text-xl font-bold md:text-2xl lg:text-3xl">
           Changelogs
         </h3>
 
         <DropdownMenu>
-          <DropdownMenuTrigger asChild className="md:hidden">
-            <Button variant="outline">
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="md:hidden">
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -72,9 +72,9 @@ const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
       </div>
 
       <ScrollArea className="h-[calc(100dvh-150px)] pr-3 pt-2">
-        <ChangelogList projectId={id} />{" "}
+        <ChangelogList projectId={id} />
       </ScrollArea>
-    </>
+    </div>
   );
 };
 

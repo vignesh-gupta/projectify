@@ -1,16 +1,9 @@
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { DialogClose } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState, type ReactNode } from "react";
+import ResponsiveModel, { ResponsiveModelTitle } from "../responsive-model";
 
 type LinkModalProps = {
   value?: string;
@@ -28,31 +21,24 @@ const LinkModal = ({ value, children, onSave }: LinkModalProps) => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>Enter destination</DialogTitle>
-        </DialogHeader>
-        <div>
-          <Label htmlFor="link" className="sr-only">
-            Link
-          </Label>
-          <Input
-            id="link"
-            value={link || ""}
-            onChange={(e) => setLink(e.target.value)}
-          />
-        </div>
-        <DialogFooter className="justify-start">
-          <DialogClose asChild>
-            <Button type="button" onClick={() => onLinkSave(link)}>
-              Save
-            </Button>
-          </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+    <ResponsiveModel className="sm:max-w-md" trigger={children} asChild>
+      <ResponsiveModelTitle>Enter destination</ResponsiveModelTitle>
+      <div className="mb-3">
+        <Label htmlFor="link" className="sr-only">
+          Link
+        </Label>
+        <Input
+          id="link"
+          value={link || ""}
+          onChange={(e) => setLink(e.target.value)}
+        />
+      </div>
+      <DialogClose asChild>
+        <Button type="button" onClick={() => onLinkSave(link)}>
+          Save
+        </Button>
+      </DialogClose>
+    </ResponsiveModel>
   );
 };
 

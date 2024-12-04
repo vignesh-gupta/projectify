@@ -1,21 +1,22 @@
 import { OrganizationProfile } from "@clerk/nextjs";
 import { Plus } from "lucide-react";
 
+import ResponsiveModel from "@/components/responsive-model";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const InviteButton = () => {
   return (
-    <Dialog>
-      <DialogTrigger asChild>
+    <ResponsiveModel
+      className="p-0 border-none bg-transparent max-w-[880px]"
+      trigger={
         <Button className="hidden sm:flex">
           <Plus className="w-4 h-4 mr-2" /> Invite members
         </Button>
-      </DialogTrigger>
-
-      <DialogContent className="p-0 border-none bg-transparent max-w-[880px]">
-        <OrganizationProfile />
-      </ResponsiveModel>
+      }
+      asChild
+    >
+      <OrganizationProfile />
+    </ResponsiveModel>
   );
 };
 

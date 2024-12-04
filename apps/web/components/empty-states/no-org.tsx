@@ -2,7 +2,7 @@ import { CreateOrganization } from "@clerk/nextjs";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import ResponsiveModel from "../responsive-model";
 
 const NoOrg = () => {
   return (
@@ -14,14 +14,13 @@ const NoOrg = () => {
         Create an organization to get started
       </p>
       <div className="mt-6">
-        <Dialog>
-          <DialogTrigger asChild>
-            <Button size="lg">Create organization</Button>
-          </DialogTrigger>
-          <DialogContent className="p-0 bg-transparent border-none max-w-[510px]">
-            <CreateOrganization />
-          </DialogContent>
-        </Dialog>
+        <ResponsiveModel
+          trigger={<Button size="lg">Create organization</Button>}
+          asChild
+          className="p-0 bg-transparent border-none max-w-[510px]"
+        >
+          <CreateOrganization />
+        </ResponsiveModel>
       </div>
     </div>
   );
