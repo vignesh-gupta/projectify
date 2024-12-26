@@ -9,7 +9,6 @@ import { Response } from "express";
 const kafka = new Kafka({
   brokers: [process.env.KAFKA_BROKER!],
   connectionTimeout: 10000,
-  ssl: true,
   sasl: {
     mechanism: "scram-sha-256",
     username: process.env.KAFKA_USERNAME!,
