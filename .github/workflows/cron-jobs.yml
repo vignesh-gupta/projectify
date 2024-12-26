@@ -9,7 +9,5 @@ jobs:
     name: Health check
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
       - name: Consumer health check
         run: curl --location --request GET 'https://projectify-im8j.onrender.com/health'
