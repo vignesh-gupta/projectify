@@ -48,7 +48,7 @@ jobs:
         run: cp .env.example .env
 
       - name: MongoDB in GitHub Actions
-        uses: supercharge/mongodb-github-action@v1.10.0
+        uses: supercharge/mongodb-github-action@1.12.0
         with:
           mongodb-username: username
           mongodb-password: password
