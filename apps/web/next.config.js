@@ -48,7 +48,6 @@ module.exports = withSentryConfig(
     sentryUrl: "https://sentry.io/",
 
     // Only print logs for uploading source maps in CI
-    // eslint-disable-next-line turbo/no-undeclared-env-vars
     silent: !process.env.CI,
 
     // For all available options, see:

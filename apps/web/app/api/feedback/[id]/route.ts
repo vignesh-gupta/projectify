@@ -2,10 +2,11 @@ import { api } from "@repo/backend/convex/_generated/api";
 import { ProjectId } from "@/lib/types";
 import { fetchQuery } from "convex/nextjs";
 
-export async function GET(_: Request, context: { params: ProjectId }) {
+export async function GET(_: Request, context: { params: Promise<ProjectId> }) {
+  const id = (await context.params).id;
   try {
     const feedbacks = await fetchQuery(api.feedback.list, {
-      projectId: context.params.id,
+      projectId: id,
     });
 
     return Response.json({

@@ -11,13 +11,14 @@
     "NEXT_PUBLIC_SENTRY_DSN",
     "KAFKA_BROKER",
     "KAFKA_USERNAME",
-    "KAFKA_PASSWORD"
+    "KAFKA_PASSWORD",
+    "CI"
   ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**" , "dist/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
