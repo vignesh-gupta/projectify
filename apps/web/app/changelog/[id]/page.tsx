@@ -2,11 +2,16 @@
 
 import MDXEditor from "@/components/md/mdx-editor";
 import { api } from "@repo/backend/convex/_generated/api";
-import { PagePropsWithProjectId } from "@/lib/types";
+import { ProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { format } from "date-fns";
+import { useParams } from "next/navigation";
 
-const ChangeLogPreviewPage = ({ params: { id } }: PagePropsWithProjectId) => {
+const ChangeLogPreviewPage = () => {
+
+  const { id } = useParams<ProjectId>()
+
+
   const projectDetails = useQuery(api.project.get, { id });
 
   const changelogs = useQuery(api.changelog.list, {

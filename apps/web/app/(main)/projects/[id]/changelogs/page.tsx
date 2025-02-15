@@ -11,11 +11,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
-import type { PagePropsWithProjectId } from "@/lib/types";
+import type { ProjectId } from "@/lib/types";
 import { Eye, FileText, MoreHorizontal, Plus } from "lucide-react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 
-const ChangelogsPage = ({ params: { id } }: PagePropsWithProjectId) => {
+const ChangelogsPage = () => {
+
+  const { id } = useParams<ProjectId>()
+
   const { onOpen } = useChangelogModal();
 
   return (

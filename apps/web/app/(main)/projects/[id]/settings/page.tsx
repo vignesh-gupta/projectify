@@ -29,9 +29,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { api } from "@repo/backend/convex/_generated/api";
 import { PROJECTS_STAGES } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
-import type { PagePropsWithProjectId } from "@/lib/types";
+import type { ProjectId } from "@/lib/types";
+import { useParams } from "next/navigation";
 
-const ProjectSettingsPage = ({ params: { id } }: PagePropsWithProjectId) => {
+const ProjectSettingsPage = () => {
+
+  const { id } = useParams<ProjectId>()
   const project = useQuery(api.project.get, { id });
 
   const { mutate: updateProject, isPending } = useApiMutation(

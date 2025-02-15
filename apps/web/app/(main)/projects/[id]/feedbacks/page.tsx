@@ -6,12 +6,16 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { api } from "@repo/backend/convex/_generated/api";
 import { useFeedbackModal } from "@/lib/store/use-feedback-modal";
-import type { PagePropsWithProjectId } from "@/lib/types";
+import type { ProjectId } from "@/lib/types";
 import { useQuery } from "convex/react";
 import { FileText, Plus } from "lucide-react";
+import { useParams } from "next/navigation";
 
-const FeedbacksPage = ({ params }: PagePropsWithProjectId) => {
-  const feedbacks = useQuery(api.feedback.list, { projectId: params.id });
+const FeedbacksPage = () => {
+
+  const { id } = useParams<ProjectId>()
+
+  const feedbacks = useQuery(api.feedback.list, { projectId: id });
 
   const { onOpen } = useFeedbackModal();
 

@@ -4,15 +4,16 @@ import ConfirmModal from "@/components/modals/confirm-modal";
 import { Button } from "@/components/ui/button";
 import { DASHBOARD_ROUTE } from "@/lib/constants";
 import useApiMutation from "@/lib/hooks/use-api-mutation";
-import type { PagePropsWithProjectId } from "@/lib/types";
+import type { ProjectId } from "@/lib/types";
 import { api } from "@repo/backend/convex/_generated/api";
 import { KafkaMessage } from "@repo/backend/lib/types";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
-const ProjectSettingsDangerZonePage = ({
-  params: { id },
-}: PagePropsWithProjectId) => {
+const ProjectSettingsDangerZonePage = () => {
+
+  const { id } = useParams<ProjectId>()
+
   const { isPending, mutate: deleteProject } = useApiMutation(
     api.project.remove
   );

@@ -6,7 +6,7 @@ export type ProjectId = {
 };
 
 export type PagePropsWithProjectId = {
-  params: ProjectId;
+  params: Promise<ProjectId>;
 };
 
 export type OptionalProperty<T, K extends keyof T> = Omit<T, K> & {

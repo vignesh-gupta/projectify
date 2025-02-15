@@ -1,18 +1,18 @@
 "use client";
 
 import { Separator } from "@/components/ui/separator";
-import type { PagePropsWithProjectId } from "@/lib/types";
+import type { ProjectId } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import type { PropsWithChildren } from "react";
 
-type ProjectSettingsLayoutProps = PropsWithChildren & PagePropsWithProjectId;
 
 const ProjectSettingsLayout = ({
   children,
-  params: { id },
-}: ProjectSettingsLayoutProps) => {
+}: PropsWithChildren) => {
+
+  const { id } = useParams<ProjectId>()
   const url = usePathname();
 
   const isDangerZone = url.includes("danger-zone");

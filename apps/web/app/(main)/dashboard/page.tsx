@@ -3,14 +3,14 @@
 import { OrganizationProfile, useOrganization } from "@clerk/nextjs";
 import NoOrg from "@/components/empty-states/no-org";
 import ProjectList from "@/components/projects/project-list";
+import { useSearchParams } from "next/navigation";
 
-type DashboardPageProps = {
-  searchParams: {
-    settings?: string;
-  };
-};
 
-const DashboardPage = ({ searchParams: { settings } }: DashboardPageProps) => {
+const DashboardPage = () => {
+
+  const searchParams = useSearchParams();
+  const settings = searchParams.get("settings");
+
   const { organization } = useOrganization();
 
   if (settings) {
