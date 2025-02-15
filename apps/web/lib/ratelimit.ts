@@ -15,8 +15,8 @@ export async function ApiRateLimit(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const ip = request.ip ?? "127.0.0.1";
-  const { success } = await ratelimit.limit(ip);
+  // const ip = request.ip ?? "127.0.0.1";
+  const { success } = await ratelimit.limit("ip");
 
   return success
     ? NextResponse.next()

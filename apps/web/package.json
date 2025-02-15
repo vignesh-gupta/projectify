@@ -10,7 +10,7 @@
     "build": "next build"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.1.4",
+    "@clerk/nextjs": "^6.11.3",
     "@clerk/themes": "^2.1.9",
     "@hookform/resolvers": "^4.1.0",
     "@radix-ui/react-alert-dialog": "^1.1.6",

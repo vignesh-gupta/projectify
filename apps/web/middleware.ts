@@ -1,5 +1,4 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { ApiRateLimit } from "./lib/ratelimit";
 
 const isPublicRoute = createRouteMatcher([
   "/",
@@ -11,10 +10,9 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware((auth, request) => {
   if (!isPublicRoute(request)) {
-    auth().protect();
+    auth.protect();
   }
 
-  return ApiRateLimit(request);
 });
 
 export const config = {
