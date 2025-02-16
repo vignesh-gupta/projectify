@@ -5,7 +5,7 @@ import { dark } from "@clerk/themes";
 import { ConvexReactClient } from "convex/react";
 import { ConvexProviderWithClerk } from "convex/react-clerk";
 import { useTheme } from "next-themes";
-import type { PropsWithChildren } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
 
 const convexURL = process.env.NEXT_PUBLIC_CONVEX_URL!;
 
@@ -13,6 +13,14 @@ const convex = new ConvexReactClient(convexURL);
 
 const ConvexClientProvider = ({ children }: PropsWithChildren) => {
   const { theme } = useTheme();
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+
+  if (!isClient) return null
 
   return (
     <ClerkProvider

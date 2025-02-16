@@ -2,8 +2,12 @@
 export default {
   providers: [
     {
-      domain: process.env.NEXT_PUBLIC_CLERK_ISSUER_BASE_URL,
+      domain: "https://devoted-hare-63.clerk.accounts.dev",
       applicationID: "convex",
-    },
+    },{
+      domain: "https://clerk.projectifyauth.vigneshgupta.me",
+      applicationID: "convex",
+    }
+    
   ],
 };

@@ -1,17 +1,16 @@
-"use client";
 
-import { OrganizationProfile, useOrganization } from "@clerk/nextjs";
-import NoOrg from "@/components/empty-states/no-org";
-import ProjectList from "@/components/projects/project-list";
-import { useSearchParams } from "next/navigation";
+import { OrganizationProfile } from "@clerk/nextjs";
+import DashboardClientPage from "./page-client";
 
+type DashboardPageProps = {
+  searchParams: Promise<{
+    settings?: string;
+  }>
+};
 
-const DashboardPage = () => {
+const DashboardPage = async ({ searchParams } : DashboardPageProps) => {
 
-  const searchParams = useSearchParams();
-  const settings = searchParams.get("settings");
-
-  const { organization } = useOrganization();
+const { settings} = await searchParams;
 
   if (settings) {
     return (
@@ -21,11 +20,7 @@ const DashboardPage = () => {
     );
   }
 
-  return (
-    <div className="flex-1 h-[calc(100dvh-80px)] p-6">
-      {!organization ? <NoOrg /> : <ProjectList orgId={organization.id} />}
-    </div>
-  );
+  return <DashboardClientPage />
 };
 
 export default DashboardPage;

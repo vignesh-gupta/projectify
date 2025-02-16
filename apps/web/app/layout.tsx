@@ -36,6 +36,7 @@ export default function RootLayout({
           "flex flex-col min-h-[100dvh]",
           inter.className
         )}
+        suppressHydrationWarning
       >
         <ThemeProvider
           attribute="class"
