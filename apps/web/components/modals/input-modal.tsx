@@ -56,6 +56,7 @@ const InputModal = ({
       asChild
       open={isOpen}
       onTriggerClick={() => setIsOpen(true)}
+      onOpenChange={setIsOpen}
     >
       <ResponsiveModelTitle>{header}</ResponsiveModelTitle>
       <ResponsiveModelDescription>{description}</ResponsiveModelDescription>

@@ -14,8 +14,7 @@ export const addMember = mutation({
       .first();
 
     if (!org) {
-      console.error("[ORG_ADD_MEMBER_ERR] : Organization not found");
-      return;
+      throw new Error("[ORG_ADD_MEMBER_ERR] : Organization not found");
     }
 
     const member = await ctx.db
@@ -24,8 +23,7 @@ export const addMember = mutation({
       .first();
 
     if (!member) {
-      console.error("[ORG_ADD_MEMBER_ERR] : User not found");
-      return;
+      throw new Error("[ORG_ADD_MEMBER_ERR] : User not found");
     }
 
     const existingMembership = await ctx.db
