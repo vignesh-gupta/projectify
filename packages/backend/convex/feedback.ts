@@ -7,6 +7,7 @@ export const list = query({
     projectId: v.id("projects"),
   },
   handler: async (ctx, args) => {
+
     const project = await ctx.db.get(args.projectId);
 
     if (!project) {
