@@ -1,3 +1,5 @@
+"use client"
+
 import { useMutation } from "convex/react";
 import { FunctionReference, OptionalRestArgs } from "convex/server";
 import { useState } from "react";

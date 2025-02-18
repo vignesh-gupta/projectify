@@ -6,8 +6,8 @@ import ChangelogCard from "./changelog-card";
 import { ScrollArea } from "../ui/scroll-area";
 import { ProjectId } from "@/lib/types";
 
-const ChangelogList = ({ projectId }: ProjectId) => {
-  const changelogs = useQuery(api.changelog.list, { projectId });
+const ChangelogList = ({ id }: ProjectId) => {
+  const changelogs = useQuery(api.changelog.list, { projectId: id });
 
   if (!changelogs) {
     return <>Loading...</>;
