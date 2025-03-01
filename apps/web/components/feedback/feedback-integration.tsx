@@ -17,7 +17,7 @@ import CodeWithCopy from "../code-with-copy";
 const FeedbackIntegration = ({ children }: PropsWithChildren) => {
   const { id } = useParams<ProjectId>();
 
-  const code = `await fetch("https://projectify.vigneshguta.tech/api/feedback", {
+  const code = `await fetch("https://projectify.vigneshguta.me/api/feedback", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -42,17 +42,8 @@ const FeedbackIntegration = ({ children }: PropsWithChildren) => {
             Integrate feedbacks into your project.
           </SheetDescription>
           <div className="space-y-5">
-            <h3 className="text-lg font-semibold">NextJS Integration</h3>
-            <p>
-              This will integrate will allow you to add feedbacks to your
-              project from your own app
-            </p>
-
             <p>You can send a request like following:</p>
-
             <CodeWithCopy code={code} />
-
-            <p>Now, replace the source with your custom path</p>
           </div>
         </SheetHeader>
       </SheetContent>

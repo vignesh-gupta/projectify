@@ -1,3 +1,5 @@
+"use client"
+
 import { api } from "@repo/backend/convex/_generated/api";
 import { useChangelogModal } from "@/lib/store/use-changelog-modal";
 import { useQuery } from "convex/react";

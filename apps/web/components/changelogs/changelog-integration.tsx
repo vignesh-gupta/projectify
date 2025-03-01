@@ -22,7 +22,7 @@ const ChangelogIntegration = ({ children }: PropsWithChildren) => {
   const nextJSCode = `rewrites: async () => [
   {
     source: "/changelog",
-    destination: "https://projectify.vigneshgupta.tech/changelog/${id}"
+    destination: "https://projectify.vigneshgupta.me/changelog/${id}"
   }
 ]`;
 
