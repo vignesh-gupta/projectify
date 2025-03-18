@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Metadata } from "next";
 import { twMerge } from "tailwind-merge";
+import { SITE_URL } from "./constants";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,12 +19,12 @@ export function cn(...inputs: ClassValue[]) {
 type MetaTagProps = {
   title?: string;
   description?: string;
-  SITE_URL?: string;
+  siteUrl?: string;
   keywords?: string[];
 };
 
 export function constructMetaTags({
-  SITE_URL = "https://projectify.vigneshgupta.tech/",
+  siteUrl = SITE_URL,
   description = "Struggling to stay organized and meet deadlines? Projectify is the ultimate free project management tool for you!  Boost your productivity and achieve your goals effortlessly with our intuitive features.  Manage tasks, deadlines, resources, and collaborate seamlessly with your team.  Sign up today and experience the difference!",
   title = "Projectify - Manage your projects effortlessly!",
   keywords = [],
@@ -51,12 +52,12 @@ export function constructMetaTags({
         alt: title,
       },
       type: "website",
-      url: SITE_URL,
+      url: siteUrl,
     },
-    metadataBase: new URL(SITE_URL),
+    metadataBase: new URL(siteUrl),
     authors: {
       name: "Vighnesh Gupta",
-      url: new URL("https://vigneshgupta.tech/"),
+      url: new URL("https://vigneshgupta.me/"),
     },
     creator: "Vighnesh Gupta",
     keywords: [
