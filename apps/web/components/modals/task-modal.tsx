@@ -164,7 +164,7 @@ const TaskModal = () => {
               />
             )}
 
-            <div className="grid grid-cols-3 *:col-span-3 *:md:col-span-1 gap-2">
+            <div className="grid grid-cols-3 *:col-span-3 md:*:col-span-1 gap-2">
               <FormField
                 control={form.control}
                 name="status"

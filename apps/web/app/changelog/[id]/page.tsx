@@ -52,7 +52,7 @@ const ChangeLogPreviewPage = () => {
                 </div>
               </div>
               <div className="lg:col-span-3 pt-8">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="mx-auto ">
                     <h3 className="text-lg text-primary font-bold my-0">
                       {entry.title}

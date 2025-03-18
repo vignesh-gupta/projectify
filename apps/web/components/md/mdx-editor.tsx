@@ -46,7 +46,7 @@ const MDXEditor = ({ content, readonly, onChange, rows }: MDXEditorProps) => {
     editable: !readonly,
     editorProps: {
       attributes: {
-        class: "prose focus:outline-none dark:text-white *:my-1",
+        class: "prose focus:outline-hidden dark:text-white *:my-1",
       },
     },
     onUpdate: ({ editor }) => {
@@ -61,7 +61,7 @@ const MDXEditor = ({ content, readonly, onChange, rows }: MDXEditorProps) => {
       <EditorContent
         editor={editor}
         disabled={readonly}
-        className={cn("p-2 focus:outline-none", {
+        className={cn("p-2 focus:outline-hidden", {
           "border rounded-b-lg": !readonly,
           "*:min-h-40": rows,
           "h-fit": !rows,

@@ -80,7 +80,7 @@ const ContactPage = () => {
                 control={form.control}
                 name="email"
                 render={({ field }) => (
-                  <FormItem className="col-span-2 md:col-span-1 md:!mt-0">
+                  <FormItem className="col-span-2 md:col-span-1 md:mt-0!">
                     <FormControl>
                       <Input placeholder="Email" {...field} />
                     </FormControl>

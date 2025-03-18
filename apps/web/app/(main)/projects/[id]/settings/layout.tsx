@@ -24,7 +24,7 @@ const ProjectSettingsLayout = ({
       <h3 className="font-bold text-xl md:text-2xl lg:text-3xl mb-3">
         Project Settings
       </h3>
-      <div className="flex gap-x-4 [&>*]:text-lg ">
+      <div className="flex gap-x-4 *:text-lg ">
         <h4
           className={cn({
             "underline underline-offset-[6px]": !isDangerZone,
