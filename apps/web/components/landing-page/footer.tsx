@@ -7,7 +7,7 @@ const Footer = () => {
       <p className="text-sm text-gray-500 dark:text-gray-400">
         Built by{" "}
         <Link
-          href="https://vigneshgupta.tech"
+          href="https://vigneshgupta.me"
           className="underline font-semibold"
         >
           Vignesh Gupta

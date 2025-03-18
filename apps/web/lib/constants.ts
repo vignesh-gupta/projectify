@@ -152,3 +152,6 @@ export const FEEDBACK_TYPES: TOption<FeedbackType>[] = [
     value: "other",
   },
 ] as const;
+
+
+export const SITE_URL = "https://projectify.vigneshgupta.me";

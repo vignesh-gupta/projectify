@@ -15,6 +15,7 @@ import { useParams } from "next/navigation";
 import Link from "next/link";
 import type { PropsWithChildren } from "react";
 import CodeWithCopy from "../code-with-copy";
+import { SITE_URL } from "@/lib/constants";
 
 const ChangelogIntegration = ({ children }: PropsWithChildren) => {
   const { id } = useParams<ProjectId>();
@@ -22,7 +23,7 @@ const ChangelogIntegration = ({ children }: PropsWithChildren) => {
   const nextJSCode = `rewrites: async () => [
   {
     source: "/changelog",
-    destination: "https://projectify.vigneshgupta.me/changelog/${id}"
+    destination: "${SITE_URL}/changelog/${id}"
   }
 ]`;
 
@@ -72,7 +73,7 @@ const ChangelogIntegration = ({ children }: PropsWithChildren) => {
               <p>Send a GET request to</p>
 
               <CodeWithCopy
-                code={`https://projectify.vigneshgupta.tech/api/changelog/${id}`}
+                code={`${SITE_URL}/api/changelog/${id}`}
               />
             </TabsContent>
           </Tabs>
