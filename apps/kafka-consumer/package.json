@@ -12,7 +12,7 @@
     "@repo/backend": "*",
     "convex": "^1.15.0",
     "cors": "^2.8.5",
-    "esbuild": "^0.25.1",
+    "esbuild": "^0.25.0",
     "express": "^4.19.2",
     "express-actuator": "^1.8.4",
     "kafkajs": "^2.2.4",
