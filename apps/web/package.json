@@ -54,7 +54,7 @@
     "prettier": "^3.5.1",
     "query-string": "^9.0.0",
     "react": "^19.0.0",
-    "react-day-picker": "8.10.1",
+    "react-day-picker": "9.6.5",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "react-use": "^17.5.1",
