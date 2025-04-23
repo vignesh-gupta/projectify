@@ -10,21 +10,23 @@ import OwnedTaskTable from "../_components/owned-task-table";
 const ProjectDashboardClientPage = ({ id }: ProjectId) => {
   const currentUser = useCurrentUser();
 
-  const myTasks = useQuery(api.work_item.list, { projectId: id })?.filter(
-    (task) => task.assigneeId === currentUser?._id
-  );
+  const myTasks = useQuery(api.work_item.list, {
+    projectId: id,
+    assigneeId: currentUser?._id,
+    ignoreCompleted: true,
+  });
 
   return (
     <section className="bg-primary-foreground/80 md:p-5 py-5 px-3 m-1 rounded-lg">
-        <h4 className="mb-5 text-lg">Your task list</h4>
-        {myTasks ? (
-          <OwnedTaskTable tasks={myTasks} />
-        ) : (
-          <div className="h-36 flex items-center justify-center">
-            <Loader2 className="h-6 w-6 animate-spin" />
-          </div>
-        )}
-      </section>
+      <h4 className="mb-5 text-lg">Your task list</h4>
+      {myTasks ? (
+        <OwnedTaskTable tasks={myTasks} />
+      ) : (
+        <div className="h-36 flex items-center justify-center">
+          <Loader2 className="h-6 w-6 animate-spin" />
+        </div>
+      )}
+    </section>
   );
 };
 

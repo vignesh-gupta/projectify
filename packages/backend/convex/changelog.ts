@@ -13,17 +13,16 @@ export const list = query({
       throw new Error("Project not found");
     }
 
-    const changeLogs = await ctx.db
+    const changeLogs = ctx.db
       .query("changeLogs")
       .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
-      .order("desc")
-      .collect();
+      .order("desc");
 
     if (args.showPublished) {
-      return changeLogs.filter((changeLog) => changeLog.isPublished);
+      return changeLogs.filter((q) => q.eq(q.field("isPublished"), true));
     }
 
-    return changeLogs;
+    return await changeLogs.collect();
   },
 });
 

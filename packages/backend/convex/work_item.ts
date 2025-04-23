@@ -57,15 +57,26 @@ export const remove = mutation({
 export const list = query({
   args: {
     projectId: v.id("projects"),
+    assigneeId: v.optional(v.id("users")),
+    ignoreCompleted: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     if (!args.projectId) throw new Error("projectId is required");
 
-    const workItems = await ctx.db
+    let workItems = ctx.db
       .query("workItems")
-      .withIndex("by_project", (q) => q.eq("projectId", args.projectId))
-      .collect();
+      .withIndex("by_project", (q) => q.eq("projectId", args.projectId));
 
-    return workItems;
+    if (args.assigneeId)
+      workItems = workItems.filter((q) =>
+        q.eq(q.field("assigneeId"), args.assigneeId)
+      );
+
+    if (args.ignoreCompleted)
+      workItems = workItems.filter((q) => q.and(q.neq(q.field("status"), "canceled"), q.neq(q.field("status"), "done")));
+
+    console.log("[WORK_ITEM_LIST_OPS] : Listing work items", args);
+
+    return workItems.collect();
   },
 });

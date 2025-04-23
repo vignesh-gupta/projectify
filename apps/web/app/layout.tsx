@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
         className={cn(
           "flex flex-col min-h-[100dvh]",
@@ -41,6 +41,7 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           disableTransitionOnChange
+          defaultTheme="dark"
         >
           <ConvexClientProvider>
             {children}
